@@ -38,11 +38,11 @@ body{
 
     .show{
 		width: 100%;
-        height: 35%;
+        height: 30%;
         z-index: 99999999;
         display: block;
         background-color: var(--firstColor);
-        top: 10%;
+        top: 9%;
         left: 0%;
         position: absolute;
         transform: scale(1.04);

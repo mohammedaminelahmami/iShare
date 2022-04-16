@@ -10,6 +10,18 @@ function Nav() {
     const [isActive, setIsActive] = useState(false);
     const [menu_el, setMenu_el] = useState(false);
 
+    const mediaQuery = window.matchMedia('(min-width: 768px)');
+    const handlemediaChange = (e)=>{
+        if(e.matches)
+        {
+            // console.log("media changed !!");
+            setIsActive(false);
+            setMenu_el(false);
+        }
+    }
+    mediaQuery.addListener(handlemediaChange);
+
+
     const hamburgerMenuToggle = ()=>{
         setIsActive(!isActive);
         setMenu_el(!menu_el);
@@ -26,11 +38,11 @@ function Nav() {
                             <div className='text-xl font-normal'> iShare </div>
                         </div>
                     </Link>
-                    <ul className={isActive ? "show flex gap-10" : "flex items-center gap-10 md:gap-0"}>
-                        <li><Link to='/' className={menu_el ? "block text-menuColor md:text-white md:text-normal text-center mt-4" : "md:hidden text-menuColor"}>Themes</Link></li>
-                        <li><Link to='/' className={menu_el ? "block text-menuColor md:text-white md:text-normal text-center mt-4" : "md:hidden text-menuColor"}>Pricing</Link></li>
-                        <li><Link to='/' className={menu_el ? "block text-menuColor md:text-white md:text-normal text-center mt-4" : "md:hidden text-menuColor"}>Community</Link></li>
-                        <li><Link to='/' className={menu_el ? "block text-menuColor md:text-white md:text-normal text-center mt-4" : "md:hidden text-menuColor"}>Contact</Link></li>
+                    <ul className={isActive ? "show" : "flex items-center gap-10 md:gap-0"}>
+                        <li><Link to='/' className={menu_el ? "block text-menuColor md:text-white md:text-normal text-center mt-4" : "md:hidden text-menuColor hover:text-firstColor"}>Themes</Link></li>
+                        <li><Link to='/' className={menu_el ? "block text-menuColor md:text-white md:text-normal text-center mt-4" : "md:hidden text-menuColor hover:text-firstColor"}>Pricing</Link></li>
+                        <li><Link to='/' className={menu_el ? "block text-menuColor md:text-white md:text-normal text-center mt-4" : "md:hidden text-menuColor hover:text-firstColor"}>Community</Link></li>
+                        <li><Link to='/' className={menu_el ? "block text-menuColor md:text-white md:text-normal text-center mt-4" : "md:hidden text-menuColor hover:text-firstColor"}>Contact</Link></li>
                         {/* Login-Web-mobile */}
                         <li><Link to='/' className={menu_el ? "block text-menuColor md:text-white md:text-normal text-center my-4 py-2 px-4 w-32 mx-auto rounded-full bg-secondColor" : "hidden text-menuColor"}> Login </Link></li>
                     </ul>
