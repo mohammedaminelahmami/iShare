@@ -4,6 +4,7 @@ module.exports = {
   ],
   theme: {
     extend: {
+      
       colors: {
         firstColor : '#5463FF',
         secondColor : '#261D8E',
@@ -11,8 +12,6 @@ module.exports = {
         navBg : '#F9F9F9',
         menuColor : '#898989',
       },
-
-      
 
       screens: {
         xl: { max: "1279px" },
