@@ -1,14 +1,20 @@
 /* Colors Var */
 :root{
     --firstColor : #5463FF;
+    --firstColor2 : #464DDC;
     --secondColor : #261D8E;
     --thirdColor : #113C5E;
     --navBg : #F9F9F9;
     --menuColor : #898989;
+    --inputColor : #EEEEEE;
 }
 
 body{
     overflow-x: hidden;
+}
+
+.zIndex_N{
+    z-index: -99999999;
 }
 
 .btnLogin{
@@ -26,6 +32,81 @@ body{
     display: none;
 }
 
+.btnGetStartedForFree{
+    transition: 330ms;
+}
+
+.btnGetStartedForFree:hover{
+    transform: scale(1.05);
+    background-color: var(--thirdColor);
+    color: white;
+}
+
+.wave{
+    width: 100%;
+    position: relative;
+}
+
+.wave::after{
+    content: '';
+    display: block;
+    position: absolute;
+    z-index: -9999;
+    width: 100%;
+    height: 40rem;
+    margin-top: 7rem;
+    background-color: var(--firstColor2);
+}
+
+.ins{
+    width: 30rem;
+}
+
+.placeHolderColor::placeholder{
+    color: rgb(124, 124, 124);
+}
+
+.myBg{
+    position: relative;
+}
+
+.myBg::after{
+    content: '';
+    display: block;
+    position: absolute;
+    margin-top: 8rem;
+    background-color: var(--navBg);
+    width: 100%;
+    height: 28rem;
+    z-index: -9999;
+}
+
+.myTansition{
+    transition: 330ms;
+}
+
+.myTansition:hover{
+    transform: scale(1.04);
+}
+
+@media(max-width: 900px)
+{
+    .svgHome{
+        display: none;
+    }
+
+    .p_1{
+        margin-top: 2rem;
+    }
+    .p_2{
+        display: none;
+    }
+
+    /* .insRes{
+        display: none;
+    } */
+}
+
 @media(max-width: 767px)
 {
     .btnLogin{
@@ -38,7 +119,7 @@ body{
 
     .show{
 		width: 100%;
-        height: 30%;
+        height: 36%;
         z-index: 99999999;
         display: block;
         background-color: var(--firstColor);
@@ -48,5 +129,17 @@ body{
         transform: scale(1.04);
         transition:all 0.3s ease;
 
+    }
+
+}
+
+@media(max-width: 550px)
+{
+    .textSmall{
+        font-size: 2.3rem;
+    }
+
+    .textSmall__sec{
+        font-size: 0.9rem;
     }
 }
