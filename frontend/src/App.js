@@ -6,6 +6,8 @@ import GetStarted from './views/User/GetStarted';
 import Contact from './views/User/Contact';
 import Pricing from './views/User/Pricing';
 import Themes from './views/User/Themes';
+import View from './views/User/View';
+import Links from './views/User/Links';
 
 function App() {
   return (
@@ -37,6 +39,16 @@ function App() {
             <Contact />
           </Route>
 
+          {/* View */}
+          <Route path='/amine0029'>
+            <View />
+          </Route>
+
+          {/* Links */}
+
+          <Route path='/links'>
+            <Links />
+          </Route>
 
         </Switch>
       </div>

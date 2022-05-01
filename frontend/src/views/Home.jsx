@@ -25,23 +25,23 @@ function Home() {
           <div className='flex flex-col justify-around'>
             <div className='flex flex-col items-center self-center'>
               {/* P1 */}
-              <p className='w-96 text-white font-normal p_1 md_lg:ml-10'>
+              <div className='w-96 text-white font-normal p_1 md_lg:ml-10'>
                 <div className='text-white font-extrabold text-3xl'>Easy to use</div>
                 <div className='mt-5 text-sm'>
                   Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum optio excepturi nemo sit eligendi quia dicta! Voluptas vitae veniam cum facilis fugiat.
                 </div>
-              </p>
+              </div>
 
             </div>
 
             <div className='flex flex-col items-center self-center'>
               {/* P2 */}
-              <p className='w-96 text-white font-normal p_2'>
-                  <div className='text-white font-extrabold text-3xl'>Easy to use</div>
-                  <div className='mt-5 text-sm'>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum optio excepturi nemo sit eligendi quia dicta! Voluptas vitae veniam cum facilis fugiat.
-                  </div>
-                </p>
+              <div className='w-96 text-white font-normal p_2'>
+                <div className='text-white font-extrabold text-3xl'>Easy to use</div>
+                <div className='mt-5 text-sm'>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum optio excepturi nemo sit eligendi quia dicta! Voluptas vitae veniam cum facilis fugiat.
+                </div>
+              </div>
 
             </div>
           </div>
@@ -55,13 +55,13 @@ function Home() {
           <div className='flex flex-col justify-around'>
             <div className='flex flex-col items-center self-center ml-36'>
               {/* P3 */}
-              <p className='w-96 font-normal self-center md:w-80 md_lg:mr-36 md_lg:mt-10'>
-                  <div className='text-firstColor font-extrabold text-3xl'>Easy to use</div>
-                  <div className='mt-5 text-sm text-menuColor'>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum optio excepturi nemo sit eligendi quia dicta! Voluptas vitae veniam cum facilis fugiat.
-                    <Link to='/register'><button type='submit' className='btnGetStartedForFree text-white bg-firstColor px-10 py-4 mt-8 rounded-sm'>GET STARTED FOR FREE !</button></Link>
-                  </div>
-                </p>
+              <div className='w-96 font-normal self-center md:w-80 md_lg:mr-36 md_lg:mt-10'>
+                <div className='text-firstColor font-extrabold text-3xl'>Easy to use</div>
+                <div className='mt-5 text-sm text-menuColor'>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum optio excepturi nemo sit eligendi quia dicta! Voluptas vitae veniam cum facilis fugiat.
+                  <Link to='/register'><button type='submit' className='btnGetStartedForFree text-white bg-firstColor px-10 py-4 mt-8 rounded-sm'>GET STARTED FOR FREE !</button></Link>
+                </div>
+              </div>
             </div>
           </div>
         </div>
