@@ -15,6 +15,8 @@ module.exports = {
         footerBgColor : '#F9F9F9',
         footerBgColor2 : '#393939',
         favColor : "#261D8E",
+        theme1Color : "#872D2D",
+        theme1ColorHover : "#EC5656",
       },
 
       screens: {

@@ -7,6 +7,7 @@
     --navBg : #F9F9F9;
     --menuColor : #898989;
     --inputColor : #EEEEEE;
+    --theme1ColorHover : #EC5656;
 }
 
 body{
@@ -87,6 +88,25 @@ body{
 
 .myTansition:hover{
     transform: scale(1.04);
+}
+
+.hoverButtonTheme1{
+    transition: 530ms;
+}
+
+.hoverButtonTheme1:hover{
+    background-color: var(--theme1ColorHover);
+    outline: white solid 1px;
+    border-bottom-right-radius: 2rem;
+    border-top-left-radius: 2rem;
+    transform: scale(1.04);
+}
+
+.myIframe{
+    width: 14rem;
+    height: 24rem;
+    outline: black solid 0.4rem;
+    border-radius: 1rem;
 }
 
 @media(max-width: 900px)
