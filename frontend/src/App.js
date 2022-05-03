@@ -45,7 +45,6 @@ function App() {
           </Route>
 
           {/* Links */}
-
           <Route path='/links'>
             <Links />
           </Route>

@@ -17,6 +17,7 @@ module.exports = {
         favColor : "#261D8E",
         theme1Color : "#872D2D",
         theme1ColorHover : "#EC5656",
+        colorOpacity : "#00000066",
       },
 
       screens: {
