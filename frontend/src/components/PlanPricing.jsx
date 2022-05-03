@@ -5,7 +5,6 @@ function PlanPricing() {
     <div>
         <center><p className='myBg mt-12 text-firstColor font-bold text-3xl md:text-2xl'>Pick your plan, you can always change later.</p></center>
         <div className='flex flex-wrap justify-center gap-10'>
-
             {/* StartPrice {FREE} */}
             <div className="p-4 max-w-sm mt-16 bg-white rounded-lg border shadow-md sm:p-8 dark:bg-gray-800 dark:border-gray-700">
                 <h5 className="mb-4 text-3xl font-extrabold text-favColor dark:text-gray-400">FREE</h5>

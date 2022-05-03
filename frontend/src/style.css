@@ -103,9 +103,9 @@ body{
 }
 
 .myIframe{
-    width: 14rem;
-    height: 24rem;
-    outline: black solid 0.4rem;
+    width: 18rem;
+    height: 30rem;
+    outline: black solid 0.5rem;
     border-radius: 1rem;
 }
 
@@ -165,7 +165,6 @@ body{
 .switch input[type="checkbox"]:checked:active + .slider::after {
     transform: translateX(calc(var(--button-width) - var(--toggle-wider) - var(--button-toggle-offset)));
 }
-
 
 @media(max-width: 900px)
 {

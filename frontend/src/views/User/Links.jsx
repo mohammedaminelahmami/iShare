@@ -11,6 +11,10 @@ function Links() {
 
   const [showModal, setShowModal] = useState(false);
 
+  const test = ()=>{
+    alert('Clicked !!!!')
+  }
+
   return (
     <div className='bg-gray-100'>
       <Nav />
@@ -94,11 +98,11 @@ function Links() {
 
       {/* Modal --- Explore */}
       {showModal ? (
-          <div className="flex justify-center items-center overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
+          <div className="p-20 flex justify-center items-center overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none  bg-colorOpacity bg-blackfocus:outline-none">
             <div className="relative w-auto my-6 mx-auto max-w-3xl">
-              <div className="border-0 rounded-md shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+              <div className="p-10 border-0 rounded-md shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
                 <div className="flex items-start justify-between p-6 border-b border-solid border-gray-300 rounded-t ">
-                  <h3 className="text-xl font-semibold">Add to iShare</h3>
+                  <h3 className="text-black text-xl font-bold">Add to iShare</h3>
                   <button
                     className="bg-transparent border-0 text-black float-right"
                     onClick={() => setShowModal(false)}
@@ -110,24 +114,31 @@ function Links() {
                 </div>
         
                 <div>
-                  <div className='flex'>
-                    <img src={shopify} className='m-5' width='40'/>
-                    <p className='self-center'>Sell Your Product !</p>
-                  </div>
+
+                  <button onClick={test}>
+                    <div className='flex'>
+                      <img src={shopify} className='m-5' width='40'/>
+                      <p className='self-center text-secondColor font-medium'>Share your product to sell online</p>
+                    </div>
+                  </button>
 
                   <hr />
 
-                  <div className='flex'>
-                    <img src={music} className='m-5' width='40'/>
-                    <p className='self-center'>Add Your Last Album !</p>
-                  </div>
+                  <button onClick={test}>
+                    <div className='flex'>
+                      <img src={music} className='m-5' width='40'/>
+                      <p className='self-center text-secondColor font-medium'>Share your latest or favorite music</p>
+                    </div>
+                  </button>
 
                   <hr />
 
-                  <div className='flex'>
-                    <img src={youtube} className='m-5' width='40'/>
-                    <p className='self-center'>Add Your Video</p>
-                  </div>
+                  <button onClick={test}>
+                    <div className='flex'>
+                      <img src={youtube} className='m-5' width='40'/>
+                      <p className='self-center text-secondColor font-medium'>Share Youtube videos on your iShare</p>
+                    </div>
+                  </button>
 
                 </div>
               </div>
