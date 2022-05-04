@@ -23,11 +23,13 @@
                 echo json_encode("Fields are required !");
             }
 
-            // RegEx
+            $checkEmail = $this->userModel->checkEmail($email);
+
+            // RegExfunc
             if(empty($username) || !preg_match("/^[a-zA-Z0-9]*$/", $username))
             {
                 echo json_encode("please enter correct 'Username' ");
-            }elseif(!preg_match("/^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/", $email))
+            }elseif(!preg_match("/^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/", $email) || $checkEmail > 0)
             {
                 echo json_encode("please enter correct 'Email' ");
             }elseif(empty($password_unhashed) || strlen($password_unhashed) < 6)
@@ -60,14 +62,13 @@
                 echo json_encode("please enter correct 'username' ");
             }else{
                 $row = $this->userModel->checkUser($username);
-
                 if($row)
                 {
                     // Hashed Password from Database
-                    $hashedPassword = $row->password;
+                    $hashedPassword = $row["password"];
                     if(password_verify($password_unhashed, $hashedPassword))
                     {
-                        return $row;
+                        echo json_encode('Correct !');
                     }else{
                         echo json_encode('Password incorrect !');
                     }
