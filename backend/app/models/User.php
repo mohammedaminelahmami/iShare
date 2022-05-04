@@ -14,7 +14,7 @@
         {
             $this->db->query("INSERT INTO ishare . user (username, email, password)
                               VALUES (:username, :email, :password)
-                              ");
+                            ");
             // Bind Values
             $this->db->bind(':username', $username);
             $this->db->bind(':email', $email);
@@ -32,16 +32,20 @@
         public function checkUser($username)
         {
             $this->db->query("SELECT * FROM ishare . user
-                              WHERE username = ':username'
-                              ");
-            // Bind Values
-            $this->db->bind(':username', $username);
-            if($this->db->single())
-            {
-                return true;
-            }else{
-                return false;
-            }
+                              WHERE username = '$username'
+                            ");
+            $row = $this->db->single();
+            return $row;
+        }
+
+        // check Email { Unique }
+        public function checkEmail($email)
+        {
+            $this->db->query("SELECT * FROM ishare . user
+                              WHERE email = '$email'
+                            ");
+            $this->db->execute();
+            return $this->db->rowCount();
         }
 
     }
