@@ -8,6 +8,7 @@ import Pricing from './views/User/Pricing';
 import Themes from './views/User/Themes';
 import View from './views/User/View';
 import Links from './views/User/Links';
+import LoginAdmin from './views/Admin/LoginAdmin';
 
 function App() {
   return (
@@ -47,6 +48,10 @@ function App() {
           {/* Links */}
           <Route path='/links'>
             <Links />
+          </Route>
+
+          <Route path='/loginadmin'>
+            <LoginAdmin />
           </Route>
 
         </Switch>
