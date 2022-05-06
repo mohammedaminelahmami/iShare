@@ -2,14 +2,16 @@ import React from 'react'
 import '../style.css'
 import { Link } from 'react-router-dom'
 import hamburgerMenuImg from '../imgs/menu.png'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Logo from './Logo'
+import profile from '../imgs/profile.png'
+import settings from '../imgs/settings.png'
 
 function Nav() {
-
     const [isActive, setIsActive] = useState(false);
     const [menu_el, setMenu_el] = useState(false);
-
+    const [loggedIn, setLoggedIn] = useState(false);
+    
     const mediaQuery = window.matchMedia('(min-width: 768px)');
     const handlemediaChange = (e)=>{
         if(e.matches)
@@ -26,6 +28,13 @@ function Nav() {
         setMenu_el(!menu_el);
     }
 
+    useEffect(()=>{
+        if(localStorage.getItem('token'))
+        {
+          setLoggedIn(true);
+        }
+      })
+
   return (
     <div className="parentNav font-['poppins']">
         <nav className='bg-navBg p-5 w-full'>
@@ -41,8 +50,24 @@ function Nav() {
                         <li><Link to='/login' className={menu_el ? "block text-menuColor md:text-white md:text-normal text-center my-4 py-2 px-4 w-32 mx-auto rounded-full bg-secondColor" : "hidden text-menuColor"}> Login </Link></li>
                     </ul>
                 </div>
-                {/* Login-Web */}
-                <Link to='/login' className="btnLogin mr-12 px-8 py-1 bg-firstColor text-white font-semibold rounded-sm"> Login </Link>
+
+                {!loggedIn&&
+                    <Link to='/login' className="btnLogin mr-12 px-8 py-1 bg-firstColor text-white font-semibold rounded-sm"> Login </Link>
+                }
+
+                {loggedIn&&
+                    <div className='flex gap-6'>
+                        <button className='flex gap-2 self-center'>
+                            <div><img src={profile} width='20' /></div>
+                            <div className='text-firstColor text-sm'>Mohammed Amine</div>
+                        </button>
+
+                        <button className='flex gap-2 mr-10 self-center'>
+                            <div><img src={settings} width='20' /></div>
+                            <div className='text-firstColor text-sm'>Settings</div>
+                        </button>
+                    </div>
+                }
 
                 <button onClick={hamburgerMenuToggle} className='hamburgerMenuImg mr-12'><img src={hamburgerMenuImg} width='25' /></button>
             </div>

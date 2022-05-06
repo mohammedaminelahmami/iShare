@@ -9,8 +9,19 @@ import Themes from './views/User/Themes';
 import View from './views/User/View';
 import Links from './views/User/Links';
 import LoginAdmin from './views/Admin/LoginAdmin';
+import React, { useState, useEffect } from 'react'
 
 function App() {
+
+  const [loggedIn, setLoggedIn] = useState(false);
+
+  useEffect(()=>{
+    if(localStorage.getItem('token'))
+    {
+      setLoggedIn(true);
+    }
+  })
+
   return (
     <Router>
       <div className='parentApp'>
@@ -21,7 +32,12 @@ function App() {
           </Route>
 
           <Route path='/login'>
-            <LoginUser />
+            {!loggedIn&&
+              <LoginUser />
+            }
+            {loggedIn&&
+              <Home />
+            }
           </Route>
 
           <Route path='/register'>
