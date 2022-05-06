@@ -68,7 +68,21 @@
                     $hashedPassword = $row["password"];
                     if(password_verify($password_unhashed, $hashedPassword))
                     {
-                        echo json_encode('Correct !');
+                        // echo json_encode('Correct !');
+
+                        $header = [
+                            "alg" => "JWT",
+                            "typ" => "HS256"
+                        ];
+
+                        $payload = [
+                            "role" => "user"
+                        ];
+
+                        $jwt = new JWT();
+                        $token = $jwt->generate($header, $payload, SECRET);
+
+                        echo json_encode($token);
                     }else{
                         echo json_encode('Password incorrect !');
                     }
