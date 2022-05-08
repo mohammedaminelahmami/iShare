@@ -2,7 +2,7 @@
 
 class JWT
 {
-    public function generate(array $header, $payload, string $secret, int $validity = 86400): string
+    public function generate(array $header, $payload, string $secret, int $validity = 3600): string
     {
         if($validity > 0)
         {

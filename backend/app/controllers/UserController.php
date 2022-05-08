@@ -76,9 +76,11 @@
                         ];
 
                         $payload = [
-                            "username" => $row["username"],
-                            "password" => $password_unhashed,
                             "role" => "user"
+                        ];
+
+                        $data = [
+                            "username" => $row["username"]
                         ];
 
                         $jwt = new JWT();
@@ -87,7 +89,7 @@
                         echo json_encode([
                             "message" => "Success !",
                             "token" => $token,
-                            "data" => $payload
+                            "data" => $data
                         ]);
                     }else{
                         echo json_encode('Password incorrect !');

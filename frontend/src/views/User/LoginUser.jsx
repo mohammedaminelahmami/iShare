@@ -1,15 +1,15 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useRef, useState, useContext } from 'react'
+import { Link, Redirect } from 'react-router-dom'
 import Logo from '../../components/Logo'
-import { useRef } from 'react'
 import axios from 'axios';
-import { useState } from 'react'
+// import { UserContext } from '../UserContext';
 
 function LoginUser() {
 
     const [loggedIn, setLoggedIn] = useState(false);
-    const [redirect, setRedirect] = useState(false);
     const [getUsername, setgetUsername] = useState(false);
+
+    // const test = useContext(UserContext)
 
     const username = useRef('');
     const password = useRef('');
@@ -24,24 +24,17 @@ function LoginUser() {
 
         axios.post('http://localhost/ishare/backend/user/login', formData)
         .then(function(response){
-            // const data = JSON.stringify(response.data);
-            // console.log(response.data.token);
             localStorage.setItem('token', response.data.token);
             if(localStorage.getItem('token') === response.data.token)
             {
                 setLoggedIn(true);
-                setgetUsername(response.data.data.username);
+                window.location.replace('http://localhost:3000/')
+                localStorage.setItem('username', response.data.data.username)
             }
         })
         .catch(function(error){
             console.log(error);
         })
-
-        setRedirect(true);
-    }
-
-    const logout = ()=>{
-        localStorage.removeItem('token');
     }
 
 return (
@@ -51,6 +44,8 @@ return (
                 <div className='mt-5' style={{marginLeft:"68px"}}>
                     <Logo />
                 </div>
+
+                {/* <h1>{test}</h1> */}
         
                 <form onSubmit={HandleSubmit} className='flex flex-col items-center mt-10'>
                     <p className='text-firstColor font-bold text-2xl md:text-xl'>Log in to your iShare account</p>

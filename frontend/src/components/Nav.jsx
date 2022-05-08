@@ -5,7 +5,8 @@ import hamburgerMenuImg from '../imgs/menu.png'
 import { useState, useEffect } from 'react'
 import Logo from './Logo'
 import profile from '../imgs/profile.png'
-import settings from '../imgs/settings.png'
+import MenuDropDown from './MenuDropDown'
+
 
 function Nav() {
     const [isActive, setIsActive] = useState(false);
@@ -56,19 +57,19 @@ function Nav() {
                 }
 
                 {loggedIn&&
-                    <div className='flex gap-6'>
-                        <button className='flex gap-2 self-center'>
-                            <div><img src={profile} width='20' /></div>
-                            <div className='text-firstColor text-sm'>Mohammed Amine</div>
-                        </button>
+                    <>
+                        <div className='flex gap-6'>
+                            {/* Profile */}
+                            <button className='flex gap-2 self-center'>
+                                <div><img src={profile} width='20' /></div>
+                                <div className='text-firstColor text-sm'>{localStorage.getItem('username')}</div>
+                            </button>
 
-                        <button className='flex gap-2 mr-10 self-center'>
-                            <div><img src={settings} width='20' /></div>
-                            <div className='text-firstColor text-sm'>Settings</div>
-                        </button>
-                    </div>
+                            {/* Settings */}
+                            <MenuDropDown />
+                        </div>
+                    </>
                 }
-
                 <button onClick={hamburgerMenuToggle} className='hamburgerMenuImg mr-12'><img src={hamburgerMenuImg} width='25' /></button>
             </div>
         </nav>
