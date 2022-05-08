@@ -7,11 +7,12 @@ export default function Example() {
 
   const logout = ()=>{
     localStorage.removeItem('token');
+    localStorage.removeItem('username');
     window.location.replace('http://localhost:3000/');
   }
 
   return (
-    <div>
+    <div className='md:hidden'>
       <Menu as="div" className="relative inline-block text-left">
         <div>
           <Menu.Button>

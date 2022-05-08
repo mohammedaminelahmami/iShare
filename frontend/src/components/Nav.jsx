@@ -36,6 +36,12 @@ function Nav() {
         }
       })
 
+      const logout = ()=>{
+        localStorage.removeItem('token');
+        localStorage.removeItem('username');
+        window.location.replace('http://localhost:3000/');
+      }
+
   return (
     <div className="parentNav font-['poppins']">
         <nav className='bg-navBg p-5 w-full'>
@@ -43,12 +49,24 @@ function Nav() {
                 <div className="flex flex-row ml-12 gap-10 md:gap-0 font-semibold text-sm">
                     <Logo />
                     <ul className={isActive ? "show" : "flex items-center gap-10 md:gap-0"}>
+                        {loggedIn&&
+                            <>
+                                <li><Link to='' className={menu_el ? "block md:text-white md:text-normal text-center mt-4 md:underline" : "hidden"}>@{localStorage.getItem('username')}</Link></li>
+                            </>
+                        }
                         <li><Link to='/Themes' className={menu_el ? "block text-menuColor md:text-white md:text-normal text-center mt-4" : "md:hidden text-menuColor hover:text-firstColor"}>Themes</Link></li>
                         <li><Link to='/Pricing' className={menu_el ? "block text-menuColor md:text-white md:text-normal text-center mt-4" : "md:hidden text-menuColor hover:text-firstColor"}>Pricing</Link></li>
                         <li><Link to='/' className={menu_el ? "block text-menuColor md:text-white md:text-normal text-center mt-4" : "md:hidden text-menuColor hover:text-firstColor"}>Community</Link></li>
                         <li><Link to='/Contact' className={menu_el ? "block text-menuColor md:text-white md:text-normal text-center mt-4" : "md:hidden text-menuColor hover:text-firstColor"}>Contact</Link></li>
-                        {/* Login-Web-mobile */}
-                        <li><Link to='/login' className={menu_el ? "block text-menuColor md:text-white md:text-normal text-center my-4 py-2 px-4 w-32 mx-auto rounded-full bg-secondColor" : "hidden text-menuColor"}> Login </Link></li>
+                        {!loggedIn&&
+                            <li><Link to='/login' className={menu_el ? "block text-menuColor md:text-white md:text-normal text-center mt-4 py-2 px-4 w-32 mx-auto rounded-full bg-secondColor" : "hidden text-menuColor"}> Login </Link></li>
+                        }
+                        {loggedIn&&
+                            <li><Link to='' className={menu_el ? "block text-menuColor md:text-white md:text-normal text-center mt-4" : "hidden text-menuColor"}> Links </Link></li>
+                        }
+                        {loggedIn&&
+                            <li><button onClick={logout} className={menu_el ? "block text-menuColor md:text-white md:text-normal text-center my-4 py-2 px-4 w-32 mx-auto rounded-full bg-secondColor" : "hidden text-menuColor"}> Logout </button></li>
+                        }
                     </ul>
                 </div>
 
@@ -60,7 +78,7 @@ function Nav() {
                     <>
                         <div className='flex gap-6'>
                             {/* Profile */}
-                            <button className='flex gap-2 self-center'>
+                            <button className='flex gap-2 self-center md:hidden'>
                                 <div><img src={profile} width='20' /></div>
                                 <div className='text-firstColor text-sm'>{localStorage.getItem('username')}</div>
                             </button>
