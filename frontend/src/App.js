@@ -9,50 +9,68 @@ import Themes from './views/User/Themes';
 import View from './views/User/View';
 import Links from './views/User/Links';
 import LoginAdmin from './views/Admin/LoginAdmin';
+import React, { useState, useEffect } from 'react'
+import { UserContext } from './views/UserContext';
 
 function App() {
+
+  const [loggedIn, setLoggedIn] = useState(false);
+
+  useEffect(()=>{
+    if(localStorage.getItem('token'))
+    {
+      setLoggedIn(true);
+    }
+  })
+
   return (
     <Router>
       <div className='parentApp'>
         <Switch>
+          <UserContext.Provider value='Test UseContext'>
+            <Route exact path='/'>
+              <Home />
+            </Route>
 
-          <Route exact path='/'>
-            <Home />
-          </Route>
+            <Route path='/login'>
+              {!loggedIn&&
+                <LoginUser />
+              }
+              {loggedIn&&
+                <Home />
+              }
+            </Route>
 
-          <Route path='/login'>
-            <LoginUser />
-          </Route>
+            <Route path='/register'>
+              <GetStarted />
+            </Route>
 
-          <Route path='/register'>
-            <GetStarted />
-          </Route>
+            <Route path='/Themes'>
+              <Themes />
+            </Route>
 
-          <Route path='/Themes'>
-            <Themes />
-          </Route>
+            <Route path='/Pricing'>
+              <Pricing />
+            </Route>
 
-          <Route path='/Pricing'>
-            <Pricing />
-          </Route>
+            <Route path='/Contact'>
+              <Contact />
+            </Route>
 
-          <Route path='/Contact'>
-            <Contact />
-          </Route>
+            {/* View */}
+            <Route path='/amine0029'>
+              <View />
+            </Route>
 
-          {/* View */}
-          <Route path='/amine0029'>
-            <View />
-          </Route>
+            {/* Links */}
+            <Route path='/links'>
+              <Links />
+            </Route>
 
-          {/* Links */}
-          <Route path='/links'>
-            <Links />
-          </Route>
-
-          <Route path='/loginadmin'>
-            <LoginAdmin />
-          </Route>
+            <Route path='/loginadmin'>
+              <LoginAdmin />
+            </Route>
+          </UserContext.Provider>
 
         </Switch>
       </div>

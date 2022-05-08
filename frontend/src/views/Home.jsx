@@ -1,10 +1,12 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import Nav from '../components/Nav'
 import Footer from '../components/Footer'
 import ins from '../imgs/ins.webp'
+import { UserContext } from './UserContext'
 
 function Home() {
+
   return (
     <div className="parentHome font-['poppins']">
       <Nav />
