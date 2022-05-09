@@ -15,8 +15,12 @@ function Links() {
     alert('Clicked !!!!')
   }
 
+  const HandleClick = ()=>{
+    window.open('http://localhost:3000/'+localStorage.getItem('username'), '_blank')
+  }
+
   return (
-    <div className='bg-gray-100'>
+    <div className='bg-gray-100 font-["poppins"]'>
       <Nav />
       <UserAnalyticsBar />
 
@@ -93,7 +97,14 @@ function Links() {
         </div>
         
         {/* Show Mobile */}
-        <iframe className='myIframe responsive-iframe' src="http://localhost:3000/amine0029" />
+        <div>
+          {/* Share */}
+          <div className='mt-4 absolute top-36'>
+              <button onClick={HandleClick} className='text-xs font-bold underline' target='_blank'>http://localhost:3000/{localStorage.getItem('username')}</button>
+              <button className='ml-3 border-4 px-2 py-1 rounded-md'>Share</button>
+          </div>
+          <iframe className='myIframe responsive-iframe mt-10' src="http://localhost:3000/amine0029" />
+        </div>
       </div>
 
       {/* Modal --- Explore */}

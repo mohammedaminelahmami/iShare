@@ -32,6 +32,8 @@ function view() {
 
             <button className='bg-green-400 text-white text-medium font-semibold mt-7 px-5 py-3 w-1/3 md:text-xs md:w-52 md:mt-2 rounded-sm hoverButtonTheme1'>Lorem ipsum dolur uncut !</button>
 
+            <button className='bg-green-400 text-white text-medium font-semibold mt-7 px-5 py-3 w-1/3 md:text-xs md:w-52 md:mt-2 rounded-sm hoverButtonTheme1'>Lorem ipsum dolur uncut !</button>
+
             {/* social media icons */}
             <div className='flex m-10 gap-2 md:m-7'>
                 <button className='w-7 h-full md:w-6'><img src={github} /></button>
@@ -41,12 +43,7 @@ function view() {
             </div>
 
             {/* Logo iShare */}
-            <img src={logoiShare3} className='mt-12 md:hidden' />
-
-            {/* Share */}
-            <div className='self-start ml-2 md:self-center'>
-                <button className='bg-green-700 text-white font-bold px-5 py-3 w-32 rounded-md md:px-2 md:py-2 md:text-xs'>Share</button>
-            </div>
+            <img src={logoiShare3} className='mt-2 md:hidden' />
         </div>
     </div>
   )
