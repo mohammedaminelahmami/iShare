@@ -64,7 +64,12 @@ function App() {
 
             {/* Links */}
             <Route path='/links'>
-              <Links />
+              {!loggedIn&&
+                <Home />
+              }
+              {loggedIn&&
+                <Links />
+              }
             </Route>
 
             <Route path='/loginadmin'>

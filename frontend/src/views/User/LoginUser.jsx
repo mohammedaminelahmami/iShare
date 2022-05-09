@@ -28,7 +28,7 @@ function LoginUser() {
             if(localStorage.getItem('token') === response.data.token)
             {
                 setLoggedIn(true);
-                window.location.replace('http://localhost:3000/')
+                window.location.replace('http://localhost:3000/links')
                 localStorage.setItem('username', response.data.data.username)
             }
         })

@@ -11,6 +11,10 @@ export default function Example() {
     window.location.replace('http://localhost:3000/');
   }
 
+  const links = ()=>{
+    window.location.replace('http://localhost:3000/links')
+  }
+
   return (
     <div className='md:hidden'>
       <Menu as="div" className="relative inline-block text-left">
@@ -36,6 +40,7 @@ export default function Example() {
               <Menu.Item>
                 {({ active }) => (
                   <button
+                    onClick={links}
                     className={`${
                       active ? 'bg-firstColor text-white' : 'text-gray-900'
                     } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
@@ -73,7 +78,7 @@ export default function Example() {
                         aria-hidden="true"
                       />
                     )}
-                    Duplicate
+                    Appearance
                   </button>
                 )}
               </Menu.Item>

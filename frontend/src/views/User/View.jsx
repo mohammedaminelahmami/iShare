@@ -1,33 +1,43 @@
 import React from 'react'
 import imgTheme from '../../imgs/img1.jpg'
-import Avatar from '../../imgs/avatar.webp'
-import instagram from '../../imgs/instagram.png'
-import facebook from '../../imgs/facebook.png'
-import twitter from '../../imgs/twitter.png'
+import Avatar from '../../imgs/avatar.png'
+import github from '../../imgs/github.png'
+import facebook from '../../imgs/facebook1.png'
+import twitter from '../../imgs/twitter1.png'
+import linkdin from '../../imgs/linkdin.png'
 import logoiShare3 from '../../imgs/logoiShare3.png'
 
 function view() {
+
+  const embedVideo = ()=>{
+    alert('Clickked');
+  }
+
   return (
     <div className='parentView'>
-        <div className='flex flex-col items-center w-full' style={{backgroundImage:`url(${imgTheme})`, height:"45.1rem"}}>
+        <div className='flex flex-col items-center w-full bg-slate-100'>
             {/* Avatar */}
             <img src={Avatar} className='w-32 md:w-20 sm:w-10 rounded-full m-3' />
 
+            {/* @username */}
+            <center className='underline font-bold md:text-xs text-black'>@{localStorage.getItem('username')}</center>
+
             {/* Description */}
-            <p className='m-8 text-black text-xl md:text-md sm:text-xs sm:font-bold font-normal md:m-3'>Lorem ipsum dolor sit amet ? </p>
+            <p className='m-8 text-black text-xl font-semibold md:text-md sm:text-xs md:m-3'>Hey, I'm Amine Welcome to ...</p>
 
             {/* Links */}
-            <button className='bg-theme1Color text-white text-medium font-semibold mt-7 px-5 py-3 w-1/3 md:w-1/2 md:text-xs md:mt-2 rounded-sm hoverButtonTheme1'>Listen to my Album !</button>
+            <button className='bg-green-700 text-white text-medium font-semibold mt-7 px-5 py-3 w-1/3 md:text-xs md:mt-2 md:w-52 rounded-sm hoverButtonTheme1'>Listen to my Album !</button>
 
-            <button className='bg-theme1Color text-white text-medium font-semibold mt-7 px-5 py-3 w-1/3 md:w-1/2 md:text-xs md:mt-2 rounded-sm hoverButtonTheme1'>Streaming Live On Youtube !</button>
+            <button onClick={embedVideo} className='bg-green-400 text-white text-medium font-semibold mt-7 px-5 py-3 w-1/3 md:text-xs md:w-52 md:mt-2 rounded-sm hoverButtonTheme1'>Streaming Live On Youtube !</button>
 
-            <button className='bg-theme1Color text-white text-medium font-semibold mt-7 px-5 py-3 w-1/3 md:w-1/2 md:text-xs md:mt-2 rounded-sm hoverButtonTheme1'>Lorem ipsum dolur uncut !</button>
+            <button className='bg-green-400 text-white text-medium font-semibold mt-7 px-5 py-3 w-1/3 md:text-xs md:w-52 md:mt-2 rounded-sm hoverButtonTheme1'>Lorem ipsum dolur uncut !</button>
 
             {/* social media icons */}
-            <div className='flex m-10 gap-5 md:m-7'>
-                <a href='#'><img src={instagram} className='w-7 h-full md:w-5' /></a>
-                <a href='#'><img src={facebook} className='w-4 h-full md:w-2' /></a>
-                <a href='#'><img src={twitter} className='w-8 h-full md:w-6' /></a>
+            <div className='flex m-10 gap-2 md:m-7'>
+                <button className='w-7 h-full md:w-6'><img src={github} /></button>
+                <button className='w-7 h-full md:w-6'><img src={facebook} /></button>
+                <button className='w-7 h-full md:w-6'><img src={twitter} /></button>
+                <button className='w-7 h-full md:w-6'><img src={linkdin} /></button>
             </div>
 
             {/* Logo iShare */}
@@ -35,7 +45,7 @@ function view() {
 
             {/* Share */}
             <div className='self-start ml-2 md:self-center'>
-                <button className='bg-black text-white font-bold px-5 py-3 w-32 rounded-md'>Share</button>
+                <button className='bg-green-700 text-white font-bold px-5 py-3 w-32 rounded-md md:px-2 md:py-2 md:text-xs'>Share</button>
             </div>
         </div>
     </div>
