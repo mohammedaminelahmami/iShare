@@ -32,17 +32,6 @@ function Links() {
             <button onClick={() => setShowModal(true)} className='px-24 py-4 rounded-md bg-firstColor text-white font-bold'><img src={explore} className='inline mb-1' width='15' /> Explore</button>
           </div>
 
-            {/* Description */}
-            <div className='mt-5 p-4 bg-white shadow-lg rounded-md'>
-              <textarea name="body" id="body" cols="15" rows="3" className="bg-gray-100 border-2 w-full p-2 rounded-md" placeholder="Description"></textarea>
-              {/* Add */}
-              <label className="switch">
-                <input type="checkbox" />
-                <span className="slider mt-2"></span>
-              </label>
-              {/* <button className='self-start px-8 py-2 rounded-md mt-2 bg-white text-white'>Add</button> */}
-            </div>
-
             {/* Link */}
             <div className='mt-5 p-4 bg-white shadow-lg rounded-md'>
               <textarea name="body" id="body" cols="15" rows="1" className="mt-2 mb-2 bg-gray-100 border-2 w-full p-2 rounded-md" placeholder="Title"></textarea>
@@ -99,11 +88,11 @@ function Links() {
         {/* Show Mobile */}
         <div>
           {/* Share */}
-          <div className='mt-4 absolute top-36'>
-              <button onClick={HandleClick} className='text-xs font-bold underline' target='_blank'>http://localhost:3000/{localStorage.getItem('username')}</button>
-              <button className='ml-3 border-4 px-2 py-1 rounded-md'>Share</button>
+          <div className='mt-2 text-white absolute right-36 top-20'>
+              <button onClick={HandleClick} className='text-sm underline' target='_blank'>http://localhost:3000/{localStorage.getItem('username')}</button>
+              <button className='ml-6 border-4 px-2 py-1 rounded-md'>Share</button>
           </div>
-          <iframe className='myIframe responsive-iframe mt-10' src="http://localhost:3000/amine0029" />
+          <iframe className='myIframe responsive-iframe mt-2' src="http://localhost:3000/amine0029" />
         </div>
       </div>
 

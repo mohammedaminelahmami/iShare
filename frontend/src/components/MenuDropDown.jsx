@@ -16,7 +16,7 @@ export default function Example() {
   }
 
   return (
-    <div className='md:hidden'>
+    <div className='md:hidden z-10'>
       <Menu as="div" className="relative inline-block text-left">
         <div>
           <Menu.Button>

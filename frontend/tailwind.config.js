@@ -18,6 +18,7 @@ module.exports = {
         theme1Color : "#872D2D",
         theme1ColorHover : "#EC5656",
         colorOpacity : "#00000066",
+        ffirstColor : '#2736D4',
       },
 
       screens: {
