@@ -11,6 +11,7 @@ import Links from './views/User/Links';
 import LoginAdmin from './views/Admin/LoginAdmin';
 import React, { useState, useEffect } from 'react'
 import { UserContext } from './views/UserContext';
+import Appearance from './views/User/Appearance';
 
 function App() {
 
@@ -64,7 +65,16 @@ function App() {
 
             {/* Links */}
             <Route path='/links'>
-              <Links />
+              {!loggedIn&&
+                <Home />
+              }
+              {loggedIn&&
+                <Links />
+              }
+            </Route>
+
+            <Route path='/Appearance'>
+              <Appearance />
             </Route>
 
             <Route path='/loginadmin'>

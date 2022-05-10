@@ -1,6 +1,7 @@
 import React from 'react'
 import green from '../imgs/green.png'
 import blue from '../imgs/blue.png'
+import lock from '../imgs/lock.png'
 
 function UserAnalyticsBar() {
   return (
@@ -10,12 +11,14 @@ function UserAnalyticsBar() {
 
             <div className='flex gap-2'>
                 <div className='self-center'><img src={green} className='' /></div>
-                <div className='text-md font-sm' >views : 24</div>
+                <div className='text-md font-sm' >views : </div>
+                <img src={lock} width='25' />
             </div>
 
             <div className='flex gap-2'>
                 <div className='self-center'><img src={blue} className='' /></div>
-                <div className='text-md font-sm'> clicks : 26</div>
+                <div className='text-md font-sm'> clicks : </div>
+                <img src={lock} width='25' />
             </div>
         </div>
     </div>

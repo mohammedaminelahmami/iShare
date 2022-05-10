@@ -15,8 +15,12 @@ function Links() {
     alert('Clicked !!!!')
   }
 
+  const HandleClick = ()=>{
+    window.open('http://localhost:3000/'+localStorage.getItem('username'), '_blank')
+  }
+
   return (
-    <div className='bg-gray-100'>
+    <div className='bg-gray-100 font-["poppins"]'>
       <Nav />
       <UserAnalyticsBar />
 
@@ -27,17 +31,6 @@ function Links() {
             <button className='px-20 py-4 rounded-md bg-firstColor text-white font-bold  mr-5'>Add New Link</button>
             <button onClick={() => setShowModal(true)} className='px-24 py-4 rounded-md bg-firstColor text-white font-bold'><img src={explore} className='inline mb-1' width='15' /> Explore</button>
           </div>
-
-            {/* Description */}
-            <div className='mt-5 p-4 bg-white shadow-lg rounded-md'>
-              <textarea name="body" id="body" cols="15" rows="3" className="bg-gray-100 border-2 w-full p-2 rounded-md" placeholder="Description"></textarea>
-              {/* Add */}
-              <label className="switch">
-                <input type="checkbox" />
-                <span className="slider mt-2"></span>
-              </label>
-              {/* <button className='self-start px-8 py-2 rounded-md mt-2 bg-white text-white'>Add</button> */}
-            </div>
 
             {/* Link */}
             <div className='mt-5 p-4 bg-white shadow-lg rounded-md'>
@@ -93,7 +86,14 @@ function Links() {
         </div>
         
         {/* Show Mobile */}
-        <iframe className='myIframe responsive-iframe' src="http://localhost:3000/amine0029" />
+        <div>
+          {/* Share */}
+          <div className='mt-2 text-white absolute right-36 top-20'>
+              <button onClick={HandleClick} className='text-sm underline' target='_blank'>http://localhost:3000/{localStorage.getItem('username')}</button>
+              <button className='ml-6 border-4 px-2 py-1 rounded-md'>Share</button>
+          </div>
+          <iframe className='myIframe responsive-iframe mt-2' src="http://localhost:3000/amine0029" />
+        </div>
       </div>
 
       {/* Modal --- Explore */}
