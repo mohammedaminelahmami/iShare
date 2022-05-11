@@ -5,11 +5,25 @@ import explore from '../../imgs/explore.png'
 import shopify from '../../imgs/shopify.png'
 import music from '../../imgs/music.png'
 import youtube from '../../imgs/youtube.png'
-import add from '../../imgs/add.png'
+import edit from '../../imgs/edit.png'
+import deletee from '../../imgs/deletee.png'
 
 function Links() {
 
-  const [showModal, setShowModal] = useState(false);
+  let myContent = (
+    <div className='mt-5 p-4 bg-white shadow-lg rounded-md'>
+      <textarea name="body" id="body" cols="15" rows="1" className="mt-2 mb-2 bg-gray-100 border-2 w-full p-2 rounded-md" placeholder="Title"></textarea>
+      <textarea name="body" id="body" cols="15" rows="3" className="bg-gray-100 border-2 w-full p-2 rounded-md" placeholder="Url"></textarea>
+
+      <label className="switch">
+        <input type="checkbox" />
+        <span className="slider mt-2"></span>
+      </label>
+      {/* <button className='self-start px-8 py-2 rounded-md mt-5 bg-white text-white'>Add</button> */}
+    </div>);
+
+  const [showModal, setShowModal] = useState(false)
+  const [content, setContent] = useState()
 
   const test = ()=>{
     alert('Clicked !!!!')
@@ -19,8 +33,20 @@ function Links() {
     window.open('http://localhost:3000/'+localStorage.getItem('username'), '_blank')
   }
 
+  const HandleClickAdd = ()=>{
+    setContent(<>{content} {myContent}</>)
+  }
+
+  const HandleClickEdit = ()=>{
+    alert('Clicked !!')
+  }
+
+  const HandleClickDelete = ()=>{
+    alert('Clicked !!')
+  }
+
   return (
-    <div className='bg-gray-100 font-["poppins"]'>
+    <div className='bg-gray-100 font-["poppins"] backg'>
       <Nav />
       <UserAnalyticsBar />
 
@@ -28,61 +54,43 @@ function Links() {
         <div className='flex flex-col'>
           {/* Links */}
           <div className='flex'>
-            <button className='px-20 py-4 rounded-md bg-firstColor text-white font-bold  mr-5'>Add New Link</button>
+            <button onClick={HandleClickAdd} className='px-20 py-4 rounded-md bg-firstColor text-white font-bold  mr-5'>Add New Link</button>
             <button onClick={() => setShowModal(true)} className='px-24 py-4 rounded-md bg-firstColor text-white font-bold'><img src={explore} className='inline mb-1' width='15' /> Explore</button>
           </div>
 
-            {/* Link */}
-            <div className='mt-5 p-4 bg-white shadow-lg rounded-md'>
-              <textarea name="body" id="body" cols="15" rows="1" className="mt-2 mb-2 bg-gray-100 border-2 w-full p-2 rounded-md" placeholder="Title"></textarea>
-              <textarea name="body" id="body" cols="15" rows="3" className="bg-gray-100 border-2 w-full p-2 rounded-md" placeholder="Url"></textarea>
+          {/* AddLink */}
+          {/* border-2 border-firstColor 2 sec {2000} setTimeOut */}
+          <div className='mt-5 p-4 bg-white shadow-lg rounded-md'>
+            <textarea name="body" id="body" cols="15" rows="1" className="mt-2 mb-2 bg-gray-100 border-2 w-full p-2 rounded-md" placeholder="Title"></textarea>
+            <textarea name="body" id="body" cols="15" rows="3" className="bg-gray-100 border-2 w-full p-2 rounded-md" placeholder="Url"></textarea>
 
-              {/* Add */}
-              <label className="switch">
-                <input type="checkbox" />
-                <span className="slider mt-2"></span>
-              </label>
-              {/* <button className='self-start px-8 py-2 rounded-md mt-5 bg-white text-white'>Add</button> */}
-            </div>
+            <button className='mt-2 py-1 px-4 text-sm font-semibold text-firstColor border-2 border-firstColor rounded-md'>Add</button>
 
-            {/* Link */}
-            <div className='mt-5 p-4 bg-white shadow-lg rounded-md'>
-              <textarea name="body" id="body" cols="15" rows="1" className="mt-2 mb-2 bg-gray-100 border-2 w-full p-2 rounded-md" placeholder="Title"></textarea>
-              <textarea name="body" id="body" cols="15" rows="3" className="bg-gray-100 border-2 w-full p-2 rounded-md" placeholder="Url"></textarea>
-              
-              {/* Add */}
-              <label className="switch">
-                <input type="checkbox" />
-                <span className="slider mt-2"></span>
-              </label>
-              {/* <button className='self-start px-8 py-2 rounded-md mt-5 bg-white text-white'>Add</button> */}
-            </div>
+            {/* <label className="switch">
+              <input type="checkbox" />
+              <span className="slider mt-2"></span>
+            </label> */}
+            {/* <button className='self-start px-8 py-2 rounded-md mt-5 bg-white text-white'>Add</button> */}
+          </div>
 
-            {/* Link */}
-            <div className='mt-5 p-4 bg-white shadow-lg rounded-md'>
-              <textarea name="body" id="body" cols="15" rows="1" className="mt-2 mb-2 bg-gray-100 border-2 w-full p-2 rounded-md" placeholder="Title"></textarea>
-              <textarea name="body" id="body" cols="15" rows="3" className="bg-gray-100 border-2 w-full p-2 rounded-md" placeholder="Url"></textarea>
-              
-              {/* Add */}
-              <label className="switch">
-                <input type="checkbox" />
-                <span className="slider mt-2"></span>
-              </label>
-              {/* <button className='self-start px-8 py-2 rounded-md mt-5 bg-white text-white'>Add</button> */}
+          <div className='flex justify-between mt-5 p-4 shadow-lg rounded-md bg-firstColor text-white'>
+            <p className='ml-2'>Listen to my album</p>
+            <div className='flex gap-4 mr-2'>
+              <button onClick={HandleClickEdit}><img src={edit} width='25' className='block' /></button>
+              <button onClick={HandleClickDelete}><img src={deletee} width='25' className='block' /></button>
             </div>
+          </div>
 
-            {/* Link */}
-            <div className='mt-5 p-4 bg-white shadow-lg rounded-md'>
-              <textarea name="body" id="body" cols="15" rows="1" className="mt-2 mb-2 bg-gray-100 border-2 w-full p-2 rounded-md" placeholder="Title"></textarea>
-              <textarea name="body" id="body" cols="15" rows="3" className="bg-gray-100 border-2 w-full p-2 rounded-md" placeholder="Url"></textarea>
-              
-              {/* Add */}
-              <label className="switch">
-                <input type="checkbox" />
-                <span className="slider mt-2"></span>
-              </label>
-              {/* <button className='self-start px-8 py-2 rounded-md mt-5 bg-secondColor text-white'>Add</button> */}
+          <div className='flex justify-between mt-5 p-4 shadow-lg rounded-md bg-firstColor text-white'>
+            <p className='ml-2'>Streaming Live on youtube</p>
+            <div className='flex gap-4 mr-2'>
+              <button onClick={HandleClickEdit}><img src={edit} width='25' className='block' /></button>
+              <button onClick={HandleClickDelete}><img src={deletee} width='25' className='block' /></button>
             </div>
+          </div>
+
+          <div>{content}</div>
+
         </div>
         
         {/* Show Mobile */}

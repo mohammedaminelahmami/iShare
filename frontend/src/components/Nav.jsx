@@ -46,7 +46,7 @@ function Nav() {
     <div className="parentNav font-['poppins']">
         <nav className='bg-navBg p-5 w-full'>
             <div className='flex flex-row justify-between'>
-                <div className="flex flex-row ml-12 gap-10 md:gap-0 font-semibold text-sm">
+                <div className={loggedIn ? "flex flex-row ml-12 md:gap-0 font-semibold text-sm" : "flex flex-row ml-12 gap-10 md:gap-0 font-semibold text-sm"}>
                     <Logo />
                     <ul className={isActive ? "show" : "flex items-center gap-10 md:gap-0"}>
                         {loggedIn&&
