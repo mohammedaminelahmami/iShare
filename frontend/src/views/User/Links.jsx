@@ -7,6 +7,9 @@ import music from '../../imgs/music.png'
 import youtube from '../../imgs/youtube.png'
 import edit from '../../imgs/edit.png'
 import deletee from '../../imgs/deletee.png'
+import Avatar from '../../imgs/avatar.svg'
+import Mobile from '../../components/Mobile'
+
 
 function Links() {
 
@@ -45,6 +48,7 @@ function Links() {
     alert('Clicked !!')
   }
 
+
   return (
     <div className='bg-gray-100 font-["poppins"] backg'>
       <Nav />
@@ -56,6 +60,20 @@ function Links() {
           <div className='flex'>
             <button onClick={HandleClickAdd} className='px-20 py-4 rounded-md bg-firstColor text-white font-bold  mr-5'>Add New Link</button>
             <button onClick={() => setShowModal(true)} className='px-24 py-4 rounded-md bg-firstColor text-white font-bold'><img src={explore} className='inline mb-1' width='15' /> Explore</button>
+          </div>
+
+          <div className='flex flex-col justify-around gap-10'>
+            <div className='flex flex-col items-center p-4 shadow-lg rounded-md w-full bg-gray-100'>
+                {/* Change Avatar */}
+                <img src={Avatar} className='block w-32 rounded-full m-3 md:w-20 sm:w-10' />
+                <label htmlFor="input" className="px-2 py-3 m-2 text-white text-xs bg-firstColor font-semibold rounded-sm cursor-pointer">Pick an image</label>
+                <input type="file" id='input' accept="image/*" hidden/>
+            </div>
+
+            <div className='p-4 w-full bg-gray-100 shadow-lg rounded-md'>
+              <textarea name="body" id="body" cols="15" rows="4" className="bg-white border-2 w-full p-2 rounded-md" placeholder="Description"></textarea>
+              <button className='mt-2 py-1 px-4 text-sm font-semibold text-firstColor bg-white border-2 border-firstColor rounded-md'>Add</button>
+            </div>
           </div>
 
           {/* AddLink */}
@@ -72,6 +90,7 @@ function Links() {
             </label> */}
             {/* <button className='self-start px-8 py-2 rounded-md mt-5 bg-white text-white'>Add</button> */}
           </div>
+          
 
           <div className='flex justify-between mt-5 p-4 shadow-lg rounded-md bg-firstColor text-white'>
             <p className='ml-2'>Listen to my album</p>
@@ -93,15 +112,7 @@ function Links() {
 
         </div>
         
-        {/* Show Mobile */}
-        <div>
-          {/* Share */}
-          <div className='mt-2 text-white absolute right-36 top-20'>
-              <button onClick={HandleClick} className='text-sm underline' target='_blank'>http://localhost:3000/{localStorage.getItem('username')}</button>
-              <button className='ml-6 border-4 px-2 py-1 rounded-md'>Share</button>
-          </div>
-          <iframe className='myIframe responsive-iframe mt-2' src="http://localhost:3000/amine0029" />
-        </div>
+        <Mobile HandleClick={HandleClick} />
       </div>
 
       {/* Modal --- Explore */}

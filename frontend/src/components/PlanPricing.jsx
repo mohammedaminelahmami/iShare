@@ -1,6 +1,17 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 function PlanPricing() {
+
+    const [loggedIn, setLoggedIn] = useState(false)
+    const [planPro, setPlanPro] = useState(false)
+
+    useEffect(()=>{
+        if(localStorage.getItem('token'))
+        {
+            setLoggedIn(true)
+        }
+    }, [])
+
   return (
     <div>
         <center><p className='myBg mt-12 text-firstColor font-bold text-3xl md:text-2xl'>Pick your plan, you can always change later.</p></center>
@@ -49,7 +60,13 @@ function PlanPricing() {
                         <span className="text-base font-normal leading-tight text-gray-500">24×7 phone & email support</span>
                     </li>
                 </ul>
-                <button type="button" className="text-white bg-firstColor hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-200 dark:focus:ring-blue-900 font-medium rounded text-sm px-5 py-2.5 inline-flex justify-center w-full text-center">Join for free</button>
+
+                {loggedIn ?
+                    <button type="button" disabled className="text-white bg-gray-400 focus:ring-4 focus:outline-none focus:ring-blue-200 dark:focus:ring-blue-900 font-medium rounded text-sm px-5 py-2.5 inline-flex justify-center w-full text-center">Free</button>
+                    :
+                    <button type="button" className="text-white bg-firstColor hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-200 dark:focus:ring-blue-900 font-medium rounded text-sm px-5 py-2.5 inline-flex justify-center w-full text-center">Join for free</button>
+                }
+
             </div>
             {/* EndPrice */}
 
@@ -99,7 +116,12 @@ function PlanPricing() {
                         <span className="text-base font-normal leading-tight text-gray-500">24×7 phone & email support</span>
                     </li>
                 </ul>
-                <button type="button" className="text-white bg-firstColor hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-200 dark:focus:ring-blue-900 font-medium rounded text-sm px-5 py-2.5 inline-flex justify-center w-full text-center">Get PRO</button>
+
+                {planPro ?
+                    <button type="button" className="text-white bg-firstColor hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-200 dark:focus:ring-blue-900 font-medium rounded text-sm px-5 py-2.5 inline-flex justify-center w-full text-center">Get PRO</button>
+                    :
+                    <button type="button" className="text-white bg-firstColor hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-200 dark:focus:ring-blue-900 font-medium rounded text-sm px-5 py-2.5 inline-flex justify-center w-full text-center">Get PRO</button>
+                }
             </div>
             {/* EndPrice */}
         </div>

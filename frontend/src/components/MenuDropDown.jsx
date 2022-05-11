@@ -1,6 +1,5 @@
 import { Menu, Transition } from '@headlessui/react'
 import { Fragment, useEffect, useRef, useState } from 'react'
-// import { ChevronDownIcon } from '@heroicons/react/solid'
 import settings from '../imgs/settings.png'
 
 export default function Example() {
@@ -13,6 +12,10 @@ export default function Example() {
 
   const links = ()=>{
     window.location.replace('http://localhost:3000/links')
+  }
+
+  const updatePlan = ()=>{
+    window.location.replace('http://localhost:3000/Pricing')
   }
 
   return (
@@ -87,6 +90,7 @@ export default function Example() {
               <Menu.Item>
                 {({ active }) => (
                   <button
+                    onClick={updatePlan}
                     className={`${
                       active ? 'bg-firstColor text-white' : 'text-gray-900'
                     } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
