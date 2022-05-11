@@ -55,7 +55,7 @@ function Nav() {
                         
                         {!loggedIn&&
                             <>
-                                <li><Link to='/Themes' className={menu_el ? "block text-menuColor md:text-white md:text-normal text-center mt-4" : "md:hidden text-menuColor hover:text-firstColor"}>Templates</Link></li>
+                                <li><Link to='/' className={menu_el ? "block text-menuColor md:text-white md:text-normal text-center mt-4" : "md:hidden text-menuColor hover:text-firstColor"}>Home</Link></li>
                                 <li><Link to='/Pricing' className={menu_el ? "block text-menuColor md:text-white md:text-normal text-center mt-4" : "md:hidden text-menuColor hover:text-firstColor"}>Pricing</Link></li>
                                 <li><Link to='/' className={menu_el ? "block text-menuColor md:text-white md:text-normal text-center mt-4" : "md:hidden text-menuColor hover:text-firstColor"}>Community</Link></li>
                                 <li><Link to='/Contact' className={menu_el ? "block text-menuColor md:text-white md:text-normal text-center mt-4" : "md:hidden text-menuColor hover:text-firstColor"}>Contact</Link></li>
@@ -66,6 +66,7 @@ function Nav() {
                             <>
                                 <li><Link to='/Links' className={menu_el ? "block text-menuColor md:text-white md:text-normal text-center mt-4" : "md:hidden text-menuColor hover:text-firstColor"}>Links</Link></li>
                                 <li><Link to='/Appearance' className={menu_el ? "block text-menuColor md:text-white md:text-normal text-center mt-4" : "md:hidden text-menuColor hover:text-firstColor"}>Appearance</Link></li>
+                                <li><Link to='/Themes' className={menu_el ? "block text-menuColor md:text-white md:text-normal text-center mt-4" : "md:hidden text-menuColor hover:text-firstColor"}>Templates</Link></li>
                                 <li><Link to='/Analytics' className={menu_el ? "block text-menuColor md:text-white md:text-normal text-center mt-4" : "md:hidden text-menuColor hover:text-firstColor"}>Analytics</Link></li>
                             </>
                         }
@@ -89,10 +90,10 @@ function Nav() {
                 {loggedIn&&
                     <div className='flex gap-6'>
                         {/* Profile */}
-                        <button className='flex gap-2 self-center md:hidden'>
+                        <Link to='/profile' className='flex gap-2 self-center md:hidden'>
                             <div><img src={profile} width='20' /></div>
                             <div className='text-firstColor text-sm'>{localStorage.getItem('username')}</div>
-                        </button>
+                        </Link>
 
                         {/* Settings */}
                         <MenuDropDown />

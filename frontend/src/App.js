@@ -9,9 +9,10 @@ import Themes from './views/User/Themes';
 import View from './views/User/View';
 import Links from './views/User/Links';
 import LoginAdmin from './views/Admin/LoginAdmin';
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, Profiler } from 'react'
 import { UserContext } from './views/UserContext';
 import Appearance from './views/User/Appearance';
+import Profile from './views/User/Profile';
 
 function App() {
 
@@ -71,6 +72,10 @@ function App() {
               {loggedIn&&
                 <Links />
               }
+            </Route>
+
+            <Route path='/profile'>
+              <Profile />
             </Route>
 
             <Route path='/Appearance'>
