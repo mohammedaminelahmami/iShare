@@ -103,10 +103,22 @@ body{
 }
 
 .myIframe{
+    position: relative;
     width: 18rem;
     height: 30rem;
     outline: black solid 0.5rem;
     border-radius: 1rem;
+}
+
+.backg::after{
+    content: "";
+    z-index: -999999;
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 50%;
+    background-color: rgb(241 245 249);
+    
 }
 
 /*  */
