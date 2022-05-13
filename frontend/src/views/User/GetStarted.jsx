@@ -1,9 +1,30 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { useState, useRef } from 'react'
+import axios from 'axios'
 import Logo from '../../components/Logo'
 
 function GetStarted() {
+
+  const username = useRef('')
+  const email = useRef('')
+  const password = useRef('')
+
+  const formData = new FormData()
+  const HandleSubmit = ()=>{
+
+    formData.append('username', username.current.value)
+    formData.append('email', email.current.value)
+    formData.append('password', password.current.value)
+
+    axios.post('http://localhost/ishare/backend/user/register', formData)
+    .then(function(response){
+      console.log(response);
+    })
+    .catch(function(error){
+      console.log(error);
+    })
+  }
 
   return (
     <div className="parentLoginUser font-['poppins'] h-auto">
@@ -11,13 +32,13 @@ function GetStarted() {
             <Logo />
         </div>
 
-        <form className='flex flex-col items-center mt-10'>
+        <form onSubmit={HandleSubmit} className='flex flex-col items-center mt-10'>
             <p className='text-firstColor font-bold text-2xl md:text-xl'>Create an account for free</p>
-            <input type="text" className='bg-inputColor mt-14 px-5 py-3 border-2 w-1/3 placeHolderColor md:w-1/2' placeholder='Username' required/>
-            <input type="email" className='bg-inputColor mt-6 px-5 py-3 border-2 w-1/3 placeHolderColor md:w-1/2' placeholder='Email' required/>
-            <input type="password" className='bg-inputColor mt-6 px-5 py-3 border-2 w-1/3 placeHolderColor md:w-1/2' placeholder='Password' required/>
+            <input type="text" ref={username} className='bg-inputColor mt-14 px-5 py-3 border-2 w-1/3 placeHolderColor md:w-1/2' placeholder='Username' required/>
+            <input type="email" ref={email} className='bg-inputColor mt-6 px-5 py-3 border-2 w-1/3 placeHolderColor md:w-1/2' placeholder='Email' required/>
+            <input type="password" ref={password} className='bg-inputColor mt-6 px-5 py-3 border-2 w-1/3 placeHolderColor md:w-1/2' placeholder='Password' required/>
 
-            <Link to='/login' className='bg-firstColor mt-7 px-5 py-3 w-1/3 z-10 md:w-1/2'><center><button type='submit' className='text-white font-bold'>Register</button></center></Link>
+            <button type='submit' className='bg-firstColor mt-7 px-5 py-3 w-1/3 z-10 md:w-1/2 text-white font-bold'>Register</button>
 
             <p className='text-favColor text-sm font-bold mt-14'><Link to='/login' className='hover:text-firstColor'>Already have an account?</Link></p>
         </form>
