@@ -6,7 +6,7 @@ import twitter from '../../imgs/twitter1.png'
 import linkdin from '../../imgs/linkdin.png'
 import logoiShare3 from '../../imgs/logoiShare3.png'
 
-function view() {
+function view(props) {
 
   const embedVideo = ()=>{
     alert('Clickked');
@@ -19,7 +19,7 @@ function view() {
             <img src={Avatar} className='w-32 md:w-20 sm:w-10 rounded-full m-3' />
 
             {/* @username */}
-            <center className='underline font-bold md:text-xs text-black'>@{localStorage.getItem('username')}</center>
+            <center className='underline font-bold md:text-xs text-black'>@{props.username}</center>
 
             {/* Description */}
             <p className='m-8 text-black text-xl font-semibold md:text-md sm:text-xs md:m-3'>Hey, I'm Amine Welcome to ...</p>

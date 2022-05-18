@@ -49,4 +49,12 @@
             return $this->db->rowCount();
         }
 
+        public function selectUser($username)
+        {
+            $this->db->query("SELECT * FROM user
+                              WHERE username = '$username'
+                            ");
+            return $this->db->single();
+        }
+
     }

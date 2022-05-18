@@ -11,7 +11,7 @@ function LoginUser() {
     const username = useRef('');
     const password = useRef('');
 
-    const formData = new FormData;
+    const formData = new FormData();
     const HandleSubmit = (e)=>{
         e.preventDefault();
 

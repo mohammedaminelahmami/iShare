@@ -72,7 +72,11 @@ function PaymentForm() {
        <div>
            <h2>Successful Payment ! </h2>
        </div>
-        } 
+       
+        }
+        {success&&
+            localStorage.setItem('plan', 'pro')
+        }
     </>
   )
 }

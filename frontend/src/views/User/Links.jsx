@@ -114,7 +114,7 @@ function Links() {
         <Mobile HandleClick={HandleClick} />
       </div>
 
-      {/* Modal --- Explore */}
+      {/* Modal */}
       {showModal ? (
           <div className="p-20 flex justify-center items-center overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none  bg-colorOpacity bg-blackfocus:outline-none">
             <div className="relative w-auto my-6 mx-auto max-w-3xl">

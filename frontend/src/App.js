@@ -1,5 +1,5 @@
 import './App.css';
-import {BrowserRouter as Router, Link, Route, Switch} from 'react-router-dom'
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 import Home from './views/Home';
 import LoginUser from './views/User/LoginUser';
 import GetStarted from './views/User/GetStarted';
@@ -9,14 +9,34 @@ import Themes from './views/User/Themes';
 import View from './views/User/View';
 import Links from './views/User/Links';
 import LoginAdmin from './views/Admin/LoginAdmin';
-import React, { useState, useEffect, Profiler } from 'react'
-import { UserContext } from './views/UserContext';
+import React, { useState, useEffect } from 'react'
+// import { UserContext } from './views/UserContext';
 import Appearance from './views/User/Appearance';
 import Profile from './views/User/Profile';
+import Error404 from './components/Error404'
+import axios from 'axios';
 
 function App() {
 
   const [loggedIn, setLoggedIn] = useState(false);
+  const [username, setUsername] = useState('');
+
+  const usernameUrl = window.location.href.slice(22)
+
+  useEffect(()=>{
+    const formData = new FormData();
+    formData.append('username', usernameUrl);
+    
+    axios.post('http://localhost/ishare/backend/user/getUser', formData)
+    .then(function(response){
+      const dataUsername = response.data.username
+      setUsername(dataUsername)
+      // console.log(dataUsername);
+    })
+    .catch(function(error){
+      console.log(error);
+    })
+  }, [])
 
   useEffect(()=>{
     if(localStorage.getItem('token'))
@@ -29,7 +49,7 @@ function App() {
     <Router>
       <div className='parentApp'>
         <Switch>
-          <UserContext.Provider value='Test UseContext'>
+          {/* <UserContext.Provider value='Test UseContext'> */}
             <Route exact path='/'>
               <Home />
             </Route>
@@ -59,12 +79,10 @@ function App() {
               <Contact />
             </Route>
 
-            {/* View */}
-            <Route path='/amine0029'>
-              <View />
+            <Route path={'/'+username}>
+              <View username={username} />
             </Route>
 
-            {/* Links */}
             <Route path='/links'>
               {!loggedIn&&
                 <Home />
@@ -85,7 +103,11 @@ function App() {
             <Route path='/loginadmin'>
               <LoginAdmin />
             </Route>
-          </UserContext.Provider>
+          {/* </UserContext.Provider> */}
+
+          <Route path='*'>
+              <Error404 />
+          </Route>
 
         </Switch>
       </div>

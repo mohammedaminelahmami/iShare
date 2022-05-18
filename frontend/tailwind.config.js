@@ -19,6 +19,7 @@ module.exports = {
         theme1ColorHover : "#EC5656",
         colorOpacity : "#00000066",
         ffirstColor : '#2736D4',
+        stripeColor : '#0a2540',
       },
 
       screens: {
