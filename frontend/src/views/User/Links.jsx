@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import Nav from '../../components/Nav'
 import UserAnalyticsBar from '../../components/UserAnalyticsBar'
 import explore from '../../imgs/explore.png'
@@ -27,6 +27,7 @@ function Links() {
 
   const [showModal, setShowModal] = useState(false)
   const [content, setContent] = useState()
+  const [links, setLinks] = useState([])
 
   const title = useRef('');
   const linkUrl = useRef('');
@@ -68,6 +69,20 @@ function Links() {
     })
   }
 
+  useEffect(()=>{
+    const myFormData = new FormData()
+    myFormData.append('username', localStorage.getItem('username'))
+
+    axios.post('http://localhost/ishare/backend/link/getLinks', myFormData)
+    .then(function(response){
+      // console.log(response)
+      setLinks(response.data)
+    })
+    .catch(function(error){
+      console.log(error);
+    })
+  }, [])
+
   return (
     <div className='bg-gray-100 font-["poppins"] backg'>
       <Nav />
@@ -87,23 +102,30 @@ function Links() {
                 <img src={Avatar} className='block w-32 rounded-full m-3 md:w-20 sm:w-10' />
                 <label htmlFor="input" className="px-2 py-3 m-2 text-white text-xs bg-firstColor font-semibold rounded-sm cursor-pointer">Pick an image</label>
                 <input type="file" id='input' accept="image/*" hidden/>
-            </div>
-
-          <div className='flex justify-between mt-2 p-4 shadow-lg rounded-md bg-firstColor text-white'>
-            <p className='ml-2'>Listen to my album</p>
-            <div className='flex gap-4 mr-2'>
-              <button onClick={HandleClickEdit}><img src={edit} width='25' className='block' /></button>
-              <button onClick={HandleClickDelete}><img src={deletee} width='25' className='block' /></button>
-            </div>
           </div>
 
-          <div className='flex justify-between mt-2 p-4 shadow-lg rounded-md bg-firstColor text-white'>
+          {links.map((link, index)=>{
+            return(
+              <div key={index}>
+                <div className='flex justify-between mt-2 p-4 shadow-lg rounded-md bg-firstColor text-white'>
+                  <p className='ml-2'>{link.title}</p>
+                  <div className='flex gap-4 mr-2'>
+                    <button onClick={HandleClickEdit}><img src={edit} width='25' className='block' /></button>
+                    <button onClick={HandleClickDelete}><img src={deletee} width='25' className='block' /></button>
+                  </div>
+                </div>
+              </div>
+              )
+            })
+          }
+
+          {/* <div className='flex justify-between mt-2 p-4 shadow-lg rounded-md bg-firstColor text-white'>
             <p className='ml-2'>Streaming Live on youtube</p>
             <div className='flex gap-4 mr-2'>
               <button onClick={HandleClickEdit}><img src={edit} width='25' className='block' /></button>
               <button onClick={HandleClickDelete}><img src={deletee} width='25' className='block' /></button>
             </div>
-          </div>
+          </div> */}
 
             {/* Description */}
             <div className='p-4 w-full bg-white shadow-lg rounded-md'>

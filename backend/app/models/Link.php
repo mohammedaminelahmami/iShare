@@ -8,32 +8,6 @@
             $this->db = new Database;
         }
 
-        // insertDescription
-        public function insertDescription($description, $username)
-        {
-            $this->db->query("INSERT INTO ishare . description (description, username) 
-                              VALUES(:description, :username)
-                            ");
-            $this->db->bind('description', $description);
-            $this->db->bind('username', $username);
-
-            if($this->db->execute())
-            {
-                return true;
-            }else{
-                return false;
-            }
-        }
-
-        // SelectDescription(s)
-        public function selectDescription($username)
-        {
-            $this->db->query("SELECT * FROM ishare . description
-                              WHERE username = '$username'
-                            ");
-            return $this->db->resultSet();
-        }
-
         public function insertLink($title, $linkUrl, $username, $type)
         {
             $this->db->query("INSERT INTO ishare . link (title, linkUrl, username, type)
@@ -46,5 +20,13 @@
             $this->db->bind(':type', $type);
 
             return $this->db->execute();
+        }
+
+        public function selectLinks($username)
+        {
+            $this->db->query("SELECT * FROM ishare . link
+                              WHERE username = '$username'
+                            ");
+            return $this->db->resultSet();
         }
     }

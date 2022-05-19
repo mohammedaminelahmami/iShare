@@ -15,6 +15,10 @@ import Appearance from './views/User/Appearance';
 import Profile from './views/User/Profile';
 import Error404 from './components/Error404'
 import axios from 'axios';
+import Admin from './views/Admin/Admin';
+import Overview from './components/Overview';
+import AnalyticsAdmin from './components/AnalyticsAdmin';
+import Banned from './components/Banned';
 
 function App() {
 
@@ -36,14 +40,12 @@ function App() {
     .catch(function(error){
       console.log(error);
     })
-  }, [])
 
-  useEffect(()=>{
     if(localStorage.getItem('token'))
     {
       setLoggedIn(true);
     }
-  })
+  }, [])
 
   return (
     <Router>
@@ -87,8 +89,9 @@ function App() {
               {!loggedIn&&
                 <Home />
               }
+
               {loggedIn&&
-                <Links />
+                <Links username={username} />
               }
             </Route>
 
@@ -103,10 +106,28 @@ function App() {
             <Route path='/loginadmin'>
               <LoginAdmin />
             </Route>
+
+            <Route path='/admin'>
+              <Admin />
+            </Route>
+
+            <Route path='/dashboard'>
+              <Overview />
+            </Route>
+
+            <Route path='/analytics'>
+              <AnalyticsAdmin />
+            </Route>
+
+            <Route path='/ban'>
+              <Banned />
+            </Route>
+
+
           {/* </UserContext.Provider> */}
 
           <Route path='*'>
-              <Error404 />
+            <Error404 />
           </Route>
 
         </Switch>

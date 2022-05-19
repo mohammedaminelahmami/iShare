@@ -1,12 +1,29 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import Avatar from '../../imgs/avatar.svg'
 import github from '../../imgs/github.png'
 import facebook from '../../imgs/facebook1.png'
 import twitter from '../../imgs/twitter1.png'
 import linkdin from '../../imgs/linkdin.png'
 import logoiShare3 from '../../imgs/logoiShare3.png'
+import axios from 'axios'
 
-function view(props) {
+function View(props) {
+
+  const [links, setLinks] = useState([])
+
+  useEffect(()=>{
+    const myFormData = new FormData()
+    myFormData.append('username', localStorage.getItem('username'))
+
+    axios.post('http://localhost/ishare/backend/link/getLinks', myFormData)
+    .then(function(response){
+      // console.log(response)
+      setLinks(response.data)
+    })
+    .catch(function(error){
+      console.log(error);
+    })
+  }, [])
 
   const embedVideo = ()=>{
     alert('Clickked');
@@ -25,10 +42,19 @@ function view(props) {
             <p className='m-8 text-black text-xl font-semibold md:text-md sm:text-xs md:m-3'>Hey, I'm Amine Welcome to ...</p>
 
             {/* Links */}
-            <button className='bg-ffirstColor text-white text-medium font-semibold mt-7 px-5 py-3 w-1/3 md:text-xs md:mt-2 md:w-52 rounded-md hoverButtonTheme1'>Listen to my Album !</button>
+            {/* <button className='bg-ffirstColor text-white text-medium font-semibold mt-7 px-5 py-3 w-1/3 md:text-xs md:mt-2 md:w-52 rounded-md hoverButtonTheme1'>Listen to my Album !</button>
             <button onClick={embedVideo} className='bg-firstColor text-white text-medium font-semibold mt-7 px-5 py-3 w-1/3 md:text-xs md:w-52 md:mt-2 rounded-md hoverButtonTheme1'>Streaming Live On Youtube !</button>
-            <button className='bg-firstColor text-white text-medium font-semibold mt-7 px-5 py-3 w-1/3 md:text-xs md:w-52 md:mt-2 rounded-md hoverButtonTheme1'>Lorem ipsum dolur uncut !</button>
-            <button className='bg-firstColor text-white text-medium font-semibold mt-7 px-5 py-3 w-1/3 md:text-xs md:w-52 md:mt-2 rounded-md hoverButtonTheme1'>Lorem ipsum dolur uncut !</button>
+            <button className='bg-firstColor text-white text-medium font-semibold mt-7 px-5 py-3 w-1/3 md:text-xs md:w-52 md:mt-2 rounded-md hoverButtonTheme1'>Lorem ipsum dolur uncut !</button> */}
+
+            {links&&
+              links.map((link, index)=>{
+                return(
+                  <div key={index}>
+                    <button className='bg-firstColor text-white text-medium font-semibold mt-7 px-5 py-3 w-1/3 md:text-xs md:w-52 md:mt-2 rounded-md hoverButtonTheme1'>{link.linkUrl}</button>
+                  </div>
+                )
+              })
+            }
 
             {/* social media icons */}
             <div className='flex m-10 gap-2 md:mb-4 md:mt-8'>
@@ -45,4 +71,4 @@ function view(props) {
   )
 }
 
-export default view
+export default View

@@ -121,6 +121,10 @@ body{
     
 }
 
+.hoverTransition{
+    transition: 230ms;
+}
+
 /*  */
 .switch {
     --button-width: 3em;

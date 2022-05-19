@@ -39,4 +39,10 @@
                 echo json_encode('FALSE');
             }
         }
+
+        public function getLinks()
+        {
+            $username = $_POST['username'];
+            echo json_encode($this->linkModel->selectLinks($username));
+        }
     }
