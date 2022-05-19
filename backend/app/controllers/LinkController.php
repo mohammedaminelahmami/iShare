@@ -24,4 +24,19 @@
         {
             //
         }
+
+        public function addLink()
+        {
+            $title = $_POST['title'];
+            $linkUrl = $_POST['linkUrl'];
+            $username = $_POST['username'];
+            $type = $_POST['type'];
+
+            if($this->linkModel->insertLink($title, $linkUrl, $username, $type))
+            {
+                echo json_encode('TRUE');
+            }else{
+                echo json_encode('FALSE');
+            }
+        }
     }

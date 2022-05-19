@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import Nav from '../../components/Nav'
 import UserAnalyticsBar from '../../components/UserAnalyticsBar'
 import explore from '../../imgs/explore.png'
@@ -9,6 +9,7 @@ import edit from '../../imgs/edit.png'
 import deletee from '../../imgs/deletee.png'
 import Avatar from '../../imgs/avatar.svg'
 import Mobile from '../../components/Mobile'
+import axios from 'axios'
 
 function Links() {
 
@@ -26,6 +27,9 @@ function Links() {
 
   const [showModal, setShowModal] = useState(false)
   const [content, setContent] = useState()
+
+  const title = useRef('');
+  const linkUrl = useRef('');
 
   const test = ()=>{
     alert('Clicked !!!!')
@@ -45,6 +49,23 @@ function Links() {
 
   const HandleClickDelete = ()=>{
     alert('Clicked !!')
+  }
+
+  const HandleClickLink = ()=>{
+    let formData = new FormData();
+
+    formData.append('title', title.current.value)
+    formData.append('linkUrl', linkUrl.current.value)
+    formData.append('username', localStorage.getItem('username'))
+    formData.append('type', 'link')
+
+    axios.post('http://localhost/ishare/backend/link/addLink', formData)
+    .then(function(response){
+      console.log(response);
+    })
+    .catch(function(error){
+      console.log(error);
+    })
   }
 
   return (
@@ -94,10 +115,10 @@ function Links() {
           {/* AddLink */}
           {/* border-2 border-firstColor 2 sec {2000} setTimeOut */}
           <div className='mt-5 p-4 bg-white shadow-lg rounded-md'>
-            <textarea name="body" id="body" cols="15" rows="1" className="mt-2 mb-2 bg-gray-100 border-2 w-full p-2 rounded-md" placeholder="Title"></textarea>
-            <textarea name="body" id="body" cols="15" rows="3" className="bg-gray-100 border-2 w-full p-2 rounded-md" placeholder="Url"></textarea>
+            <textarea name="body" id="body" cols="15" rows="1" ref={title} className="mt-2 mb-2 bg-gray-100 border-2 w-full p-2 rounded-md" placeholder="Title"></textarea>
+            <textarea name="body" id="body" cols="15" rows="3" ref={linkUrl} className="bg-gray-100 border-2 w-full p-2 rounded-md" placeholder="Url"></textarea>
 
-            <button className='mt-2 py-1 px-4 text-sm font-semibold text-firstColor border-2 border-firstColor rounded-md'>Add</button>
+            <button type='submit' onClick={HandleClickLink} className='mt-2 py-1 px-4 text-sm font-semibold text-firstColor border-2 border-firstColor rounded-md'>Add</button>
 
             {/* <label className="switch">
               <input type="checkbox" />

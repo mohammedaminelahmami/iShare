@@ -33,4 +33,18 @@
                             ");
             return $this->db->resultSet();
         }
+
+        public function insertLink($title, $linkUrl, $username, $type)
+        {
+            $this->db->query("INSERT INTO ishare . link (title, linkUrl, username, type)
+                              VALUES (:title, :linkUrl, :username, :type)
+                            ");
+            // Bind Values
+            $this->db->bind(':title', $title);
+            $this->db->bind(':linkUrl', $linkUrl);
+            $this->db->bind(':username', $username);
+            $this->db->bind(':type', $type);
+
+            return $this->db->execute();
+        }
     }
