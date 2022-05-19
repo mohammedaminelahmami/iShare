@@ -123,6 +123,11 @@ body{
 
 .hoverTransition{
     transition: 230ms;
+    width: 11rem;
+}
+
+.hoverTransition:hover{
+    width: 11rem;
 }
 
 /*  */

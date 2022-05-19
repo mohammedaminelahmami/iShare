@@ -123,7 +123,6 @@ function App() {
               <Banned />
             </Route>
 
-
           {/* </UserContext.Provider> */}
 
           <Route path='*'>
