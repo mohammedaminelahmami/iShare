@@ -1,9 +1,9 @@
 import React from 'react'
-import NavAdmin from './NavAdmin'
+import NavAdmin from '../../components/NavAdmin'
 
 function Banned() {
   return (
-    <div>
+    <div className='font-["poppins"]'>
         <NavAdmin />
         Banned
     </div>

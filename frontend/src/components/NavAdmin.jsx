@@ -3,12 +3,17 @@ import admin from '../imgs/admin.png'
 import overview from '../imgs/overview.png'
 import analytics from '../imgs/analytics.png'
 import ban from '../imgs/ban.png'
-import logout from '../imgs/logout.png'
+import loggout from '../imgs/logout.png'
 import { Link } from 'react-router-dom'
 
-function NavAdmin() {
+function NavAdmin(props) {
 
     const pageUrl = window.location.href.slice(22)
+
+    const logout = ()=>{
+        window.location.replace('http://localhost:3000/loginadmin')
+        localStorage.removeItem('tokenAdmin')
+      }
 
     return (
         <div className='font-["poppins"]'>
@@ -35,8 +40,8 @@ function NavAdmin() {
                             <div className='font-semibold'>Banned</div>
                         </Link>
 
-                        <button type='submit' className='flex gap-4 p-4 mt-52 hover:bg-ffirstColor hover:rounded-md hoverTransition'>
-                            <div><img src={logout} width='22' /></div>
+                        <button onClick={logout} type='submit' className='flex gap-4 p-4 mt-52 hover:bg-ffirstColor hover:rounded-md hoverTransition'>
+                            <div><img src={loggout} width='22' /></div>
                             <div className='font-semibold'>Logout</div>
                         </button>
                     </div>

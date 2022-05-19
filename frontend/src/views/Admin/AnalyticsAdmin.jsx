@@ -1,13 +1,13 @@
 import React from 'react'
 import NavAdmin from '../../components/NavAdmin'
 
-function Admin() {
+function AnalyticsAdmin() {
   return (
-    <div>
+    <div className='font-["poppins"]'>
         <NavAdmin />
-        
+        AnalyticsAdmin
     </div>
   )
 }
 
-export default Admin
+export default AnalyticsAdmin

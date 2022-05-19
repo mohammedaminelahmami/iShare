@@ -10,15 +10,13 @@ import View from './views/User/View';
 import Links from './views/User/Links';
 import LoginAdmin from './views/Admin/LoginAdmin';
 import React, { useState, useEffect } from 'react'
-// import { UserContext } from './views/UserContext';
 import Appearance from './views/User/Appearance';
 import Profile from './views/User/Profile';
 import Error404 from './components/Error404'
 import axios from 'axios';
-import Admin from './views/Admin/Admin';
-import Overview from './components/Overview';
-import AnalyticsAdmin from './components/AnalyticsAdmin';
-import Banned from './components/Banned';
+import Overview from './views/Admin/Overview';
+import AnalyticsAdmin from './views/Admin/AnalyticsAdmin';
+import Banned from './views/Admin/Banned';
 
 function App() {
 
@@ -105,10 +103,6 @@ function App() {
 
             <Route path='/loginadmin'>
               <LoginAdmin />
-            </Route>
-
-            <Route path='/admin'>
-              <Admin />
             </Route>
 
             <Route path='/dashboard'>
