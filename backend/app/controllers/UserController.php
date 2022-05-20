@@ -99,4 +99,16 @@
                 }
             }
         }
+
+        public function getUser()
+        {
+            $username = $_POST['username'];
+            $data = $this->userModel->selectUser($username);
+            if($data)
+            {
+                echo json_encode($data);
+            }else{
+                echo json_encode('username not found !');
+            }
+        }
     }

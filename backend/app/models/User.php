@@ -12,13 +12,14 @@
         // Insert new User { Register }
         public function addUser($username, $email, $password)
         {
-            $this->db->query("INSERT INTO ishare . user (username, email, password)
-                              VALUES (:username, :email, :password)
+            $this->db->query("INSERT INTO ishare . user (username, email, password, idTheme)
+                              VALUES (:username, :email, :password, :idTheme)
                             ");
             // Bind Values
             $this->db->bind(':username', $username);
             $this->db->bind(':email', $email);
             $this->db->bind(':password', $password);
+            $this->db->bind(':idTheme', '1');
 
             if($this->db->execute())
             {
@@ -46,6 +47,14 @@
                             ");
             $this->db->execute();
             return $this->db->rowCount();
+        }
+
+        public function selectUser($username)
+        {
+            $this->db->query("SELECT * FROM user
+                              WHERE username = '$username'
+                            ");
+            return $this->db->single();
         }
 
     }

@@ -7,15 +7,11 @@ import axios from 'axios';
 function LoginUser() {
 
     const [loggedIn, setLoggedIn] = useState(false);
-    const [getUsername, setgetUsername] = useState(false);
-
-    // const test = useContext(UserContext)
 
     const username = useRef('');
     const password = useRef('');
 
-    const formData = new FormData;
-
+    const formData = new FormData();
     const HandleSubmit = (e)=>{
         e.preventDefault();
 

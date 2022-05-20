@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import Nav from '../../components/Nav'
 import UserAnalyticsBar from '../../components/UserAnalyticsBar'
 import explore from '../../imgs/explore.png'
@@ -9,24 +9,23 @@ import edit from '../../imgs/edit.png'
 import deletee from '../../imgs/deletee.png'
 import Avatar from '../../imgs/avatar.svg'
 import Mobile from '../../components/Mobile'
-
+import axios from 'axios'
+import ShowModalEdit from '../../components/ShowModalEdit'
 
 function Links() {
 
-  let myContent = (
-    <div className='mt-5 p-4 bg-white shadow-lg rounded-md'>
-      <textarea name="body" id="body" cols="15" rows="1" className="mt-2 mb-2 bg-gray-100 border-2 w-full p-2 rounded-md" placeholder="Title"></textarea>
-      <textarea name="body" id="body" cols="15" rows="3" className="bg-gray-100 border-2 w-full p-2 rounded-md" placeholder="Url"></textarea>
-
-      <label className="switch">
-        <input type="checkbox" />
-        <span className="slider mt-2"></span>
-      </label>
-      {/* <button className='self-start px-8 py-2 rounded-md mt-5 bg-white text-white'>Add</button> */}
-    </div>);
-
+  //
   const [showModal, setShowModal] = useState(false)
-  const [content, setContent] = useState()
+  const [showModalEdit, setShowModalEdit] = useState(false)
+  const [links, setLinks] = useState([])
+  const [myIdLink, setMyIdLink] = useState('')
+  const [mytitle, setMyTitle] = useState('')
+  const [myUrl, setMyUrl] = useState('')
+
+  //
+  const title = useRef('');
+  const linkUrl = useRef('');
+  const description = useRef('');
 
   const test = ()=>{
     alert('Clicked !!!!')
@@ -37,17 +36,71 @@ function Links() {
   }
 
   const HandleClickAdd = ()=>{
-    setContent(<>{content} {myContent}</>)
   }
 
-  const HandleClickEdit = ()=>{
-    alert('Clicked !!')
+  // const HandleClickDelete = (e)=>{
+  //   e.preventDefault();
+
+  //   setMyIdLink(link.idLink)
+
+  //   let formDataDelete = new FormData();
+  //   formDataDelete.append('idLink', idLink.current.value)
+
+  //   axios.post('http://localhost/ishare/backend/link/deleteLink', formDataDelete)
+  //   .then(function(response){
+  //     // console.log(idLink.current.value);
+  //     // console.log(response);
+  //     // window.location.reload()
+  //   })
+  //   .catch(function(error){
+  //     console.log(error);
+  //   })
+  // }
+
+  const HandleClickLink = ()=>{
+    let formData = new FormData();
+
+    formData.append('title', title.current.value)
+    formData.append('linkUrl', linkUrl.current.value)
+    formData.append('username', localStorage.getItem('username'))
+    formData.append('type', 'link')
+
+    axios.post('http://localhost/ishare/backend/link/addLink', formData)
+    .then(function(response){
+      console.log(response);
+    })
+    .catch(function(error){
+      console.log(error);
+    })
   }
 
-  const HandleClickDelete = ()=>{
-    alert('Clicked !!')
-  }
+  useEffect(()=>{
+    const myFormData = new FormData()
+    myFormData.append('username', localStorage.getItem('username'))
 
+    axios.post('http://localhost/ishare/backend/link/getLinks', myFormData)
+    .then(function(response){
+      // console.log(response)
+      setLinks(response.data)
+    })
+    .catch(function(error){
+      console.log(error);
+    })
+  }, [])
+
+  const HandleClickDesc = ()=>{
+    const formDataDesc = new FormData();
+    formDataDesc.append('description', description.current.value)
+    formDataDesc.append('username', localStorage.getItem('username'))
+
+    axios.post('http://localhost/ishare/backend/link/description', formDataDesc)
+    .then(function(response){
+      // console.log(response)
+    })
+    .catch(function(error){
+      console.log(error);
+    })
+  }
 
   return (
     <div className='bg-gray-100 font-["poppins"] backg'>
@@ -56,66 +109,81 @@ function Links() {
 
       <div className='flex justify-around mt-10'>
         <div className='flex flex-col'>
-          {/* Links */}
+          {/* Add Links + Explore */}
           <div className='flex'>
-            <button onClick={HandleClickAdd} className='px-20 py-4 rounded-md bg-firstColor text-white font-bold  mr-5'>Add New Link</button>
-            <button onClick={() => setShowModal(true)} className='px-24 py-4 rounded-md bg-firstColor text-white font-bold'><img src={explore} className='inline mb-1' width='15' /> Explore</button>
+            <button type='button' onClick={HandleClickAdd} className='px-20 py-4 rounded-md bg-firstColor text-white font-bold  mr-5'>Add New Link</button>
+            <button type='button' onClick={() => setShowModal(true)} className='px-24 py-4 rounded-md bg-firstColor text-white font-bold'><img src={explore} className='inline mb-1' width='15' /> Explore</button>
           </div>
 
-          <div className='flex flex-col justify-around gap-10'>
+          <div className='flex flex-col justify-around gap-4'>
+            {/* Change Avatar */}
             <div className='flex flex-col items-center p-4 shadow-lg rounded-md w-full bg-gray-100'>
-                {/* Change Avatar */}
                 <img src={Avatar} className='block w-32 rounded-full m-3 md:w-20 sm:w-10' />
                 <label htmlFor="input" className="px-2 py-3 m-2 text-white text-xs bg-firstColor font-semibold rounded-sm cursor-pointer">Pick an image</label>
                 <input type="file" id='input' accept="image/*" hidden/>
             </div>
 
-            <div className='p-4 w-full bg-gray-100 shadow-lg rounded-md'>
-              <textarea name="body" id="body" cols="15" rows="4" className="bg-white border-2 w-full p-2 rounded-md" placeholder="Description"></textarea>
-              <button className='mt-2 py-1 px-4 text-sm font-semibold text-firstColor bg-white border-2 border-firstColor rounded-md'>Add</button>
+          {links.map((link, index)=>{
+            return(
+              <div key={index}>
+                <div className='flex justify-between mt-2 p-4 shadow-lg rounded-md bg-firstColor text-white'>
+                  <p className='ml-2'>{link.title}</p>
+                  <div className='flex gap-4 mr-2'>
+                    <button type='button'
+                      onClick={()=>{
+                        setShowModalEdit(true)
+                        setMyIdLink(link.idLink)
+                        setMyTitle(link.title)
+                        setMyUrl(link.linkUrl)
+                      }}
+                      >
+                      <img src={edit} width='25' className='block' />
+                    </button>
+
+                    <button type='button'
+                      onClick={(e)=>{
+                        e.preventDefault();
+                        let formDataDelete = new FormData();
+                        formDataDelete.append('idLink', link.idLink)
+
+                        axios.post('http://localhost/ishare/backend/link/deleteLink', formDataDelete)
+                        .then(function(response){
+                          // console.log(response);
+                        })
+                        .catch(function(error){
+                          console.log(error);
+                        })
+                      }}><img src={deletee} width='25' className='block' />
+                    </button>
+                  </div>
+                </div>
+              </div>
+              )
+            })
+          }
+            {/* Description */}
+            <div className='p-4 w-full bg-white shadow-lg rounded-md'>
+              <textarea ref={description} name="body" id="body" cols="15" rows="2" className="bg-gray-100 border-2 w-full p-2 rounded-md" placeholder="Description"></textarea>
+              <button type='button' onClick={HandleClickDesc} className='mt-2 py-1 px-4 text-sm font-semibold text-firstColor bg-white border-2 border-firstColor rounded-md'>Submit</button>
             </div>
           </div>
 
           {/* AddLink */}
-          {/* border-2 border-firstColor 2 sec {2000} setTimeOut */}
           <div className='mt-5 p-4 bg-white shadow-lg rounded-md'>
-            <textarea name="body" id="body" cols="15" rows="1" className="mt-2 mb-2 bg-gray-100 border-2 w-full p-2 rounded-md" placeholder="Title"></textarea>
-            <textarea name="body" id="body" cols="15" rows="3" className="bg-gray-100 border-2 w-full p-2 rounded-md" placeholder="Url"></textarea>
+            <textarea name="body" id="body" cols="15" rows="1" ref={title} className="mt-2 mb-2 bg-gray-100 border-2 w-full p-2 rounded-md" placeholder="Title"></textarea>
+            <textarea name="body" id="body" cols="15" rows="3" ref={linkUrl} className="bg-gray-100 border-2 w-full p-2 rounded-md" placeholder="Url"></textarea>
 
-            <button className='mt-2 py-1 px-4 text-sm font-semibold text-firstColor border-2 border-firstColor rounded-md'>Add</button>
-
-            {/* <label className="switch">
-              <input type="checkbox" />
-              <span className="slider mt-2"></span>
-            </label> */}
-            {/* <button className='self-start px-8 py-2 rounded-md mt-5 bg-white text-white'>Add</button> */}
+            <button type='button' onClick={HandleClickLink} className='mt-2 py-1 px-4 text-sm font-semibold text-firstColor border-2 border-firstColor rounded-md'>Add</button>
           </div>
-          
-
-          <div className='flex justify-between mt-5 p-4 shadow-lg rounded-md bg-firstColor text-white'>
-            <p className='ml-2'>Listen to my album</p>
-            <div className='flex gap-4 mr-2'>
-              <button onClick={HandleClickEdit}><img src={edit} width='25' className='block' /></button>
-              <button onClick={HandleClickDelete}><img src={deletee} width='25' className='block' /></button>
-            </div>
-          </div>
-
-          <div className='flex justify-between mt-5 p-4 shadow-lg rounded-md bg-firstColor text-white'>
-            <p className='ml-2'>Streaming Live on youtube</p>
-            <div className='flex gap-4 mr-2'>
-              <button onClick={HandleClickEdit}><img src={edit} width='25' className='block' /></button>
-              <button onClick={HandleClickDelete}><img src={deletee} width='25' className='block' /></button>
-            </div>
-          </div>
-
-          <div>{content}</div>
 
         </div>
         
         <Mobile HandleClick={HandleClick} />
       </div>
 
-      {/* Modal --- Explore */}
+      <ShowModalEdit showModalEdit={showModalEdit} close={()=>{setShowModalEdit(false)}} idLink={myIdLink} title={mytitle} linkUrl={myUrl} />
+
+      {/* Modal */}
       {showModal ? (
           <div className="p-20 flex justify-center items-center overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none  bg-colorOpacity bg-blackfocus:outline-none">
             <div className="relative w-auto my-6 mx-auto max-w-3xl">

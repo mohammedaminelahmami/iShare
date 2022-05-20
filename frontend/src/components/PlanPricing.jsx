@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
+import StripeContainer from './StripeContainer'
 
 function PlanPricing() {
 
     const [loggedIn, setLoggedIn] = useState(false)
-    const [planPro, setPlanPro] = useState(false)
+    const [showModal, setShowModal] = useState(false)
 
     useEffect(()=>{
         if(localStorage.getItem('token'))
@@ -11,6 +13,10 @@ function PlanPricing() {
             setLoggedIn(true)
         }
     }, [])
+
+    const HandleClickModal = ()=>{
+        setShowModal(true)
+    }
 
   return (
     <div>
@@ -64,7 +70,7 @@ function PlanPricing() {
                 {loggedIn ?
                     <button type="button" disabled className="text-white bg-gray-400 focus:ring-4 focus:outline-none focus:ring-blue-200 dark:focus:ring-blue-900 font-medium rounded text-sm px-5 py-2.5 inline-flex justify-center w-full text-center">Free</button>
                     :
-                    <button type="button" className="text-white bg-firstColor hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-200 dark:focus:ring-blue-900 font-medium rounded text-sm px-5 py-2.5 inline-flex justify-center w-full text-center">Join for free</button>
+                    <Link to='/register'><button type="button" className="text-white bg-firstColor hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-200 dark:focus:ring-blue-900 font-medium rounded text-sm px-5 py-2.5 inline-flex justify-center w-full text-center">Join for free</button></Link>
                 }
 
             </div>
@@ -116,14 +122,39 @@ function PlanPricing() {
                         <span className="text-base font-normal leading-tight text-gray-500">24×7 phone & email support</span>
                     </li>
                 </ul>
-
-                {planPro ?
-                    <button type="button" className="text-white bg-firstColor hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-200 dark:focus:ring-blue-900 font-medium rounded text-sm px-5 py-2.5 inline-flex justify-center w-full text-center">Get PRO</button>
+                
+                {loggedIn ?
+                    <button type="button" onClick={HandleClickModal} className="text-white bg-firstColor hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-200 dark:focus:ring-blue-900 font-medium rounded text-sm px-5 py-2.5 inline-flex justify-center w-full text-center">Get PRO</button>
                     :
-                    <button type="button" className="text-white bg-firstColor hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-200 dark:focus:ring-blue-900 font-medium rounded text-sm px-5 py-2.5 inline-flex justify-center w-full text-center">Get PRO</button>
+                    <Link to='/register'><button type="button" className="text-white bg-firstColor hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-200 dark:focus:ring-blue-900 font-medium rounded text-sm px-5 py-2.5 inline-flex justify-center w-full text-center">Get PRO</button></Link>
                 }
             </div>
             {/* EndPrice */}
+
+            {showModal ? (
+                <div className="p-20 flex justify-center items-center overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none  bg-colorOpacity bg-blackfocus:outline-none">
+                    <div className="relative w-auto my-6 mx-auto max-w-3xl">
+                        <div className="p-10 border-0 rounded-md shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+                            <div className="flex items-start justify-between p-6">
+                                <h3 className="text-stripeColor text-xl font-bold mr-10">Payment with stripe 👀</h3>
+                                <button
+                                    className="bg-transparent border-0 float-right"
+                                    onClick={() => setShowModal(false)}
+                                >
+                                    <span className="h-8 w-8 text-xl block bg-firstColor text-white font-medium rounded-md">
+                                        x
+                                    </span>
+                                </button>
+                            </div>
+
+                            <div>
+                                <StripeContainer />
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            ) : null}
         </div>
     </div>
   )
