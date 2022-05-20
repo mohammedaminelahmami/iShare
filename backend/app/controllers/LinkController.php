@@ -55,9 +55,10 @@
         public function updateLink()
         {
             $linkUrl = $_POST['linkUrl'];
+            $title = $_POST['title'];
             $idLink = $_POST['idLink'];
 
-            return $this->linkModel->updateLink($linkUrl, $idLink);
+            return $this->linkModel->updateLink($linkUrl, $title, $idLink);
         }
 
         // Add Description

@@ -10,32 +10,22 @@ import deletee from '../../imgs/deletee.png'
 import Avatar from '../../imgs/avatar.svg'
 import Mobile from '../../components/Mobile'
 import axios from 'axios'
+import ShowModalEdit from '../../components/ShowModalEdit'
 
 function Links() {
 
-  let myContent = (
-    <div className='mt-5 p-4 bg-white shadow-lg rounded-md'>
-      <textarea name="body" id="body" cols="15" rows="1" className="mt-2 mb-2 bg-gray-100 border-2 w-full p-2 rounded-md" placeholder="Title"></textarea>
-      <textarea name="body" id="body" cols="15" rows="3" className="bg-gray-100 border-2 w-full p-2 rounded-md" placeholder="Url"></textarea>
-
-      <label className="switch">
-        <input type="checkbox" />
-        <span className="slider mt-2"></span>
-      </label>
-      {/* <button className='self-start px-8 py-2 rounded-md mt-5 bg-white text-white'>Add</button> */}
-    </div>);
-
+  //
   const [showModal, setShowModal] = useState(false)
   const [showModalEdit, setShowModalEdit] = useState(false)
-  const [content, setContent] = useState()
   const [links, setLinks] = useState([])
+  const [myIdLink, setMyIdLink] = useState('')
+  const [mytitle, setMyTitle] = useState('')
+  const [myUrl, setMyUrl] = useState('')
 
+  //
   const title = useRef('');
   const linkUrl = useRef('');
   const description = useRef('');
-  const idLink = useRef('');
-  const myTitle = useRef('')
-  const myLinkUrl = useRef('')
 
   const test = ()=>{
     alert('Clicked !!!!')
@@ -46,40 +36,26 @@ function Links() {
   }
 
   const HandleClickAdd = ()=>{
-    setContent(<>{content} {myContent}</>)
   }
 
-  // const HandleClickEdit = ()=>{
-  //   let formDataEdit = new FormData();
+  // const HandleClickDelete = (e)=>{
+  //   e.preventDefault();
 
-  //   formDataEdit.append('link', )
-  //   formDataEdit.append('idLink', idLink.current.value)
+  //   setMyIdLink(link.idLink)
 
-  //   axios.post('http://localhost/ishare/backend/link/updateLink', formDataEdit)
+  //   let formDataDelete = new FormData();
+  //   formDataDelete.append('idLink', idLink.current.value)
+
+  //   axios.post('http://localhost/ishare/backend/link/deleteLink', formDataDelete)
   //   .then(function(response){
-  //     console.log(response);
+  //     // console.log(idLink.current.value);
+  //     // console.log(response);
+  //     // window.location.reload()
   //   })
   //   .catch(function(error){
   //     console.log(error);
   //   })
   // }
-
-  const HandleClickDelete = (e)=>{
-    e.preventDefault();
-
-    let formDataDelete = new FormData();
-    formDataDelete.append('idLink', idLink.current.value)
-
-    axios.post('http://localhost/ishare/backend/link/deleteLink', formDataDelete)
-    .then(function(response){
-      // console.log(idLink.current.value);
-      // console.log(response);
-      // window.location.reload()
-    })
-    .catch(function(error){
-      console.log(error);
-    })
-  }
 
   const HandleClickLink = ()=>{
     let formData = new FormData();
@@ -145,7 +121,7 @@ function Links() {
                 <img src={Avatar} className='block w-32 rounded-full m-3 md:w-20 sm:w-10' />
                 <label htmlFor="input" className="px-2 py-3 m-2 text-white text-xs bg-firstColor font-semibold rounded-sm cursor-pointer">Pick an image</label>
                 <input type="file" id='input' accept="image/*" hidden/>
-          </div>
+            </div>
 
           {links.map((link, index)=>{
             return(
@@ -153,11 +129,32 @@ function Links() {
                 <div className='flex justify-between mt-2 p-4 shadow-lg rounded-md bg-firstColor text-white'>
                   <p className='ml-2'>{link.title}</p>
                   <div className='flex gap-4 mr-2'>
-                    <input type='hidden' defaultValue={link.idLink} ref={idLink} />
-                    <input type='hidden' defaultValue={link.title} ref={myTitle} />
-                    <input type='hidden' defaultValue={link.linkUrl} ref={myLinkUrl} />
-                    <button type='button' onClick={() => setShowModalEdit(true)}><img src={edit} width='25' className='block' /></button>
-                    <button type='button' onClick={HandleClickDelete}><img src={deletee} width='25' className='block' /></button>
+                    <button type='button'
+                      onClick={()=>{
+                        setShowModalEdit(true)
+                        setMyIdLink(link.idLink)
+                        setMyTitle(link.title)
+                        setMyUrl(link.linkUrl)
+                      }}
+                      >
+                      <img src={edit} width='25' className='block' />
+                    </button>
+
+                    <button type='button'
+                      onClick={(e)=>{
+                        e.preventDefault();
+                        let formDataDelete = new FormData();
+                        formDataDelete.append('idLink', link.idLink)
+
+                        axios.post('http://localhost/ishare/backend/link/deleteLink', formDataDelete)
+                        .then(function(response){
+                          // console.log(response);
+                        })
+                        .catch(function(error){
+                          console.log(error);
+                        })
+                      }}><img src={deletee} width='25' className='block' />
+                    </button>
                   </div>
                 </div>
               </div>
@@ -167,9 +164,8 @@ function Links() {
             {/* Description */}
             <div className='p-4 w-full bg-white shadow-lg rounded-md'>
               <textarea ref={description} name="body" id="body" cols="15" rows="2" className="bg-gray-100 border-2 w-full p-2 rounded-md" placeholder="Description"></textarea>
-              <button type='button' onClick={HandleClickDesc} className='mt-2 py-1 px-4 text-sm font-semibold text-firstColor bg-white border-2 border-firstColor rounded-md'>Add</button>
+              <button type='button' onClick={HandleClickDesc} className='mt-2 py-1 px-4 text-sm font-semibold text-firstColor bg-white border-2 border-firstColor rounded-md'>Submit</button>
             </div>
-
           </div>
 
           {/* AddLink */}
@@ -180,44 +176,12 @@ function Links() {
             <button type='button' onClick={HandleClickLink} className='mt-2 py-1 px-4 text-sm font-semibold text-firstColor border-2 border-firstColor rounded-md'>Add</button>
           </div>
 
-          <div>{content}</div>
-
         </div>
         
         <Mobile HandleClick={HandleClick} />
       </div>
 
-      {/* Modal */}
-      {showModalEdit ? (
-          <div className="p-20 flex justify-center items-center overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none  bg-colorOpacity bg-blackfocus:outline-none">
-            <div className="relative w-auto my-6 mx-auto max-w-3xl">
-              <div className="animate-scale p-10 border-0 rounded-md shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
-                <div className="flex items-start justify-between p-6 border-b border-solid border-gray-300 rounded-t ">
-                  <h3 className="text-black text-xl font-bold">Edit Link</h3>
-                  <button
-                    className="bg-transparent border-0 text-black float-right"
-                    onClick={() => setShowModalEdit(false)}
-                  >
-                    <span className="h-8 w-8 text-xl block bg-firstColor text-white font-medium rounded-md">
-                      x
-                    </span>
-
-                  </button>
-                </div>
-        
-                <div>
-                  {/* AddLink */}
-                  <div className='mt-5 p-4 bg-white shadow-lg rounded-md'>
-                    <textarea name="body" id="body" cols="15" rows="1" defaultValue={myTitle.current.value} className="mt-2 mb-2 bg-gray-100 border-2 w-full p-2 rounded-md" placeholder="Title"></textarea>
-                    <textarea name="body" id="body" cols="15" rows="3" defaultValue={myLinkUrl.current.value} className="bg-gray-100 border-2 w-full p-2 rounded-md" placeholder="Url"></textarea>
-
-                    <button type='button' onClick={HandleClickLink} className='mt-2 py-1 px-4 text-sm font-semibold text-firstColor border-2 border-firstColor rounded-md'>Edit</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-      ) : null}
+      <ShowModalEdit showModalEdit={showModalEdit} close={()=>{setShowModalEdit(false)}} idLink={myIdLink} title={mytitle} linkUrl={myUrl} />
 
       {/* Modal */}
       {showModal ? (

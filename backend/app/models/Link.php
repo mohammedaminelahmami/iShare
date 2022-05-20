@@ -38,10 +38,10 @@
             return $this->db->execute();
         }
 
-        public function updateLink($linkUrl, $idLink)
+        public function updateLink($linkUrl, $title, $idLink)
         {
             $this->db->query("UPDATE link
-                              SET linkUrl = '$linkUrl'
+                              SET linkUrl = '$linkUrl', title = '$title'
                               WHERE idLink = '$idLink'
                             ");
             return $this->db->execute();
