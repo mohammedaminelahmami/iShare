@@ -10,6 +10,8 @@ import axios from 'axios'
 function View(props) {
 
   const [links, setLinks] = useState([])
+  const [desc, setDesc] = useState('')
+  const [test, setTest] = useState()
 
   useEffect(()=>{
     const myFormData = new FormData()
@@ -25,9 +27,20 @@ function View(props) {
     })
   }, [])
 
-  const embedVideo = ()=>{
-    alert('Clickked');
-  }
+
+  useEffect(()=>{
+    let formData = new FormData();
+    formData.append('username', localStorage.getItem('username'))
+
+    axios.post('http://localhost/ishare/backend/link/getDescription', formData)
+    .then(function(response){
+      // console.log(response.data.description);
+      setDesc(response.data.description)
+    })
+    .catch(function(error){
+      console.log(error);
+    })
+  }, [])
 
   return (
     <div className='parentView'>
@@ -39,18 +52,13 @@ function View(props) {
             <center className='underline font-bold md:text-xs text-black'>@{props.username}</center>
 
             {/* Description */}
-            <p className='m-8 text-black text-xl font-semibold md:text-md sm:text-xs md:m-3'>Hey, I'm Amine Welcome to ...</p>
-
-            {/* Links */}
-            {/* <button className='bg-ffirstColor text-white text-medium font-semibold mt-7 px-5 py-3 w-1/3 md:text-xs md:mt-2 md:w-52 rounded-md hoverButtonTheme1'>Listen to my Album !</button>
-            <button onClick={embedVideo} className='bg-firstColor text-white text-medium font-semibold mt-7 px-5 py-3 w-1/3 md:text-xs md:w-52 md:mt-2 rounded-md hoverButtonTheme1'>Streaming Live On Youtube !</button>
-            <button className='bg-firstColor text-white text-medium font-semibold mt-7 px-5 py-3 w-1/3 md:text-xs md:w-52 md:mt-2 rounded-md hoverButtonTheme1'>Lorem ipsum dolur uncut !</button> */}
+            <p className='m-8 text-black text-xl font-semibold md:text-md sm:text-xs md:m-3'>{desc}</p>
 
             {links&&
               links.map((link, index)=>{
                 return(
                   <div key={index}>
-                    <button className='bg-firstColor text-white text-medium font-semibold mt-7 px-5 py-3 w-1/3 md:text-xs md:w-52 md:mt-2 rounded-md hoverButtonTheme1'>{link.linkUrl}</button>
+                    <button className='bg-firstColor text-white text-medium font-semibold mt-7 px-5 py-3 w-1/3 md:text-xs md:w-52 md:mt-2 rounded-md hoverButtonTheme1'>{link.title}</button>
                   </div>
                 )
               })

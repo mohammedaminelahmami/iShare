@@ -45,4 +45,34 @@
             $username = $_POST['username'];
             echo json_encode($this->linkModel->selectLinks($username));
         }
+
+        public function deleteLink()
+        {
+            $idLink = $_POST['idLink'];
+            return $this->linkModel->deleteLink($idLink);
+        }
+
+        public function updateLink()
+        {
+            $linkUrl = $_POST['linkUrl'];
+            $idLink = $_POST['idLink'];
+
+            return $this->linkModel->updateLink($linkUrl, $idLink);
+        }
+
+        // Add Description
+        public function description()
+        {
+            $description = $_POST['description'];
+            $username = $_POST['username'];
+
+            return $this->linkModel->insertDescription($description, $username);
+        }
+
+        public function getDescription()
+        {
+            $username = $_POST['username'];
+            $description =  $this->linkModel->selectDescription($username);
+            echo json_encode($description);
+        }
     }

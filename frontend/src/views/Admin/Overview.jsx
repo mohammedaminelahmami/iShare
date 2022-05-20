@@ -1,5 +1,4 @@
 import React from 'react'
-import { Chart } from 'react-chartjs-2'
 import CardAnalytic from '../../components/CardAnalytic'
 import NavAdmin from '../../components/NavAdmin'
 
@@ -14,8 +13,6 @@ function Overview() {
           <CardAnalytic />
           <CardAnalytic />
         </div>
-
-
     </div>
   )
 }

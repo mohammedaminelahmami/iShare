@@ -29,4 +29,41 @@
                             ");
             return $this->db->resultSet();
         }
+
+        public function deleteLink($idLink)
+        {
+            $this->db->query("DELETE FROM link
+                              WHERE idLink = '$idLink'
+                            ");
+            return $this->db->execute();
+        }
+
+        public function updateLink($linkUrl, $idLink)
+        {
+            $this->db->query("UPDATE link
+                              SET linkUrl = '$linkUrl'
+                              WHERE idLink = '$idLink'
+                            ");
+            return $this->db->execute();
+        }
+
+        public function insertDescription($description, $username)
+        {
+            $this->db->query("INSERT INTO description (description, username)
+                              VALUES (:description, :username)
+                            ");
+            // Bind Values
+            $this->db->bind(':description', $description);
+            $this->db->bind(':username', $username);
+
+            return $this->db->execute();
+        }
+
+        public function selectDescription($username)
+        {
+            $this->db->query("SELECT description FROM description
+                              WHERE username = '$username'
+                            ");
+            return $this->db->single();
+        }
     }
