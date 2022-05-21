@@ -32,7 +32,7 @@ function View(props) {
     let formData = new FormData();
     formData.append('username', localStorage.getItem('username'))
 
-    axios.post('http://localhost/ishare/backend/link/getDescription', formData)
+    axios.post('http://localhost/ishare/backend/user/getDescription', formData)
     .then(function(response){
       // console.log(response.data.description);
       setDesc(response.data.description)

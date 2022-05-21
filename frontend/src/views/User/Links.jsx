@@ -5,22 +5,31 @@ import explore from '../../imgs/explore.png'
 import shopify from '../../imgs/shopify.png'
 import music from '../../imgs/music.png'
 import youtube from '../../imgs/youtube.png'
+import spotify from '../../imgs/spotify.png'
+import none from '../../imgs/none.png'
 import edit from '../../imgs/edit.png'
 import deletee from '../../imgs/deletee.png'
 import Avatar from '../../imgs/avatar.svg'
 import Mobile from '../../components/Mobile'
-import axios from 'axios'
 import ShowModalEdit from '../../components/ShowModalEdit'
+import axios from 'axios'
+import YouTube from 'react-youtube';
+var getYouTubeID = require('get-youtube-id');
+
 
 function Links() {
 
-  //
   const [showModal, setShowModal] = useState(false)
   const [showModalEdit, setShowModalEdit] = useState(false)
   const [links, setLinks] = useState([])
   const [myIdLink, setMyIdLink] = useState('')
   const [mytitle, setMyTitle] = useState('')
   const [myUrl, setMyUrl] = useState('')
+  const [youtubeId, setYoutubeId] = useState('')
+
+  const [clickedNone, setClickedNone] = useState(true)
+  const [clickedYoutube, setClickedYoutube] = useState(false)
+  const [clickedSpotify, setClickedSpotify] = useState(false)
 
   //
   const title = useRef('');
@@ -35,39 +44,30 @@ function Links() {
     window.open('http://localhost:3000/'+localStorage.getItem('username'), '_blank')
   }
 
-  const HandleClickAdd = ()=>{
-  }
-
-  // const HandleClickDelete = (e)=>{
-  //   e.preventDefault();
-
-  //   setMyIdLink(link.idLink)
-
-  //   let formDataDelete = new FormData();
-  //   formDataDelete.append('idLink', idLink.current.value)
-
-  //   axios.post('http://localhost/ishare/backend/link/deleteLink', formDataDelete)
-  //   .then(function(response){
-  //     // console.log(idLink.current.value);
-  //     // console.log(response);
-  //     // window.location.reload()
-  //   })
-  //   .catch(function(error){
-  //     console.log(error);
-  //   })
-  // }
-
   const HandleClickLink = ()=>{
     let formData = new FormData();
+
+    let typeLink = ''
+    if(clickedNone)
+    {
+      typeLink = 'Normal Link'
+    }else if(clickedYoutube)
+    {
+      typeLink = 'Youtube Link'
+    }else if(clickedSpotify)
+    {
+      typeLink = 'Spotify Link'
+    }
 
     formData.append('title', title.current.value)
     formData.append('linkUrl', linkUrl.current.value)
     formData.append('username', localStorage.getItem('username'))
-    formData.append('type', 'link')
+    formData.append('type', typeLink)
 
     axios.post('http://localhost/ishare/backend/link/addLink', formData)
     .then(function(response){
       console.log(response);
+      window.location.reload()
     })
     .catch(function(error){
       console.log(error);
@@ -93,8 +93,9 @@ function Links() {
     formDataDesc.append('description', description.current.value)
     formDataDesc.append('username', localStorage.getItem('username'))
 
-    axios.post('http://localhost/ishare/backend/link/description', formDataDesc)
+    axios.post('http://localhost/ishare/backend/user/addDescription', formDataDesc)
     .then(function(response){
+      window.location.reload()
       // console.log(response)
     })
     .catch(function(error){
@@ -102,6 +103,18 @@ function Links() {
     })
   }
 
+  const HandleChange = (e)=>{
+    // console.log(e.target.value);
+    setYoutubeId(getYouTubeID(e.target.value));
+  }
+  const opts = {
+    height: '390',
+    width: '640',
+    playerVars: {
+      // https://developers.google.com/youtube/player_parameters
+      autoplay: 1,
+    },
+  };
   return (
     <div className='bg-gray-100 font-["poppins"] backg'>
       <Nav />
@@ -111,7 +124,7 @@ function Links() {
         <div className='flex flex-col'>
           {/* Add Links + Explore */}
           <div className='flex'>
-            <button type='button' onClick={HandleClickAdd} className='px-20 py-4 rounded-md bg-firstColor text-white font-bold  mr-5'>Add New Link</button>
+            <button type='button' className='px-20 py-4 rounded-md bg-firstColor text-white font-bold  mr-5'>Add New Link</button>
             <button type='button' onClick={() => setShowModal(true)} className='px-24 py-4 rounded-md bg-firstColor text-white font-bold'><img src={explore} className='inline mb-1' width='15' /> Explore</button>
           </div>
 
@@ -148,6 +161,7 @@ function Links() {
 
                         axios.post('http://localhost/ishare/backend/link/deleteLink', formDataDelete)
                         .then(function(response){
+                        window.location.reload()
                           // console.log(response);
                         })
                         .catch(function(error){
@@ -168,16 +182,24 @@ function Links() {
             </div>
           </div>
 
+          <input type="text" onChange={HandleChange} placeholder='URL...' />
+          <YouTube videoId={youtubeId} opts={opts} />;
+
+
           {/* AddLink */}
           <div className='mt-5 p-4 bg-white shadow-lg rounded-md'>
+            <div className='flex gap-3 m-2'>
+              <div className='self-center text-xl text-firstColor font-semibold'>Links Type</div>
+              <button type='submit' onClick={()=>{setClickedNone(true); setClickedYoutube(false); setClickedSpotify(false)}} className={clickedNone ? 'bg-blue-200 rounded-full p-3' : 'bg-gray-100 rounded-full p-3'}><img src={none} width='27' title='Normal link' /></button>
+              <button type='submit' onClick={()=>{setClickedYoutube(true); setClickedNone(false); setClickedSpotify(false)}} className={clickedYoutube ? 'bg-blue-200 rounded-full p-3' : 'bg-gray-100 rounded-full p-3'}><img src={youtube} width='27' title='Youtube link' /></button>
+              <button type='submit' onClick={()=>{setClickedSpotify(true); setClickedNone(false); setClickedYoutube(false);}} className={clickedSpotify ? 'bg-blue-200 rounded-full p-3' : 'bg-gray-100 rounded-full p-3'}><img src={spotify} width='27' title='Spotify link' /></button>
+            </div>
             <textarea name="body" id="body" cols="15" rows="1" ref={title} className="mt-2 mb-2 bg-gray-100 border-2 w-full p-2 rounded-md" placeholder="Title"></textarea>
             <textarea name="body" id="body" cols="15" rows="3" ref={linkUrl} className="bg-gray-100 border-2 w-full p-2 rounded-md" placeholder="Url"></textarea>
 
             <button type='button' onClick={HandleClickLink} className='mt-2 py-1 px-4 text-sm font-semibold text-firstColor border-2 border-firstColor rounded-md'>Add</button>
           </div>
-
         </div>
-        
         <Mobile HandleClick={HandleClick} />
       </div>
 
@@ -187,7 +209,7 @@ function Links() {
       {showModal ? (
           <div className="p-20 flex justify-center items-center overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none  bg-colorOpacity bg-blackfocus:outline-none">
             <div className="relative w-auto my-6 mx-auto max-w-3xl">
-              <div className="p-10 border-0 rounded-md shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+              <div className="animate-scale p-10 border-0 rounded-md shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
                 <div className="flex items-start justify-between p-6 border-b border-solid border-gray-300 rounded-t ">
                   <h3 className="text-black text-xl font-bold">Add to iShare</h3>
                   <button

@@ -111,4 +111,28 @@
                 echo json_encode('username not found !');
             }
         }
+
+        // Add img
+        public function addimgPrf()
+        {
+            $imgProfile = $_POST['imgProfile'];
+            $username = $_POST['username'];
+
+            return $this->userModel->updateUserAddImg($imgProfile, $username);
+        }
+
+        public function addDescription()
+        {
+            $description = $_POST['description'];
+            $username = $_POST['username'];
+
+            return $this->useModel->insertDescription($description, $username);
+        }
+
+        public function getDescription()
+        {
+            $username = $_POST['username'];
+            $description = $this->userModel->selectDescription($username);
+            echo json_encode($description);
+        }
     }

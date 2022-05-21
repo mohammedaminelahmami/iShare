@@ -57,4 +57,32 @@
             return $this->db->single();
         }
 
+        // update ==> add image
+        public function updateUserAddImg($imgProfile, $username)
+        {
+            $this->db->query("UPDATE user
+                              SET imgProfile = '$imgProfile'
+                              WHERE username = '$username'
+                            ");
+            return $this->db->execute();
+        }
+
+        // update ===> add description
+        public function insertDescription($description, $username)
+        {
+            $this->db->query("UPDATE user
+                              SET description = '$description'
+                              WHERE username = '$username'
+                            ");
+            return $this->db->execute();
+        }
+
+        public function selectDescription($username)
+        {
+            $this->db->query("SELECT description FROM user
+                              WHERE username = '$username'
+                            ");
+            return $this->db->single();
+        }
+
     }
