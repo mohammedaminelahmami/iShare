@@ -60,4 +60,13 @@
 
             return $this->linkModel->updateLink($linkUrl, $title, $idLink);
         }
+
+        public function getYoutubeLinks()
+        {
+            $username = $_POST['username'];
+            $idLink = $_POST['idLink'];
+
+            $youtubeLink = $this->linkModel->selectYoutubeLinks($idLink, $username);
+            echo json_encode($youtubeLink);
+        }
     }

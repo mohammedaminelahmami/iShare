@@ -126,7 +126,7 @@
             $description = $_POST['description'];
             $username = $_POST['username'];
 
-            return $this->useModel->insertDescription($description, $username);
+            return $this->userModel->insertDescription($description, $username);
         }
 
         public function getDescription()

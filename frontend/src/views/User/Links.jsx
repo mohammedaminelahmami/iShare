@@ -13,9 +13,6 @@ import Avatar from '../../imgs/avatar.svg'
 import Mobile from '../../components/Mobile'
 import ShowModalEdit from '../../components/ShowModalEdit'
 import axios from 'axios'
-import YouTube from 'react-youtube';
-var getYouTubeID = require('get-youtube-id');
-
 
 function Links() {
 
@@ -25,7 +22,6 @@ function Links() {
   const [myIdLink, setMyIdLink] = useState('')
   const [mytitle, setMyTitle] = useState('')
   const [myUrl, setMyUrl] = useState('')
-  const [youtubeId, setYoutubeId] = useState('')
 
   const [clickedNone, setClickedNone] = useState(true)
   const [clickedYoutube, setClickedYoutube] = useState(false)
@@ -103,18 +99,6 @@ function Links() {
     })
   }
 
-  const HandleChange = (e)=>{
-    // console.log(e.target.value);
-    setYoutubeId(getYouTubeID(e.target.value));
-  }
-  const opts = {
-    height: '390',
-    width: '640',
-    playerVars: {
-      // https://developers.google.com/youtube/player_parameters
-      autoplay: 1,
-    },
-  };
   return (
     <div className='bg-gray-100 font-["poppins"] backg'>
       <Nav />
@@ -182,17 +166,13 @@ function Links() {
             </div>
           </div>
 
-          <input type="text" onChange={HandleChange} placeholder='URL...' />
-          <YouTube videoId={youtubeId} opts={opts} />;
-
-
           {/* AddLink */}
           <div className='mt-5 p-4 bg-white shadow-lg rounded-md'>
             <div className='flex gap-3 m-2'>
               <div className='self-center text-xl text-firstColor font-semibold'>Links Type</div>
-              <button type='submit' onClick={()=>{setClickedNone(true); setClickedYoutube(false); setClickedSpotify(false)}} className={clickedNone ? 'bg-blue-200 rounded-full p-3' : 'bg-gray-100 rounded-full p-3'}><img src={none} width='27' title='Normal link' /></button>
-              <button type='submit' onClick={()=>{setClickedYoutube(true); setClickedNone(false); setClickedSpotify(false)}} className={clickedYoutube ? 'bg-blue-200 rounded-full p-3' : 'bg-gray-100 rounded-full p-3'}><img src={youtube} width='27' title='Youtube link' /></button>
-              <button type='submit' onClick={()=>{setClickedSpotify(true); setClickedNone(false); setClickedYoutube(false);}} className={clickedSpotify ? 'bg-blue-200 rounded-full p-3' : 'bg-gray-100 rounded-full p-3'}><img src={spotify} width='27' title='Spotify link' /></button>
+              <button type='submit' onClick={()=>{setClickedNone(true); setClickedYoutube(false); setClickedSpotify(false)}} className={clickedNone ? 'bg-blue-200 rounded-full p-3' : 'bg-gray-100 rounded-full p-3'}><img src={none} width='27' title='Normal Link' /></button>
+              <button type='submit' onClick={()=>{setClickedYoutube(true); setClickedNone(false); setClickedSpotify(false)}} className={clickedYoutube ? 'bg-blue-200 rounded-full p-3' : 'bg-gray-100 rounded-full p-3'}><img src={youtube} width='27' title='Youtube Link' /></button>
+              <button type='submit' onClick={()=>{setClickedSpotify(true); setClickedNone(false); setClickedYoutube(false);}} className={clickedSpotify ? 'bg-blue-200 rounded-full p-3' : 'bg-gray-100 rounded-full p-3'}><img src={spotify} width='27' title='Spotify Link' /></button>
             </div>
             <textarea name="body" id="body" cols="15" rows="1" ref={title} className="mt-2 mb-2 bg-gray-100 border-2 w-full p-2 rounded-md" placeholder="Title"></textarea>
             <textarea name="body" id="body" cols="15" rows="3" ref={linkUrl} className="bg-gray-100 border-2 w-full p-2 rounded-md" placeholder="Url"></textarea>

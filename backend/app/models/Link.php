@@ -46,4 +46,14 @@
                             ");
             return $this->db->execute();
         }
+
+        public function selectYoutubeLinks($idLink, $username)
+        {
+            $this->db->query("SELECT * FROM link
+                              WHERE type = 'Youtube Link'
+                              AND idLink = '$idLink'
+                              AND username = '$username'
+                            ");
+            return $this->db->single();
+        }
     }
