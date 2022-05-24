@@ -7,7 +7,6 @@
     --navBg : #F9F9F9;
     --menuColor : #898989;
     --inputColor : #EEEEEE;
-    --theme1ColorHover : #EC5656;
 }
 
 body{
@@ -95,10 +94,10 @@ body{
 }
 
 .hoverButtonTheme1:hover{
-    background-color: var(--theme1ColorHover);
+    background-color: var(--secondColor);
     outline: white solid 1px;
-    border-bottom-right-radius: 2rem;
-    border-top-left-radius: 2rem;
+    border-bottom-right-radius: 0.7rem;
+    border-top-left-radius: 0.7rem;
     transform: scale(1.04);
 }
 
@@ -226,9 +225,7 @@ body{
         position: absolute;
         transform: scale(1.04);
         transition:all 0.3s ease;
-
     }
-
 }
 
 @media(max-width: 550px)

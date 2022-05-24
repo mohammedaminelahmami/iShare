@@ -85,4 +85,19 @@
             return $this->db->single();
         }
 
+        public function imgProfile($filename, $username)
+        {
+            $this->db->query("UPDATE user
+                              SET imgProfile  = '$filename'
+                              WHERE username = '$username'
+                            ");
+            if($this->db->execute())
+            {
+                return true;
+            }else{
+                return false;
+            }
+        }
+
+
     }

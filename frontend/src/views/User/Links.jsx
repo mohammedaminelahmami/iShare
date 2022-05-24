@@ -1,9 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react'
 import Nav from '../../components/Nav'
 import UserAnalyticsBar from '../../components/UserAnalyticsBar'
-import explore from '../../imgs/explore.png'
-import shopify from '../../imgs/shopify.png'
-import music from '../../imgs/music.png'
 import youtube from '../../imgs/youtube.png'
 import spotify from '../../imgs/spotify.png'
 import none from '../../imgs/none.png'
@@ -14,14 +11,16 @@ import Mobile from '../../components/Mobile'
 import ShowModalEdit from '../../components/ShowModalEdit'
 import axios from 'axios'
 
+let imgProfile = require('../../uploads/${imgProfile}');
+
 function Links() {
 
-  const [showModal, setShowModal] = useState(false)
   const [showModalEdit, setShowModalEdit] = useState(false)
   const [links, setLinks] = useState([])
   const [myIdLink, setMyIdLink] = useState('')
   const [mytitle, setMyTitle] = useState('')
   const [myUrl, setMyUrl] = useState('')
+  const [imgProfile, setImgProfile] = useState('')
 
   const [clickedNone, setClickedNone] = useState(true)
   const [clickedYoutube, setClickedYoutube] = useState(false)
@@ -99,25 +98,38 @@ function Links() {
     })
   }
 
+  const HandleChangeImg = (e)=>{
+    let formDataImg = new FormData();
+    formDataImg.append('img', e.target.files[0])
+    formDataImg.append('username', localStorage.getItem('username'))
+
+    axios.post('http://localhost/ishare/backend/user/imgUpload', formDataImg, {
+      headers:{
+        "Content-Type": "multipart/form-data",
+      },
+    })
+    .then(response =>{
+      // console.log(response.data);
+      setImgProfile(response.data);
+    })
+    .catch(error =>{
+      console.log(error);
+    })
+  }
+
   return (
     <div className='bg-gray-100 font-["poppins"] backg'>
       <Nav />
       <UserAnalyticsBar />
 
       <div className='flex justify-around mt-10'>
-        <div className='flex flex-col'>
-          {/* Add Links + Explore */}
-          <div className='flex'>
-            <button type='button' className='px-20 py-4 rounded-md bg-firstColor text-white font-bold  mr-5'>Add New Link</button>
-            <button type='button' onClick={() => setShowModal(true)} className='px-24 py-4 rounded-md bg-firstColor text-white font-bold'><img src={explore} className='inline mb-1' width='15' /> Explore</button>
-          </div>
-
+        <div className='flex flex-col' style={{width:"31rem"}}>
           <div className='flex flex-col justify-around gap-4'>
             {/* Change Avatar */}
             <div className='flex flex-col items-center p-4 shadow-lg rounded-md w-full bg-gray-100'>
-                <img src={Avatar} className='block w-32 rounded-full m-3 md:w-20 sm:w-10' />
+                <img src={imgProfile ? imgProfile : Avatar} className='block w-32 rounded-full m-3 md:w-20 sm:w-10' />
                 <label htmlFor="input" className="px-2 py-3 m-2 text-white text-xs bg-firstColor font-semibold rounded-sm cursor-pointer">Pick an image</label>
-                <input type="file" id='input' accept="image/*" hidden/>
+                <input onChange={HandleChangeImg} type="file" id='input' accept="image/*" hidden/>
             </div>
 
           {links.map((link, index)=>{
@@ -184,57 +196,6 @@ function Links() {
       </div>
 
       <ShowModalEdit showModalEdit={showModalEdit} close={()=>{setShowModalEdit(false)}} idLink={myIdLink} title={mytitle} linkUrl={myUrl} />
-
-      {/* Modal */}
-      {showModal ? (
-          <div className="p-20 flex justify-center items-center overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none  bg-colorOpacity bg-blackfocus:outline-none">
-            <div className="relative w-auto my-6 mx-auto max-w-3xl">
-              <div className="animate-scale p-10 border-0 rounded-md shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
-                <div className="flex items-start justify-between p-6 border-b border-solid border-gray-300 rounded-t ">
-                  <h3 className="text-black text-xl font-bold">Add to iShare</h3>
-                  <button
-                    className="bg-transparent border-0 text-black float-right"
-                    onClick={() => setShowModal(false)}
-                  >
-                    <span className="h-8 w-8 text-xl block bg-firstColor text-white font-medium rounded-md">
-                      x
-                    </span>
-                  </button>
-                </div>
-        
-                <div>
-
-                  <button onClick={test}>
-                    <div className='flex'>
-                      <img src={shopify} className='m-5' width='40'/>
-                      <p className='self-center text-secondColor font-medium'>Share your product to sell online</p>
-                    </div>
-                  </button>
-
-                  <hr />
-
-                  <button onClick={test}>
-                    <div className='flex'>
-                      <img src={music} className='m-5' width='40'/>
-                      <p className='self-center text-secondColor font-medium'>Share your latest or favorite music</p>
-                    </div>
-                  </button>
-
-                  <hr />
-
-                  <button onClick={test}>
-                    <div className='flex'>
-                      <img src={youtube} className='m-5' width='40'/>
-                      <p className='self-center text-secondColor font-medium'>Share Youtube videos on your iShare</p>
-                    </div>
-                  </button>
-
-                </div>
-              </div>
-            </div>
-          </div>
-      ) : null}
-
     </div>
   )
 }

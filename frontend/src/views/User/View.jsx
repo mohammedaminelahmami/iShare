@@ -17,7 +17,8 @@ function View(props) {
   const [openModal, setOpenModal] = useState(false)
   const [YTlink, setYTlink] = useState([])
   const [urlYoutube, setUrlYoutube] = useState('')
-
+  const [mobile, setMobile] = useState(false)
+  
   useEffect(()=>{
     const myFormData = new FormData()
     myFormData.append('username', localStorage.getItem('username'))
@@ -51,15 +52,26 @@ function View(props) {
     setYoutubeId(getYouTubeID(e.target.value));
   }
   
-  const opts = {
+  const optsWeb = {
+    height: '320',
+    width: '490',
+    playerVars: {
+      // https://developers.google.com/youtube/player_parameters
+      autoplay: 1,
+    },
+    
+  };
+  
+  const optsMobile = {
     height: '150',
     width: '200',
     playerVars: {
       // https://developers.google.com/youtube/player_parameters
       autoplay: 1,
     },
+    
   };
-
+  
   return (
     <div className='parentView'>
         <div className='flex flex-col items-center w-full bg-blue-50'>
@@ -75,10 +87,10 @@ function View(props) {
             {/* <input type="text" onChange={HandleChange} defaultValue={youtubeUrl} placeholder='URL...' hidden/> */}
 
             {links&&
-              links.map((link, index)=>{
+              links.map((link)=>{
                 return(
-                  <div key={index}>
-                    <button 
+                  <>
+                    <button
                       onClick={link.type === 'Normal Link' ? ()=>{window.open('http://'+link.linkUrl, '_blank')} : ()=>{
                         let formDataYTLinks = new FormData();
 
@@ -100,9 +112,13 @@ function View(props) {
                       className='bg-firstColor text-white text-medium font-semibold mt-7 px-5 py-3 w-1/3 md:text-xs md:w-52 md:mt-2 rounded-md hoverButtonTheme1'>{link.title}
                     </button>
                     {YTlink.idLink === link.idLink&&
-                      <YouTube videoId={urlYoutube} opts={opts} />
+                      <>
+                        <div className='mt-1 border-8 border-firstColor rounded-md'>
+                          <YouTube videoId={urlYoutube} opts={mobile ? optsMobile : optsWeb} />
+                        </div>
+                      </>
                     }
-                  </div>
+                  </>
                 )
               })
             }

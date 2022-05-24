@@ -135,4 +135,22 @@
             $description = $this->userModel->selectDescription($username);
             echo json_encode($description);
         }
+
+        public function imgUpload()
+        {
+            $username = $_POST['username'];
+            
+            $filename = $_FILES["img"]["name"];
+            $tempname = $_FILES["img"]["tmp_name"];
+            $folder = APPROOT . "/../../frontend/src/uploads/" . $filename;
+
+            if(move_uploaded_file($tempname, $folder) && $this->userModel->imgProfile($filename, $username))
+            {
+                echo json_encode($filename);
+                // echo json_encode('img Uploaded');
+            }
+            else{
+                echo json_encode('ERROR img');
+            }
+        }
     }
