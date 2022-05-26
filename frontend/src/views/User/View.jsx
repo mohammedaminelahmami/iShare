@@ -5,8 +5,10 @@ import facebook from '../../imgs/facebook1.png'
 import twitter from '../../imgs/twitter1.png'
 import linkdin from '../../imgs/linkdin.png'
 import logoiShare3 from '../../imgs/logoiShare3.png'
+import spt from '../../imgs/spt.png'
 import axios from 'axios'
 import YouTube from 'react-youtube';
+import { HandleImg } from '../../components/imgProfile'
 var getYouTubeID = require('get-youtube-id');
 
 function View(props) {
@@ -76,7 +78,7 @@ function View(props) {
     <div className='parentView'>
         <div className='flex flex-col items-center w-full bg-blue-50'>
             {/* Avatar */}
-            <img src={Avatar} className='w-32 md:w-20 sm:w-10 rounded-full m-3' />
+            <HandleImg img={localStorage.getItem('img')} />
 
             {/* @username */}
             <center className='underline font-bold md:text-xs text-black'>@{props.username}</center>
@@ -110,6 +112,7 @@ function View(props) {
                         })
                       } }
                       className='bg-firstColor text-white text-medium font-semibold mt-7 px-5 py-3 w-1/3 md:text-xs md:w-52 md:mt-2 rounded-md hoverButtonTheme1'>{link.title}
+                      
                     </button>
                     {YTlink.idLink === link.idLink&&
                       <>
@@ -122,7 +125,6 @@ function View(props) {
                 )
               })
             }
-
 
             {/* social media icons */}
             <div className='flex m-10 gap-2 md:mb-4 md:mt-8'>

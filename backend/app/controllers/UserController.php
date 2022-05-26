@@ -153,4 +153,17 @@
                 echo json_encode('ERROR img');
             }
         }
+
+        public function getUsers()
+        {
+            $data = $this->userModel->selectAllUsers();
+            echo json_encode($data);
+        }
+
+        public function banUser()
+        {
+            $username = $_POST['username'];
+            return $this->userModel->updateUser($username);
+        }
+
     }

@@ -1,4 +1,5 @@
 import './App.css';
+import React, { useState, useEffect } from 'react'
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 import Home from './views/Home';
 import LoginUser from './views/User/LoginUser';
@@ -9,14 +10,14 @@ import Themes from './views/User/Themes';
 import View from './views/User/View';
 import Links from './views/User/Links';
 import LoginAdmin from './views/Admin/LoginAdmin';
-import React, { useState, useEffect } from 'react'
 import Appearance from './views/User/Appearance';
 import Profile from './views/User/Profile';
 import Error404 from './components/Error404'
-import axios from 'axios';
 import Overview from './views/Admin/Overview';
+import UsersAction from './views/Admin/UsersAction';
 import AnalyticsAdmin from './views/Admin/AnalyticsAdmin';
 import Banned from './views/Admin/Banned';
+import axios from 'axios';
 
 function App() {
 
@@ -107,6 +108,10 @@ function App() {
 
             <Route path='/dashboard'>
               <Overview />
+            </Route>
+
+            <Route path='/users'>
+              <UsersAction />
             </Route>
 
             <Route path='/analytics'>

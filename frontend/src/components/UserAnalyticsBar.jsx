@@ -7,15 +7,15 @@ function UserAnalyticsBar() {
   return (
     <div className='parentUserAnalyticsBar'>
         <div className='flex text-white bg-secondColor w-full p-5 gap-10'>
-            <div className='ml-12 text-md font-sm'>Lifetime Analytics</div>
+            <div className='ml-12 text-md font-sm d_none'>Lifetime Analytics</div>
 
-            <div className='flex gap-2'>
+            <div className='flex gap-2 view_click'>
                 <div className='self-center'><img src={green} className='' /></div>
                 <div className='text-md font-sm' >views : </div>
                 <img src={lock} width='25' />
             </div>
 
-            <div className='flex gap-2'>
+            <div className='flex gap-2 view_click'>
                 <div className='self-center'><img src={blue} className='' /></div>
                 <div className='text-md font-sm'> clicks : </div>
                 <img src={lock} width='25' />

@@ -99,5 +99,20 @@
             }
         }
 
+        // Select All Users
+        public function selectAllUsers()
+        {
+            $this->db->query("SELECT * FROM user
+                              ORDER BY username DESC
+                            ");
+            return $this->db->resultSet();
+        }
 
+        public function updateUser($username)
+        {
+            $this->db->query("UPDATE user SET status = 1
+                              WHERE username = '$username'
+                            ");
+            return $this->db->execute();
+        }
     }

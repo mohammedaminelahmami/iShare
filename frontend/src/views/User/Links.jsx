@@ -6,12 +6,10 @@ import spotify from '../../imgs/spotify.png'
 import none from '../../imgs/none.png'
 import edit from '../../imgs/edit.png'
 import deletee from '../../imgs/deletee.png'
-import Avatar from '../../imgs/avatar.svg'
 import Mobile from '../../components/Mobile'
 import ShowModalEdit from '../../components/ShowModalEdit'
+import Img from '../../components/Img'
 import axios from 'axios'
-
-let imgProfile = require('../../uploads/${imgProfile}');
 
 function Links() {
 
@@ -20,7 +18,6 @@ function Links() {
   const [myIdLink, setMyIdLink] = useState('')
   const [mytitle, setMyTitle] = useState('')
   const [myUrl, setMyUrl] = useState('')
-  const [imgProfile, setImgProfile] = useState('')
 
   const [clickedNone, setClickedNone] = useState(true)
   const [clickedYoutube, setClickedYoutube] = useState(false)
@@ -98,25 +95,6 @@ function Links() {
     })
   }
 
-  const HandleChangeImg = (e)=>{
-    let formDataImg = new FormData();
-    formDataImg.append('img', e.target.files[0])
-    formDataImg.append('username', localStorage.getItem('username'))
-
-    axios.post('http://localhost/ishare/backend/user/imgUpload', formDataImg, {
-      headers:{
-        "Content-Type": "multipart/form-data",
-      },
-    })
-    .then(response =>{
-      // console.log(response.data);
-      setImgProfile(response.data);
-    })
-    .catch(error =>{
-      console.log(error);
-    })
-  }
-
   return (
     <div className='bg-gray-100 font-["poppins"] backg'>
       <Nav />
@@ -125,52 +103,48 @@ function Links() {
       <div className='flex justify-around mt-10'>
         <div className='flex flex-col' style={{width:"31rem"}}>
           <div className='flex flex-col justify-around gap-4'>
-            {/* Change Avatar */}
-            <div className='flex flex-col items-center p-4 shadow-lg rounded-md w-full bg-gray-100'>
-                <img src={imgProfile ? imgProfile : Avatar} className='block w-32 rounded-full m-3 md:w-20 sm:w-10' />
-                <label htmlFor="input" className="px-2 py-3 m-2 text-white text-xs bg-firstColor font-semibold rounded-sm cursor-pointer">Pick an image</label>
-                <input onChange={HandleChangeImg} type="file" id='input' accept="image/*" hidden/>
-            </div>
 
-          {links.map((link, index)=>{
-            return(
-              <div key={index}>
-                <div className='flex justify-between mt-2 p-4 shadow-lg rounded-md bg-firstColor text-white'>
-                  <p className='ml-2'>{link.title}</p>
-                  <div className='flex gap-4 mr-2'>
-                    <button type='button'
-                      onClick={()=>{
-                        setShowModalEdit(true)
-                        setMyIdLink(link.idLink)
-                        setMyTitle(link.title)
-                        setMyUrl(link.linkUrl)
-                      }}
-                      >
-                      <img src={edit} width='25' className='block' />
-                    </button>
+            <Img />
 
-                    <button type='button'
-                      onClick={(e)=>{
-                        e.preventDefault();
-                        let formDataDelete = new FormData();
-                        formDataDelete.append('idLink', link.idLink)
+            {links.map((link, index)=>{
+              return(
+                <div key={index}>
+                  <div className='flex justify-between mt-2 p-4 shadow-lg rounded-md bg-firstColor text-white'>
+                    <p className='ml-2'>{link.title}</p>
+                    <div className='flex gap-4 mr-2'>
+                      <button type='button'
+                        onClick={()=>{
+                          setShowModalEdit(true)
+                          setMyIdLink(link.idLink)
+                          setMyTitle(link.title)
+                          setMyUrl(link.linkUrl)
+                        }}
+                        >
+                        <img src={edit} width='25' className='block' />
+                      </button>
 
-                        axios.post('http://localhost/ishare/backend/link/deleteLink', formDataDelete)
-                        .then(function(response){
-                        window.location.reload()
-                          // console.log(response);
-                        })
-                        .catch(function(error){
-                          console.log(error);
-                        })
-                      }}><img src={deletee} width='25' className='block' />
-                    </button>
+                      <button type='button'
+                        onClick={(e)=>{
+                          e.preventDefault();
+                          let formDataDelete = new FormData();
+                          formDataDelete.append('idLink', link.idLink)
+
+                          axios.post('http://localhost/ishare/backend/link/deleteLink', formDataDelete)
+                          .then(function(response){
+                          window.location.reload()
+                            // console.log(response);
+                          })
+                          .catch(function(error){
+                            console.log(error);
+                          })
+                        }}><img src={deletee} width='25' className='block' />
+                      </button>
+                    </div>
                   </div>
                 </div>
-              </div>
-              )
-            })
-          }
+                )
+              })
+            }
             {/* Description */}
             <div className='p-4 w-full bg-white shadow-lg rounded-md'>
               <textarea ref={description} name="body" id="body" cols="15" rows="2" className="bg-gray-100 border-2 w-full p-2 rounded-md" placeholder="Description"></textarea>
@@ -192,10 +166,10 @@ function Links() {
             <button type='button' onClick={HandleClickLink} className='mt-2 py-1 px-4 text-sm font-semibold text-firstColor border-2 border-firstColor rounded-md'>Add</button>
           </div>
         </div>
-        <Mobile HandleClick={HandleClick} />
+          <Mobile HandleClick={HandleClick} />
       </div>
 
-      <ShowModalEdit showModalEdit={showModalEdit} close={()=>{setShowModalEdit(false)}} idLink={myIdLink} title={mytitle} linkUrl={myUrl} />
+        <ShowModalEdit showModalEdit={showModalEdit} close={()=>{setShowModalEdit(false)}} idLink={myIdLink} title={mytitle} linkUrl={myUrl} />
     </div>
   )
 }
