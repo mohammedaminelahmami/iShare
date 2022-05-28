@@ -34,7 +34,7 @@ function Nav() {
         {
           setLoggedIn(true);
         }
-      })
+      }, [])
 
       const logout = ()=>{
         localStorage.removeItem('token');

@@ -23,35 +23,29 @@ function App() {
 
   const [loggedIn, setLoggedIn] = useState(false);
   const [username, setUsername] = useState('');
-
-  if(localStorage.getItem('token'))
-  {
-    setLoggedIn(true);
-  }
   
   const usernameUrl = window.location.href.slice(22)
+
+  useEffect(()=>{
+    if(localStorage.getItem('token'))
+    {
+      setLoggedIn(true);
+    }
+  }, [])
   
-  const res = ()=>{
-    const formData = new FormData();
+  const res = async ()=>{
+    let formData = new FormData();
     formData.append('username', usernameUrl);
     
-    axios.post('http://localhost/ishare/backend/user/getUser', formData)
-    .then(response=>{
-      const dataUsername = response.data.username
+    let response = await axios.post('http://localhost/ishare/backend/user/getUser', formData)
+      let dataUsername = response.data.username
       setUsername(dataUsername)
-      // console.log(dataUsername);
-    })
-    .catch(error=>{
-      console.log(error);
-    })
   }
 
   useEffect(()=>{
     res();
   }, [])
   
-
-
   return (
     <Router>
       <div className='parentApp'>

@@ -26,27 +26,22 @@ function View() {
 
   const usernameUrl = window.location.href.slice(22)
 
-  const username_res = ()=>{
-    const formData = new FormData();
-    formData.append('username', usernameUrl);
+  const username_res = async ()=>{
+    let formDataUser = new FormData();
+    formDataUser.append('username', usernameUrl);
     
-    axios.post('http://localhost/ishare/backend/user/getUser', formData)
-    .then(function(response){
-      const dataUsername = response.data.username
-      setUsername(dataUsername)
-      setReload(true)
-      // console.log(dataUsername);
-    })
-    .catch(function(error){
-      console.log(error);
-    })
+    let response = await axios.post('http://localhost/ishare/backend/user/getUser', formDataUser)
+    const dataUsername = response.data.username
+    setUsername(dataUsername)
+    setReload(true)
   }
+
   useEffect(()=>{
     username_res();
   }, [])
   
   useEffect(()=>{
-    const myFormData = new FormData()
+    let myFormData = new FormData()
     myFormData.append('username', username)
 
     axios.post('http://localhost/ishare/backend/link/getLinks', myFormData)
@@ -103,8 +98,8 @@ function View() {
     formDataImg.append('username', username)
 
     let getImg = await axios.post('http://localhost/ishare/backend/user/getImg', formDataImg)
-    // console.log(getImg.data.imgProfile);
     setImg(getImg.data.imgProfile)
+    // console.log(getImg.data.imgProfile);
   }
   
   useEffect(()=>{

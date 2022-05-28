@@ -2,7 +2,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import HandleImg from "./HandleImg";
 
-const Img = ()=> {
+function Img() {
 
   const [img, setImg] = useState('')
   const [upload, setUpload] = useState(false)
@@ -20,17 +20,17 @@ const Img = ()=> {
     setUpload(true)
   }
 
-  const res = async ()=>{
+  const resImg = async ()=>{
     let formDataGetImg = new FormData();
     formDataGetImg.append('username', localStorage.getItem('username'))
 
-    let getImg = await axios.post('http://localhost/ishare/backend/user/getImg', formDataGetImg)
+    let response = await axios.post('http://localhost/ishare/backend/user/getImg', formDataGetImg)
     // console.log(getImg.data.imgProfile);
-    setImg(getImg.data.imgProfile)
+    setImg(response.data.imgProfile)
   }
 
   useEffect(()=>{
-    res();
+    resImg();
   }, [upload])
 
   return (

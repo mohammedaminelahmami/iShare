@@ -67,7 +67,7 @@ function Links() {
   }
 
   useEffect(()=>{
-    const myFormData = new FormData()
+    let myFormData = new FormData();
     myFormData.append('username', localStorage.getItem('username'))
 
     axios.post('http://localhost/ishare/backend/link/getLinks', myFormData)
@@ -81,7 +81,7 @@ function Links() {
   }, [])
 
   const HandleClickDesc = ()=>{
-    const formDataDesc = new FormData();
+    let formDataDesc = new FormData();
     formDataDesc.append('description', description.current.value)
     formDataDesc.append('username', localStorage.getItem('username'))
 

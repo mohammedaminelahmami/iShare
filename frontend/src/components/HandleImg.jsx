@@ -10,7 +10,7 @@ const HandleImg = (props)=>{
         {
             setImg(require(`../uploads/${props.img}`))
         }
-    })
+    }, [props.img])
 
     return(
         <img src={img} className='block w-32 h-32 rounded-full m-3 md:w-20 md:h-20' />

@@ -9,19 +9,14 @@ function UsersAction() {
   const [AreYouSure, setAreYouSure] = useState(false)
   const [username, setUsername] = useState('')
 
-  const res = async () => {
-    await axios.get('http://localhost/ishare/backend/user/getUsers')
-    .then(response=>{
-      console.log(response.data);
-      setUsers(response.data)
-    })
-    .catch(error=>{
-      console.log(error);
-    })
+  const resGetUsers = async () => {
+    let response = await axios.get('http://localhost/ishare/backend/user/getUsers')
+    console.log(response.data);
+    setUsers(response.data)
   }
 
   useEffect(()=>{
-    res();
+    resGetUsers();
   }, [AreYouSure])
 
   return (
