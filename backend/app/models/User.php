@@ -103,16 +103,34 @@
         public function selectAllUsers()
         {
             $this->db->query("SELECT * FROM user
+                              WHERE status = 0
                               ORDER BY username DESC
                             ");
             return $this->db->resultSet();
         }
 
+        // Ban user
         public function updateUser($username)
         {
             $this->db->query("UPDATE user SET status = 1
                               WHERE username = '$username'
                             ");
             return $this->db->execute();
+        }
+
+        public function usersBanned()
+        {
+            $this->db->query("SELECT * FROM user
+                              WHERE status = 1
+                            ");
+            return $this->db->resultSet();
+        }
+
+        public function selectImgUser($username)
+        {
+            $this->db->query("SELECT imgProfile FROM user
+                              WHERE username = '$username'
+                            ");
+            return $this->db->single();
         }
     }

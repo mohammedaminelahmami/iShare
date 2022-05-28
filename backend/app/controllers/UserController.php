@@ -146,12 +146,19 @@
 
             if(move_uploaded_file($tempname, $folder) && $this->userModel->imgProfile($filename, $username))
             {
-                echo json_encode($filename);
-                // echo json_encode('img Uploaded');
+                echo json_encode('img Uploaded');
             }
             else{
                 echo json_encode('ERROR img');
             }
+        }
+
+        public function getImg()
+        {
+            $username = $_POST['username'];
+            
+            $data = $this->userModel->selectImgUser($username);
+            echo json_encode($data);
         }
 
         public function getUsers()
@@ -164,6 +171,12 @@
         {
             $username = $_POST['username'];
             return $this->userModel->updateUser($username);
+        }
+
+        public function getBanns()
+        {
+            $data = $this->userModel->usersBanned();
+            echo json_encode($data);
         }
 
     }

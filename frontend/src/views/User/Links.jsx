@@ -94,7 +94,7 @@ function Links() {
       console.log(error);
     })
   }
-
+  
   return (
     <div className='bg-gray-100 font-["poppins"] backg'>
       <Nav />
@@ -119,7 +119,7 @@ function Links() {
                           setMyTitle(link.title)
                           setMyUrl(link.linkUrl)
                         }}
-                        >
+                      >
                         <img src={edit} width='25' className='block' />
                       </button>
 

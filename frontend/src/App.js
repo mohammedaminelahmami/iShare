@@ -24,27 +24,33 @@ function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [username, setUsername] = useState('');
 
+  if(localStorage.getItem('token'))
+  {
+    setLoggedIn(true);
+  }
+  
   const usernameUrl = window.location.href.slice(22)
-
-  useEffect(()=>{
+  
+  const res = ()=>{
     const formData = new FormData();
     formData.append('username', usernameUrl);
     
     axios.post('http://localhost/ishare/backend/user/getUser', formData)
-    .then(function(response){
+    .then(response=>{
       const dataUsername = response.data.username
       setUsername(dataUsername)
       // console.log(dataUsername);
     })
-    .catch(function(error){
+    .catch(error=>{
       console.log(error);
     })
+  }
 
-    if(localStorage.getItem('token'))
-    {
-      setLoggedIn(true);
-    }
+  useEffect(()=>{
+    res();
   }, [])
+  
+
 
   return (
     <Router>
@@ -81,7 +87,7 @@ function App() {
             </Route>
 
             <Route path={'/'+username}>
-              <View username={username} />
+              <View />
             </Route>
 
             <Route path='/links'>
@@ -90,7 +96,7 @@ function App() {
               }
 
               {loggedIn&&
-                <Links username={username} />
+                <Links />
               }
             </Route>
 
@@ -131,7 +137,7 @@ function App() {
         </Switch>
       </div>
     </Router>
-  );
+  )
 }
 
 export default App;

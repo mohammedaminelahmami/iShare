@@ -7,7 +7,7 @@ import loggout from '../imgs/logout.png'
 import { Link } from 'react-router-dom'
 import users from '../imgs/users.png'
 
-function NavAdmin(props) {
+function NavAdmin() {
 
     const pageUrl = window.location.href.slice(22)
 
@@ -45,7 +45,6 @@ function NavAdmin(props) {
                             <div><img src={ban} width='22' /></div>
                             <div className='font-semibold'>Banned</div>
                         </Link>
-
 
                         <button onClick={logout} type='submit' className='flex gap-4 p-4 mt-36 hover:bg-ffirstColor hover:rounded-md hoverTransition'>
                             <div><img src={loggout} width='22' /></div>

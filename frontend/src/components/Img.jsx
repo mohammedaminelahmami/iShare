@@ -1,38 +1,48 @@
-import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { HandleImg } from "./imgProfile";
+import { useState, useEffect } from "react";
+import HandleImg from "./HandleImg";
 
-function ImgProfile() {
+const Img = ()=> {
 
-    const HandleChangeImg = (e)=>{
-        let formDataImg = new FormData();
-        formDataImg.append('img', e.target.files[0])
-        formDataImg.append('username', localStorage.getItem('username'))
-    
-        axios.post('http://localhost/ishare/backend/user/imgUpload', formDataImg, {
-          headers:{
-            "Content-Type": "multipart/form-data",
-          },
-        })
-        .then(response =>{
-          // console.log(response.data);
-          localStorage.setItem('img', response.data)
-        })
-        .catch(error =>{
-          console.log(error);
-        })
-      }
+  const [img, setImg] = useState('')
+  const [upload, setUpload] = useState(false)
 
-    return (
-        <div>
-            {/* Change Avatar */}
-            <div className='flex flex-col items-center p-4 shadow-lg rounded-md w-full bg-gray-100'>
-                <HandleImg img={localStorage.getItem('img')} />
-                <label htmlFor="input" className="px-2 py-3 m-2 text-white text-xs bg-firstColor font-semibold rounded-sm cursor-pointer">Pick an image</label>
-                <input onChange={HandleChangeImg} type="file" id='input' accept="image/*" hidden/>
-            </div>
-        </div>
-    )
+  const HandleChangeImg = async (e)=>{
+    let formDataImg = new FormData();
+    formDataImg.append('img', e.target.files[0])
+    formDataImg.append('username', localStorage.getItem('username'))
+
+    await axios.post('http://localhost/ishare/backend/user/imgUpload', formDataImg, {
+      headers:{
+        "Content-Type": "multipart/form-data",
+      },
+    })
+    setUpload(true)
+  }
+
+  const res = async ()=>{
+    let formDataGetImg = new FormData();
+    formDataGetImg.append('username', localStorage.getItem('username'))
+
+    let getImg = await axios.post('http://localhost/ishare/backend/user/getImg', formDataGetImg)
+    // console.log(getImg.data.imgProfile);
+    setImg(getImg.data.imgProfile)
+  }
+
+  useEffect(()=>{
+    res();
+  }, [upload])
+
+  return (
+    <div>
+      {/* Change Avatar */}
+      <div className='flex flex-col items-center p-4 shadow-lg rounded-md w-full bg-gray-100'>
+        <HandleImg img={img&& img} />
+        <label htmlFor="input" className="px-2 py-3 m-2 text-white text-xs bg-firstColor font-semibold rounded-sm cursor-pointer">Pick an image</label>
+        <input onChange={HandleChangeImg} type="file" id='input' accept="image/*" hidden/>
+      </div>
+    </div>
+  )
 }
 
-export default ImgProfile
+export default Img

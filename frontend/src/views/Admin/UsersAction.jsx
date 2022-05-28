@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import NavAdmin from '../../components/NavAdmin'
+import ModalAreYouSure from '../../components/ModalAreYouSure'
 
 function UsersAction() {
   
   const [Users, setUsers] = useState([])
+  const [AreYouSure, setAreYouSure] = useState(false)
+  const [username, setUsername] = useState('')
 
-  useEffect(()=>{
-    axios.get('http://localhost/ishare/backend/user/getUsers')
+  const res = async () => {
+    await axios.get('http://localhost/ishare/backend/user/getUsers')
     .then(response=>{
       console.log(response.data);
       setUsers(response.data)
@@ -15,7 +18,11 @@ function UsersAction() {
     .catch(error=>{
       console.log(error);
     })
-  }, [])
+  }
+
+  useEffect(()=>{
+    res();
+  }, [AreYouSure])
 
   return (
     <div className='font-["poppins"]'>
@@ -43,32 +50,35 @@ function UsersAction() {
                 </th>
               </tr>
             </thead>
-            <tbody>
+              <tbody>
                 {Users.map((user, index)=>{
                   return(
-                      <tr key={index} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                        <th scope="row" className="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
-                          {user.username}
-                        </th>
-                        <td className="px-6 py-4">
-                          {user.email}
-                        </td>
-                        <td className="px-6 py-4">
-                          {user.plan}
-                        </td>
-                        <td className="px-6 py-4">
-                          {user.created_at}
-                        </td>
-                        <td className="px-6 py-4 text-right">
-                          <a href="#" className="font-medium text-red-600 hover:underline">Ban</a>
-                        </td>
-                        </tr>
+                    <tr key={index} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                      <th scope="row" className="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
+                        {user.username}
+                      </th>
+                      <td className="px-6 py-4">
+                        {user.email}
+                      </td>
+                      <td className="px-6 py-4">
+                        {user.plan}
+                      </td>
+                      <td className="px-6 py-4">
+                        {user.created_at}
+                      </td>
+                      <td className="px-6 py-4 text-right">
+                        <button onClick={()=>{
+                          setAreYouSure(true);
+                          setUsername(user.username);
+                        }} className="font-medium text-red-600 hover:underline">Ban</button>
+                      </td>
+                      <ModalAreYouSure AreYouSure={AreYouSure} close={()=>{setAreYouSure(false)}} username={username} />
+                    </tr>
                     )
                   })}
-            </tbody>
+              </tbody>
           </table>
         </div>
-
     </div>
   )
 }
