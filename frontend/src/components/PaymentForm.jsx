@@ -22,6 +22,12 @@ const CARD_OPTIONS = {
 	}
 }
 
+const updatePlanApi = async ()=>{
+    let formData = new FormData();
+    formData.append('username', localStorage.getItem('username'));
+    await axios.post('http://localhost/ishare/backend/user/changePlan', formData)
+}
+
 function PaymentForm() {
 
     const [success, setSuccess] = useState(false)
@@ -48,6 +54,9 @@ function PaymentForm() {
                 {
                     console.log("successful payment !");
                     setSuccess(true)
+                    // changer plan 0 --> 1 user --> pro
+                    updatePlanApi();
+                    // { expire date } if user is pro --> 0
                 }
             } catch (error) {
                 console.log("ERROR" . error);
@@ -73,9 +82,6 @@ function PaymentForm() {
            <h2>Successful Payment ! </h2>
        </div>
        
-        }
-        {success&&
-            localStorage.setItem('plan', 'pro')
         }
     </>
   )

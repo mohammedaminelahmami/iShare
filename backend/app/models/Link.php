@@ -47,22 +47,12 @@
             return $this->db->execute();
         }
 
-        public function insertDescription($description, $username)
+        public function selectYoutubeLinks($idLink, $username)
         {
-            $this->db->query("INSERT INTO description (description, username)
-                              VALUES (:description, :username)
-                            ");
-            // Bind Values
-            $this->db->bind(':description', $description);
-            $this->db->bind(':username', $username);
-
-            return $this->db->execute();
-        }
-
-        public function selectDescription($username)
-        {
-            $this->db->query("SELECT description FROM description
-                              WHERE username = '$username'
+            $this->db->query("SELECT * FROM link
+                              WHERE type = 'Youtube Link'
+                              AND idLink = '$idLink'
+                              AND username = '$username'
                             ");
             return $this->db->single();
         }

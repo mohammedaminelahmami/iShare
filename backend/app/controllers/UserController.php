@@ -111,4 +111,92 @@
                 echo json_encode('username not found !');
             }
         }
+
+        // Add img
+        public function addimgPrf()
+        {
+            $imgProfile = $_POST['imgProfile'];
+            $username = $_POST['username'];
+
+            return $this->userModel->updateUserAddImg($imgProfile, $username);
+        }
+
+        public function addDescription()
+        {
+            $description = $_POST['description'];
+            $username = $_POST['username'];
+
+            return $this->userModel->insertDescription($description, $username);
+        }
+
+        public function getDescription()
+        {
+            $username = $_POST['username'];
+            $description = $this->userModel->selectDescription($username);
+            echo json_encode($description);
+        }
+
+        public function imgUpload()
+        {
+            $username = $_POST['username'];
+            
+            $filename = $_FILES["img"]["name"];
+            $tempname = $_FILES["img"]["tmp_name"];
+            $folder = APPROOT . "/../../frontend/src/uploads/" . $filename;
+
+            if(move_uploaded_file($tempname, $folder) && $this->userModel->imgProfile($filename, $username))
+            {
+                echo json_encode('img Uploaded');
+            }
+            else{
+                echo json_encode('ERROR img');
+            }
+        }
+
+        public function getImg()
+        {
+            $username = $_POST['username'];
+            
+            $data = $this->userModel->selectImgUser($username);
+            echo json_encode($data);
+        }
+
+        public function changePlan()
+        {
+            $username = $_POST['username'];
+            return $this->userModel->updatePlan($username);
+        }
+
+        public function getUsers()
+        {
+            $data = $this->userModel->selectAllUsers();
+            echo json_encode($data);
+        }
+
+        public function banUser()
+        {
+            $username = $_POST['username'];
+            return $this->userModel->updateUser($username);
+        }
+
+        public function getBanns()
+        {
+            $data = $this->userModel->usersBanned();
+            echo json_encode($data);
+        }
+
+        public function totalUsers()
+        {
+            $data = $this->userModel->selectTotalUsers();
+            echo json_encode($data);
+        }
+
+        public function totalProfit()
+        {
+            $data = $this->userModel->selectTotalProfit();
+            echo json_encode($data);
+        }
+
+
+
     }

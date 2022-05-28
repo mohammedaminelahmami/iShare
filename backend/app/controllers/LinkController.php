@@ -61,19 +61,12 @@
             return $this->linkModel->updateLink($linkUrl, $title, $idLink);
         }
 
-        // Add Description
-        public function description()
-        {
-            $description = $_POST['description'];
-            $username = $_POST['username'];
-
-            return $this->linkModel->insertDescription($description, $username);
-        }
-
-        public function getDescription()
+        public function getYoutubeLinks()
         {
             $username = $_POST['username'];
-            $description =  $this->linkModel->selectDescription($username);
-            echo json_encode($description);
+            $idLink = $_POST['idLink'];
+
+            $youtubeLink = $this->linkModel->selectYoutubeLinks($idLink, $username);
+            echo json_encode($youtubeLink);
         }
     }

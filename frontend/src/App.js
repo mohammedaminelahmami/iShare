@@ -1,4 +1,5 @@
 import './App.css';
+import React, { useState, useEffect } from 'react'
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 import Home from './views/Home';
 import LoginUser from './views/User/LoginUser';
@@ -9,42 +10,42 @@ import Themes from './views/User/Themes';
 import View from './views/User/View';
 import Links from './views/User/Links';
 import LoginAdmin from './views/Admin/LoginAdmin';
-import React, { useState, useEffect } from 'react'
 import Appearance from './views/User/Appearance';
 import Profile from './views/User/Profile';
 import Error404 from './components/Error404'
-import axios from 'axios';
 import Overview from './views/Admin/Overview';
+import UsersAction from './views/Admin/UsersAction';
 import AnalyticsAdmin from './views/Admin/AnalyticsAdmin';
 import Banned from './views/Admin/Banned';
+import axios from 'axios';
 
 function App() {
 
   const [loggedIn, setLoggedIn] = useState(false);
   const [username, setUsername] = useState('');
-
+  
   const usernameUrl = window.location.href.slice(22)
 
   useEffect(()=>{
-    const formData = new FormData();
-    formData.append('username', usernameUrl);
-    
-    axios.post('http://localhost/ishare/backend/user/getUser', formData)
-    .then(function(response){
-      const dataUsername = response.data.username
-      setUsername(dataUsername)
-      // console.log(dataUsername);
-    })
-    .catch(function(error){
-      console.log(error);
-    })
-
     if(localStorage.getItem('token'))
     {
       setLoggedIn(true);
     }
   }, [])
+  
+  const res = async ()=>{
+    let formData = new FormData();
+    formData.append('username', usernameUrl);
+    
+    let response = await axios.post('http://localhost/ishare/backend/user/getUser', formData)
+      let dataUsername = response.data.username
+      setUsername(dataUsername)
+  }
 
+  useEffect(()=>{
+    res();
+  }, [])
+  
   return (
     <Router>
       <div className='parentApp'>
@@ -80,7 +81,7 @@ function App() {
             </Route>
 
             <Route path={'/'+username}>
-              <View username={username} />
+              <View />
             </Route>
 
             <Route path='/links'>
@@ -89,7 +90,7 @@ function App() {
               }
 
               {loggedIn&&
-                <Links username={username} />
+                <Links />
               }
             </Route>
 
@@ -109,6 +110,10 @@ function App() {
               <Overview />
             </Route>
 
+            <Route path='/users'>
+              <UsersAction />
+            </Route>
+
             <Route path='/analytics'>
               <AnalyticsAdmin />
             </Route>
@@ -126,7 +131,7 @@ function App() {
         </Switch>
       </div>
     </Router>
-  );
+  )
 }
 
 export default App;

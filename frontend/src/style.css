@@ -7,7 +7,6 @@
     --navBg : #F9F9F9;
     --menuColor : #898989;
     --inputColor : #EEEEEE;
-    --theme1ColorHover : #EC5656;
 }
 
 body{
@@ -95,10 +94,10 @@ body{
 }
 
 .hoverButtonTheme1:hover{
-    background-color: var(--theme1ColorHover);
+    background-color: var(--secondColor);
     outline: white solid 1px;
-    border-bottom-right-radius: 2rem;
-    border-top-left-radius: 2rem;
+    border-bottom-right-radius: 0.7rem;
+    border-top-left-radius: 0.7rem;
     transform: scale(1.04);
 }
 
@@ -205,6 +204,13 @@ body{
     } */
 }
 
+@media(max-width: 982px)
+{
+    .display_none{
+        display: none;
+    }
+}
+
 @media(max-width: 767px)
 {
     .btnLogin{
@@ -226,9 +232,7 @@ body{
         position: absolute;
         transform: scale(1.04);
         transition:all 0.3s ease;
-
     }
-
 }
 
 @media(max-width: 550px)
@@ -240,4 +244,23 @@ body{
     .textSmall__sec{
         font-size: 0.9rem;
     }
+
+    .d_none{
+        display: none;
+    }
+
+    .view_click{
+        margin-left: 2rem;
+    }
+    .modal{
+        width: 21rem;
+    }
+    .ins{
+        width: 100%;
+    }
 }
+
+/* .test{
+    width: 90%;
+    margin-right: auto;
+} */
