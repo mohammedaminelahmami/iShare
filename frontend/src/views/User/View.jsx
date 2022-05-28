@@ -1,11 +1,9 @@
 import React, {useState, useEffect} from 'react'
-// import Avatar from '../../imgs/avatar.svg'
 import github from '../../imgs/github.png'
 import facebook from '../../imgs/facebook1.png'
 import twitter from '../../imgs/twitter1.png'
 import linkdin from '../../imgs/linkdin.png'
 import logoiShare3 from '../../imgs/logoiShare3.png'
-// import spt from '../../imgs/spt.png'
 import axios from 'axios'
 import YouTube from 'react-youtube';
 import HandleImg from '../../components/HandleImg'
@@ -15,7 +13,6 @@ function View() {
 
   const [links, setLinks] = useState([])
   const [desc, setDesc] = useState('')
-  const [youtubeId, setYoutubeId] = useState('')
   const [YTlink, setYTlink] = useState([])
   const [urlYoutube, setUrlYoutube] = useState('')
   const [mobile, setMobile] = useState(false)
@@ -53,11 +50,6 @@ function View() {
       console.log(error);
     })
   }, [reload])
-
-  const HandleChange = (e)=>{
-    // console.log(e.target.value);
-    setYoutubeId(getYouTubeID(e.target.value));
-  }
 
   useEffect(()=>{
     let formData = new FormData();

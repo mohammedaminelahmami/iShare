@@ -109,6 +109,20 @@
             return $this->db->resultSet();
         }
 
+        public function selectTotalUsers()
+        {
+            $this->db->query("SELECT COUNT(*) as totalUsers FROM user");
+            return $this->db->single();
+        }
+
+        public function selectTotalProfit()
+        {
+            $this->db->query("SELECT SUM(plan)*5 as totalProfit FROM user
+                              WHERE plan = 1
+                            ");
+            return $this->db->single();
+        }
+
         // Ban user
         public function updateUser($username)
         {
@@ -141,4 +155,6 @@
                             ");
             return $this->db->execute();
         }
+
+
     }

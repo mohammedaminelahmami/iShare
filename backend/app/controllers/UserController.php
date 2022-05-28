@@ -185,4 +185,18 @@
             echo json_encode($data);
         }
 
+        public function totalUsers()
+        {
+            $data = $this->userModel->selectTotalUsers();
+            echo json_encode($data);
+        }
+
+        public function totalProfit()
+        {
+            $data = $this->userModel->selectTotalProfit();
+            echo json_encode($data);
+        }
+
+
+
     }

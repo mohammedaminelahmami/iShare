@@ -83,9 +83,6 @@ function PaymentForm() {
        </div>
        
         }
-        {success&&
-            localStorage.setItem('plan', 'pro')
-        }
     </>
   )
 }

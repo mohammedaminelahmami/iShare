@@ -1,5 +1,6 @@
 import { Menu, Transition } from '@headlessui/react'
 import { Fragment, useEffect, useRef, useState } from 'react'
+import { Link } from 'react-router-dom';
 import settings from '../imgs/settings.png'
 
 export default function Example() {
@@ -9,15 +10,7 @@ export default function Example() {
     localStorage.removeItem('username');
     window.location.replace('http://localhost:3000/');
   }
-
-  const links = ()=>{
-    window.location.replace('http://localhost:3000/links')
-  }
-
-  const updatePlan = ()=>{
-    window.location.replace('http://localhost:3000/Pricing')
-  }
-
+  
   return (
     <div className='md:hidden z-10'>
       <Menu as="div" className="relative inline-block text-left">
@@ -42,8 +35,8 @@ export default function Example() {
             <div className="px-1 py-1 ">
               <Menu.Item>
                 {({ active }) => (
+                  <Link to='/links'>
                   <button
-                    onClick={links}
                     className={`${
                       active ? 'bg-firstColor text-white' : 'text-gray-900'
                     } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
@@ -61,10 +54,12 @@ export default function Example() {
                     )}
                     Links
                   </button>
+                  </Link>
                 )}
               </Menu.Item>
               <Menu.Item>
                 {({ active }) => (
+                  <Link to='/themes'>
                   <button
                     className={`${
                       active ? 'bg-firstColor text-white' : 'text-gray-900'
@@ -81,16 +76,17 @@ export default function Example() {
                         aria-hidden="true"
                       />
                     )}
-                    Appearance
+                    Themes
                   </button>
+                  </Link>
                 )}
               </Menu.Item>
             </div>
             <div className="px-1 py-1">
               <Menu.Item>
                 {({ active }) => (
+                  <Link to='/pricing'>
                   <button
-                    onClick={updatePlan}
                     className={`${
                       active ? 'bg-firstColor text-white' : 'text-gray-900'
                     } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
@@ -108,6 +104,7 @@ export default function Example() {
                     )}
                     Update Plan
                   </button>
+                  </Link>
                 )}
               </Menu.Item>
             </div>

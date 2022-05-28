@@ -66,8 +66,8 @@ function Nav() {
                             <>
                                 <li><Link to='/Links' className={menu_el ? "block text-menuColor md:text-white md:text-normal text-center mt-4" : "md:hidden text-menuColor hover:text-firstColor"}>Links</Link></li>
                                 {/* <li><Link to='/Appearance' className={menu_el ? "block text-menuColor md:text-white md:text-normal text-center mt-4" : "md:hidden text-menuColor hover:text-firstColor"}>Appearance</Link></li> */}
-                                <li><Link to='/Themes' className={menu_el ? "block text-menuColor md:text-white md:text-normal text-center mt-4" : "md:hidden text-menuColor hover:text-firstColor"}>Templates</Link></li>
-                                <li><Link to={'/' + localStorage.getItem('username') + 'Analytics'} className={menu_el ? "block text-menuColor md:text-white md:text-normal text-center mt-4" : "md:hidden text-menuColor hover:text-firstColor"}>Analytics</Link></li>
+                                <li><Link to='/Themes' className={menu_el ? "block text-menuColor md:text-white md:text-normal text-center mt-4" : "md:hidden text-menuColor hover:text-firstColor"}>Themes</Link></li>
+                                <li><Link to={'/' + localStorage.getItem('username') + 'Analytics'} className={menu_el ? "block text-menuColor md:text-white md:text-normal text-center mt-4" : "md:hidden text-menuColor hover:text-firstColor"}> Analytics </Link></li>
                             </>
                         }
 
