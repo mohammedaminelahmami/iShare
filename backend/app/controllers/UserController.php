@@ -161,6 +161,12 @@
             echo json_encode($data);
         }
 
+        public function changePlan()
+        {
+            $username = $_POST['username'];
+            return $this->userModel->updatePlan($username);
+        }
+
         public function getUsers()
         {
             $data = $this->userModel->selectAllUsers();

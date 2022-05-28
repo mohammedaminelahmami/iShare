@@ -2,7 +2,7 @@ import React, { useRef } from 'react'
 import Mobile from '../../components/Mobile'
 import Nav from '../../components/Nav'
 import UserAnalyticsBar from '../../components/UserAnalyticsBar'
-import Avatar from '../../imgs/avatar.svg'
+// import img1 from '../../imgs/img1.jpg'
 
 function Appearance() {
 
@@ -15,28 +15,24 @@ function Appearance() {
         <Nav />
         <UserAnalyticsBar />
         
-        <div className='flex justify-around mt-10'>
-            <div className='flex flex-col justify-around gap-10'>
-              <div className='flex flex-col items-center p-4 shadow-lg rounded-md w-full bg-gray-100'>
-                  {/* Change Avatar */}
-                  <img src={Avatar} className='block w-32 rounded-full m-3 md:w-20 sm:w-10' />
-                  <label htmlFor="input" className="px-2 py-3 m-2 text-white text-xs bg-firstColor font-semibold rounded-sm cursor-pointer">Pick an image</label>
-                  <input type="file" id='input' accept="image/*" hidden/>
-              </div>
-
-              <div className='p-4 w-full bg-gray-100 shadow-lg rounded-md'>
-                <textarea name="body" id="body" cols="15" rows="4" className="bg-white border-2 w-full p-2 rounded-md" placeholder="Description"></textarea>
-                <button className='mt-2 py-1 px-4 text-sm font-semibold text-firstColor bg-white border-2 border-firstColor rounded-md'>Add</button>
-              </div>
+        <div className='flex justify-center gap-36 mt-10'>
+          <div className='flex justify-around bg-gray-100 rounded-md w-1/2 h-96'>  
+            <div className='self-center bg-gray-400 w-36 h-48 rounded-md'>
+              {/* <img src={img1} className='w-full' /> */}
             </div>
 
-          <div className='-mr-24'>
+            <div className='self-center bg-gray-400 w-36 h-48 rounded-md'>
+
+            </div>
+
+            <div className='self-center bg-gray-400 w-36 h-48 rounded-md'>
+
+            </div>
+          </div>
+
+          <div className=''>
             <Mobile HandleClick={HandleClick} />
           </div>
-        </div>
-
-        <div className='mt-10'>
-          Hello
         </div>
     </div>
   )

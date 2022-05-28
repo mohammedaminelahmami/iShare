@@ -133,4 +133,12 @@
                             ");
             return $this->db->single();
         }
+
+        public function updatePlan($username)
+        {
+            $this->db->query("UPDATE user SET plan = 1
+                              WHERE username = '$username'
+                            ");
+            return $this->db->execute();
+        }
     }
