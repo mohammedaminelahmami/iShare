@@ -3,6 +3,8 @@ import github from '../../imgs/github.png'
 import facebook from '../../imgs/facebook1.png'
 import twitter from '../../imgs/twitter1.png'
 import linkdin from '../../imgs/linkdin.png'
+import spt from '../../imgs/spt.png'
+import ytt from '../../imgs/ytt.png'
 import logoiShare3 from '../../imgs/logoiShare3.png'
 import axios from 'axios'
 import YouTube from 'react-youtube';
@@ -11,22 +13,12 @@ import SpotifyPlayer from 'react-spotify-player';
 var getYouTubeID = require('get-youtube-id');
 
 function View() {
- 
-// size may also be a plain string using the presets 'large' or 'compact'
-const size = {
-  width: '100%',
-  height: 300,
-};
-const view = 'list'; // or 'coverart'
-const theme = 'black'; // or 'white'
-
 
   const [links, setLinks] = useState([])
   const [YTlink, setYTlink] = useState([])
   const [spotifyLink, setSpotifyLink] = useState('')
   const [desc, setDesc] = useState('')
   const [urlYoutube, setUrlYoutube] = useState('')
-  const [mobile, setMobile] = useState(false)
   const [img, setImg] = useState('')
   const [reload, setReload] = useState(false)
 
@@ -77,24 +69,22 @@ const theme = 'black'; // or 'white'
   }, [reload])
   
   const optsWeb = {
+    width: '100%',
     height: '320',
-    width: '490',
     playerVars: {
       // https://developers.google.com/youtube/player_parameters
       autoplay: 1,
     },
     
   };
-  
-  const optsMobile = {
-    height: '150',
-    width: '200',
-    playerVars: {
-      // https://developers.google.com/youtube/player_parameters
-      autoplay: 1,
-    },
-    
+
+  // size may also be a plain string using the presets 'large' or 'compact'
+  const size = {
+    width: '100%',
+    height: 300,
   };
+  const view = 'list'; // or 'coverart'
+  const theme = 'black'; // or 'white'
 
   const getImg = async ()=>{
     let formDataImg = new FormData();
@@ -163,16 +153,30 @@ const theme = 'black'; // or 'white'
                       }
                     )
                   }
-                  className='bg-firstColor text-white text-medium font-semibold mt-7 px-5 py-3 w-1/3 md:text-xs md:w-52 md:mt-2 rounded-md hoverButtonTheme1'>{link.title}
-                  
+                  className='bg-firstColor text-white text-medium font-semibold mt-7 px-5 py-3 w-1/3 md:text-xs md:w-52 md:mt-2 rounded-md hoverButtonTheme1'>
+                    {link.type === 'Spotify Link' ?
+                      <div className='flex'>
+                        <div className=''><img src={spt} width="20" className='inline' /></div>
+                        <div className='mx-auto'>{link.title}</div>
+                      </div>
+                      :
+                      (link.type === 'Youtube Link' ?
+                        <div className='flex'>
+                          <div className=''><img src={ytt} width="20" className='inline' /></div>
+                          <div className='mx-auto'>{link.title}</div>
+                        </div>
+                          :
+                        <div className='mx-auto'>{link.title}</div>
+                      )
+                    }
                 </button>
                 {YTlink.idLink == link.idLink&&
-                  <div className='mt-1 border-8 border-firstColor rounded-md'>
-                    <YouTube videoId={urlYoutube} opts={mobile ? optsMobile : optsWeb} />
+                  <div className='w-1/3 sm:w-width_77 mt-1 border-8 border-firstColor rounded-md'>
+                    <YouTube videoId={urlYoutube} opts={optsWeb} />
                   </div>
                 }
                 {spotifyLink.idLink == link.idLink&&
-                  <div className='w-1/3 mt-1 border-8 border-firstColor rounded-md'>
+                  <div className='w-1/3 sm:w-width_77 mt-1 border-8 border-firstColor rounded-md'>
                     <SpotifyPlayer
                       uri={spotifyLink.linkUrl}
                       size={size}
