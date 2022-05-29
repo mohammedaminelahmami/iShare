@@ -7,7 +7,7 @@ import GetStarted from './views/User/GetStarted';
 import Contact from './views/User/Contact';
 import Pricing from './views/User/Pricing';
 import Themes from './views/User/Themes';
-import View from './views/User/View';
+import View2 from './views/User/View2';
 import Links from './views/User/Links';
 import LoginAdmin from './views/Admin/LoginAdmin';
 import Appearance from './views/User/Appearance';
@@ -81,7 +81,7 @@ function App() {
             </Route>
 
             <Route path={'/'+username}>
-              <View />
+              <View2 />
             </Route>
 
             <Route path='/links'>

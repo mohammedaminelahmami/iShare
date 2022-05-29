@@ -101,7 +101,7 @@ function View() {
   
   return (
     <div className='parentView'>
-      <div className='flex flex-col items-center w-full bg-blue-50'>
+      <div className='flex flex-col items-center w-full bg-blue-50' style={{height:"100vh"}}>
         {/* Avatar */}
         <HandleImg img={img&& img} />
         {/* @username */}
