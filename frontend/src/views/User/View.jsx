@@ -7,13 +7,24 @@ import logoiShare3 from '../../imgs/logoiShare3.png'
 import axios from 'axios'
 import YouTube from 'react-youtube';
 import HandleImg from '../../components/HandleImg'
+import SpotifyPlayer from 'react-spotify-player';
 var getYouTubeID = require('get-youtube-id');
 
 function View() {
+ 
+// size may also be a plain string using the presets 'large' or 'compact'
+const size = {
+  width: '100%',
+  height: 300,
+};
+const view = 'list'; // or 'coverart'
+const theme = 'black'; // or 'white'
+
 
   const [links, setLinks] = useState([])
-  const [desc, setDesc] = useState('')
   const [YTlink, setYTlink] = useState([])
+  const [spotifyLink, setSpotifyLink] = useState('')
+  const [desc, setDesc] = useState('')
   const [urlYoutube, setUrlYoutube] = useState('')
   const [mobile, setMobile] = useState(false)
   const [img, setImg] = useState('')
@@ -103,10 +114,8 @@ function View() {
       <div className='flex flex-col items-center w-full bg-blue-50'>
         {/* Avatar */}
         <HandleImg img={img&& img} />
-
         {/* @username */}
         <center className='underline font-bold md:text-xs text-black'>@{username}</center>
-
         {/* Description */}
         <p className='m-8 text-black text-xl font-semibold md:text-md sm:text-xs md:m-3'>{desc}</p>
 
@@ -117,39 +126,65 @@ function View() {
             return(
               <>
                 <button
-                  onClick={link.type === 'Normal Link' ? ()=>{window.open('http://'+link.linkUrl, '_blank')} : ()=>{
-                    let formDataYTLinks = new FormData();
+                  onClick={link.type === 'Normal Link' ? ()=>{window.open('http://'+link.linkUrl, '_blank')} : 
+                    (link.type === 'Youtube Link' ?
+                      ()=>
+                      {
+                        let formDataYTLinks = new FormData();
 
-                    formDataYTLinks.append('idLink', link.idLink)
-                    formDataYTLinks.append('username', username)
-                  
-                    axios.post('http://localhost/ishare/backend/link/getYoutubeLinks', formDataYTLinks)
-                    .then(response =>{
-                      // console.log(response.data);
-                      let data = response.data
-                      setYTlink(data)
-                      let a = data.linkUrl.slice(24)
-                      setUrlYoutube(a)
-                    })
-                    .catch(error=>{
-                      console.log(error);
-                    })
-                  } }
+                        formDataYTLinks.append('idLink', link.idLink)
+                        formDataYTLinks.append('username', username)
+                      
+                        axios.post('http://localhost/ishare/backend/link/getYoutubeLinks', formDataYTLinks)
+                        .then(response =>{
+                          // console.log(response.data);
+                          let data = response.data
+                          setYTlink(data)
+                          let a = data.linkUrl.slice(24)
+                          setUrlYoutube(a)
+                        })
+                        .catch(error=>{
+                          console.log(error);
+                        })
+                      }
+                      :
+                      ()=>{
+                        let formDataSpotify = new FormData();
+                        formDataSpotify.append('idLink', link.idLink)
+                        formDataSpotify.append('username', username)
+                    
+                        axios.post('http://localhost/ishare/backend/link/getSpotifyLinks', formDataSpotify)
+                        .then(response=>{
+                          setSpotifyLink(response.data)
+                        })
+                        .catch(error=>{
+                          console.log(error);
+                        })
+                      }
+                    )
+                  }
                   className='bg-firstColor text-white text-medium font-semibold mt-7 px-5 py-3 w-1/3 md:text-xs md:w-52 md:mt-2 rounded-md hoverButtonTheme1'>{link.title}
                   
                 </button>
-                {YTlink.idLink === link.idLink&&
-                  <>
-                    <div className='mt-1 border-8 border-firstColor rounded-md'>
-                      <YouTube videoId={urlYoutube} opts={mobile ? optsMobile : optsWeb} />
-                    </div>
-                  </>
+                {YTlink.idLink == link.idLink&&
+                  <div className='mt-1 border-8 border-firstColor rounded-md'>
+                    <YouTube videoId={urlYoutube} opts={mobile ? optsMobile : optsWeb} />
+                  </div>
+                }
+                {spotifyLink.idLink == link.idLink&&
+                  <div className='w-1/3 mt-1 border-8 border-firstColor rounded-md'>
+                    <SpotifyPlayer
+                      uri={spotifyLink.linkUrl}
+                      size={size}
+                      view={view}
+                      theme={theme}
+                    />
+                  </div>
                 }
               </>
             )
           })
         }
-
         {/* social media icons */}
         <div className='flex m-10 gap-2 md:mb-4 md:mt-8'>
           <button className='w-7 h-full md:w-6'><img src={github} /></button>
@@ -161,6 +196,23 @@ function View() {
         {/* Logo iShare */}
         <img src={logoiShare3} className='p-1 md:w-24 md:p-5' />
       </div>
+
+
+        {/* {true ?    
+          <div> Hi </div>
+          :
+          (
+            1-1===1 ?
+            <div> Hello </div>
+          :
+
+            (3+3===6&&
+
+              <div> World </div>
+            )
+          )
+        } */}
+        
     </div>
   )
 }

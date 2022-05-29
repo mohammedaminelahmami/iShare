@@ -185,6 +185,12 @@
             echo json_encode($data);
         }
 
+        public function unban()
+        {
+            $username = $_POST['username'];
+            return $this->userModel->unbanUser($username);
+        }
+
         public function totalUsers()
         {
             $data = $this->userModel->selectTotalUsers();

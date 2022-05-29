@@ -56,4 +56,14 @@
                             ");
             return $this->db->single();
         }
+
+        public function selectSpotifyLinks($idLink, $username)
+        {
+            $this->db->query("SELECT * FROM link
+                              WHERE type = 'Spotify Link'
+                              AND idLink = '$idLink'
+                              AND username = '$username'
+                            ");
+            return $this->db->single();
+        }
     }

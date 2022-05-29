@@ -5,17 +5,18 @@ import NavAdmin from '../../components/NavAdmin'
 function UsersAction() {
   
   const [Bans, setBans] = useState([])
+  const [testReload, setTestReload] = useState(false)
 
   useEffect(()=>{
     axios.get('http://localhost/ishare/backend/user/getBanns')
     .then(response=>{
-      console.log(response.data);
+      // console.log(response.data);
       setBans(response.data)
     })
     .catch(error=>{
       console.log(error);
     })
-  }, [])
+  }, [testReload])
 
   return (
     <div className='font-["poppins"]'>
@@ -60,7 +61,13 @@ function UsersAction() {
                         {ban.created_at}
                       </td>
                       <td className="px-6 py-4 text-right">
-                        <a href="#" className="font-medium text-red-600 hover:underline">Ban</a>
+                        <button onClick={()=>{
+                            setTestReload(true)
+                            let formData = new FormData();
+                            formData.append('username', ban.username);
+                            axios.post('http://localhost/ishare/backend/user/unban', formData)
+                          }
+                        } className="font-medium text-red-600 hover:underline">Unban</button>
                       </td>
                     </tr>
                   )
