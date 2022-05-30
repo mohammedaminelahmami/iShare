@@ -101,6 +101,26 @@ body{
     transform: scale(1.04);
 }
 
+.hoverButtonTheme2{
+    transition: 430ms;
+}
+
+.hoverButtonTheme2:hover{
+    background-color: rgb(30, 62, 30);
+    outline: white solid 1px;
+    transform: scale(1.04);
+}
+
+.hoverButtonTheme3{
+    transition: 430ms;
+}
+
+.hoverButtonTheme3:hover{
+    background-color: rgb(8, 8, 103);
+    outline: white solid 1px;
+    transform: scale(1.04);
+}
+
 .myIframe{
     position: relative;
     width: 18rem;

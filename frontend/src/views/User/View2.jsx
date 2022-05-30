@@ -4,8 +4,9 @@ import facebook from '../../imgs/facebook1.png'
 import twitter from '../../imgs/twitter1.png'
 import linkdin from '../../imgs/linkdin.png'
 import spt from '../../imgs/spt.png'
-import ytt from '../../imgs/ytt.png'
-import logoiShare3 from '../../imgs/logoiShare3.png'
+import ytt2 from '../../imgs/ytt2.png'
+import music1 from '../../imgs/music1.png'
+import music2 from '../../imgs/music2.png'
 import axios from 'axios'
 import YouTube from 'react-youtube';
 import HandleImg from '../../components/HandleImg'
@@ -21,7 +22,7 @@ function View() {
   const [urlYoutube, setUrlYoutube] = useState('')
   const [img, setImg] = useState('')
   const [reload, setReload] = useState(false)
-  const [clicktest, setClickTest] = useState(false)
+  const [click_100, setClick_100] = useState(false)
 
   const [username, setUsername] = useState('');
 
@@ -101,8 +102,12 @@ function View() {
   }, [reload])
   
   return (
-    <div className='parentView bg-green-200' style={clicktest ? {height:"100%"} : {height:"100vh"}}>
+    <div className='parentView bg-green-100' style={click_100 ? {height:"100%"} : {height:"100vh"}}>
       <div className='flex flex-col items-center w-full'>
+
+        <div className='absolute left-40 top-10 sm:left-10 sm:top-10'><img src={music1} width="40" /></div>
+        <div className='absolute right-20 top-10 sm:right-10 sm:top-10'><img src={music2} width="40" /></div>
+
         {/* Avatar */}
         <HandleImg img={img&& img} />
         {/* @username */}
@@ -121,7 +126,7 @@ function View() {
                     (link.type === 'Youtube Link' ?
                       ()=>
                       {
-                        setClickTest(true)
+                        setClick_100(true)
                         let formDataYTLinks = new FormData();
 
                         formDataYTLinks.append('idLink', link.idLink)
@@ -141,7 +146,7 @@ function View() {
                       }
                       :
                       ()=>{
-                        setClickTest(true)
+                        setClick_100(true)
                         let formDataSpotify = new FormData();
                         formDataSpotify.append('idLink', link.idLink)
                         formDataSpotify.append('username', username)
@@ -156,7 +161,7 @@ function View() {
                       }
                     )
                   }
-                  className='bg-green-600 text-white text-medium font-semibold mt-7 px-5 py-3 w-1/3 md:text-xs md:w-52 md:mt-2 hoverButtonTheme1'>
+                  className='bg-green-600 text-white text-medium font-semibold mt-7 px-5 py-3 w-1/3 md:text-xs md:w-52 md:mt-2 hoverButtonTheme2'>
                     {link.type === 'Spotify Link' ?
                       <div className='flex'>
                         <div className=''><img src={spt} width="20" className='inline' /></div>
@@ -165,7 +170,7 @@ function View() {
                       :
                       (link.type === 'Youtube Link' ?
                         <div className='flex'>
-                          <div className=''><img src={ytt} width="20" className='inline' /></div>
+                          <div className=''><img src={ytt2} width="20" className='inline' /></div>
                           <div className='mx-auto'>{link.title}</div>
                         </div>
                           :
@@ -174,12 +179,12 @@ function View() {
                     }
                 </button>
                 {YTlink.idLink == link.idLink&&
-                  <div className='w-1/3 sm:w-width_77 mt-1 border-8 border-firstColor rounded-md'>
+                  <div className='w-1/3 sm:w-width_77 mt-1 border-8 border-green-600 rounded-md'>
                     <YouTube videoId={urlYoutube} opts={optsWeb} />
                   </div>
                 }
                 {spotifyLink.idLink == link.idLink&&
-                  <div className='w-1/3 sm:w-width_77 mt-1 border-8 border-firstColor rounded-md'>
+                  <div className='w-1/3 sm:w-width_77 mt-1 border-8 border-green-600 rounded-md'>
                     <SpotifyPlayer
                       uri={spotifyLink.linkUrl}
                       size={size}
