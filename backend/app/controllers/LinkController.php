@@ -68,5 +68,16 @@
 
             $youtubeLink = $this->linkModel->selectYoutubeLinks($idLink, $username);
             echo json_encode($youtubeLink);
+            return;
+        }
+
+        public function getSpotifyLinks()
+        {
+            $username = $_POST['username'];
+            $idLink = $_POST['idLink'];
+            
+            $spotifyLink = $this->linkModel->selectSpotifyLinks($idLink, $username);
+            echo json_encode($spotifyLink);
+            return;
         }
     }

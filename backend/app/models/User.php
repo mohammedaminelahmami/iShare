@@ -140,6 +140,14 @@
             return $this->db->resultSet();
         }
 
+        public function unbanUser($username)
+        {
+            $this->db->query("UPDATE user SET status = 0
+                              WHERE username = '$username'
+                            ");
+            return $this->db->execute();
+        }
+
         public function selectImgUser($username)
         {
             $this->db->query("SELECT imgProfile FROM user
@@ -155,6 +163,4 @@
                             ");
             return $this->db->execute();
         }
-
-
     }

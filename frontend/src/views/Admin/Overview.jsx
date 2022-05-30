@@ -6,7 +6,7 @@ import NavAdmin from '../../components/NavAdmin'
 function Overview() {
 
   const [users, setUsers] = useState([]);
-  const [profit, setProfit] = useState(0)
+  const [revenue, setRevenue] = useState(0)
 
   useEffect(()=>{
     axios.get('http://localhost/ishare/backend/user/totalUsers')
@@ -23,7 +23,7 @@ function Overview() {
     axios.get('http://localhost/ishare/backend/user/totalProfit')
     .then(response=>{
       // console.log(response.data)
-      setProfit(response.data.totalProfit)
+      setRevenue(response.data.totalProfit)
     })
     .catch(error=>{
       console.log(error)
@@ -38,7 +38,7 @@ function Overview() {
         <div className='flex justify-center ml-40' style={{marginTop:"6.5rem"}}>
           <CardAnalytic img='users' title='Total Users' data={users} />
           <CardAnalytic img='views' title='Total Views' data={'2450'}/>
-          <CardAnalytic img='money' title='Total Profit' data={'$'+profit} />
+          <CardAnalytic img='money' title='Total Revenue' data={'$'+revenue} />
         </div>
     </div>
   )

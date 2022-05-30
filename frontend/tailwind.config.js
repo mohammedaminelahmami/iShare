@@ -14,7 +14,6 @@ module.exports = {
           to: { transform: 'scale(1)' },
         }
       },
-      
       colors: {
         firstColor : '#5463FF',
         secondColor : '#261D8E',
@@ -48,7 +47,9 @@ module.exports = {
         sm: { max: "500px" },
         // => @media (max-width: 639px) { ... }
       },
-
+      width:{
+        width_77 : "77%"
+      }
     },
   },
   plugins: [],

@@ -4,6 +4,7 @@ import blue from '../imgs/blue.png'
 import lock from '../imgs/lock.png'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
+import ReactGa from 'react-ga';
 
 function UserAnalyticsBar() {
 
@@ -27,6 +28,11 @@ function UserAnalyticsBar() {
 
   useEffect(()=>{
     getUser();
+  }, [])
+
+  useEffect(()=>{
+    ReactGa.initialize('G-B88DQZQ7CK');
+    ReactGa.pageview('/');
   }, [])
 
   return (
