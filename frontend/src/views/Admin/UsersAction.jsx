@@ -56,7 +56,7 @@ function UsersAction() {
                         {user.email}
                       </td>
                       <td className="px-6 py-4">
-                        {user.plan}
+                        {user.plan == '0' ? <div className='text-gray-600 font-medium'>FREE</div> : <div className='text-green-600 font-medium'>PREMIUM</div>}
                       </td>
                       <td className="px-6 py-4">
                         {user.created_at}

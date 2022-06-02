@@ -135,9 +135,7 @@ body{
     display: block;
     position: absolute;
     width: 100%;
-    height: 50%;
     background-color: rgb(241 245 249);
-    
 }
 
 .hoverTransition{
@@ -204,6 +202,11 @@ body{
 
 .switch input[type="checkbox"]:checked:active + .slider::after {
     transform: translateX(calc(var(--button-width) - var(--toggle-wider) - var(--button-toggle-offset)));
+}
+
+/* Background Theme 3 */
+.myBgTheme3{
+    background-image: linear-gradient(to bottom right, white, #a5abff);
 }
 
 @media(max-width: 900px)
@@ -279,8 +282,3 @@ body{
         width: 100%;
     }
 }
-
-/* .test{
-    width: 90%;
-    margin-right: auto;
-} */
