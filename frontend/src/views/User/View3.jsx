@@ -4,10 +4,9 @@ import facebook from '../../imgs/facebook1.png'
 import twitter from '../../imgs/twitter1.png'
 import linkdin from '../../imgs/linkdin.png'
 import spt from '../../imgs/spt.png'
-import ytt2 from '../../imgs/ytt2.png'
+import ytt from '../../imgs/ytt.png'
 import music4 from '../../imgs/music4.png'
 import music5 from '../../imgs/music5.png'
-import music6 from '../../imgs/music6.png'
 import axios from 'axios'
 import YouTube from 'react-youtube';
 import HandleImg from '../../components/HandleImg'
@@ -103,13 +102,13 @@ function View() {
   }, [reload])
   
   return (
-    <div className='parentView bg-blue-100' style={click_100 ? {height:"100%"} : {height:"100vh"}}>
+    <div className='parentView myBgTheme3' style={click_100 ? {height:"100%"} : {height:"100vh"}}>
       <div className='flex flex-col items-center w-full'>
 
-        <div className='absolute left-40 top-10 sm:left-10 sm:top-10'><img src={music4} width="40" /></div>
-        <div className='absolute right-20 top-10 sm:right-10 sm:top-10'><img src={music5} width="40" /></div>
-        <div className='absolute right-30 top-60 sm:right-10 sm:top-96'><img src={music6} width="40" /></div>
-        <div className='absolute left-30 top-60 sm:left-10 sm:top-96'><img src={music6} width="40" /></div>
+        <div className='absolute left-40 top-10 sm:left-10 sm:top-10'><img src={music4} width="20" /></div>
+        <div className='absolute right-20 top-10 sm:right-10 sm:top-10'><img src={music5} width="20" /></div>
+        {/* <div className='absolute right-30 top-60 sm:right-10 sm:top-96'><img src={music6} width="40" /></div> */}
+        {/* <div className='absolute left-30 top-60 sm:left-10 sm:top-96'><img src={music6} width="40" /></div> */}
 
         {/* Avatar */}
         <HandleImg img={img&& img} />
@@ -164,7 +163,7 @@ function View() {
                       }
                     )
                   }
-                  className='bg-blue-700 text-white text-medium font-semibold rounded-full mt-7 px-5 py-3 w-1/3 md:text-xs md:w-52 md:mt-2 hoverButtonTheme3'>
+                  className='bg-firstColor text-white text-medium font-semibold rounded-md mt-6 px-5 py-3 w-1/3 md:text-xs md:w-52 md:mt-2 hoverButtonTheme3'>
                     {link.type === 'Spotify Link' ?
                       <div className='flex'>
                         <div className=''><img src={spt} width="20" className='inline' /></div>
@@ -173,7 +172,7 @@ function View() {
                       :
                       (link.type === 'Youtube Link' ?
                         <div className='flex'>
-                          <div className=''><img src={ytt2} width="20" className='inline' /></div>
+                          <div className=''><img src={ytt} width="20" className='inline' /></div>
                           <div className='mx-auto'>{link.title}</div>
                         </div>
                           :
@@ -182,12 +181,12 @@ function View() {
                     }
                 </button>
                 {YTlink.idLink == link.idLink&&
-                  <div className='w-1/3 sm:w-width_77 mt-1 border-8 border-blue-700 rounded-md'>
+                  <div className='w-1/3 sm:w-width_77 mt-1 border-8 border-firstColor rounded-md'>
                     <YouTube videoId={urlYoutube} opts={optsWeb} />
                   </div>
                 }
                 {spotifyLink.idLink == link.idLink&&
-                  <div className='w-1/3 sm:w-width_77 mt-1 border-8 border-blue-700 rounded-md'>
+                  <div className='w-1/3 sm:w-width_77 mt-1 border-8 border-firstColor rounded-md'>
                     <SpotifyPlayer
                       uri={spotifyLink.linkUrl}
                       size={size}

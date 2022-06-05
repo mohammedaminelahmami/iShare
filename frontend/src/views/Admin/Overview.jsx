@@ -3,9 +3,9 @@ import React, { useState, useEffect } from 'react'
 import CardAnalytic from '../../components/CardAnalytic'
 import NavAdmin from '../../components/NavAdmin'
 
-function Overview() {
+const Overview = ()=> {
 
-  const [users, setUsers] = useState([]);
+  const [users, setUsers] = useState([])
   const [revenue, setRevenue] = useState(0)
 
   useEffect(()=>{

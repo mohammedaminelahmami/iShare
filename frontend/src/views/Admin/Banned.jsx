@@ -55,7 +55,7 @@ function UsersAction() {
                         {ban.email}
                       </td>
                       <td className="px-6 py-4">
-                        {ban.plan}
+                        {ban.plan == '0' ? <div className='text-gray-600 font-medium'>FREE</div> : <div className='text-green-600 font-medium'>PREMIUM</div>}
                       </td>
                       <td className="px-6 py-4">
                         {ban.created_at}

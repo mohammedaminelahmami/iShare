@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js"
 import axios from 'axios'
 
@@ -28,6 +28,27 @@ const updatePlanApi = async ()=>{
     await axios.post('http://localhost/ishare/backend/user/changePlan', formData)
 }
 
+const insertPayment = ()=>{
+    let formDataPayment = new FormData();
+    formDataPayment.append('username', localStorage.getItem('username'));
+
+    axios.post('http://localhost/ishare/backend/payment/payment', formDataPayment)
+    .then(response =>{
+        // console.log(response.data);
+    })
+    .catch(error =>{
+        console.log(error);
+    })
+}
+
+const payment_Ex = async ()=>{
+    let formDataPayment_Ex = new FormData();
+    formDataPayment_Ex.append('username', localStorage.getItem('username'));
+    await axios.post('http://localhost/ishare/backend/payment/payment_Ex', formDataPayment_Ex);
+}
+
+payment_Ex();
+
 function PaymentForm() {
 
     const [success, setSuccess] = useState(false)
@@ -56,7 +77,7 @@ function PaymentForm() {
                     setSuccess(true)
                     // changer plan 0 --> 1 user --> pro
                     updatePlanApi();
-                    // { expire date } if user is pro --> 0
+                    insertPayment();
                 }
             } catch (error) {
                 console.log("ERROR" . error);

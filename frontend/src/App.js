@@ -7,7 +7,7 @@ import GetStarted from './views/User/GetStarted';
 import Contact from './views/User/Contact';
 import Pricing from './views/User/Pricing';
 import Themes from './views/User/Themes';
-import View from './views/User/View';
+import View3 from './views/User/View3';
 import Links from './views/User/Links';
 import LoginAdmin from './views/Admin/LoginAdmin';
 import Appearance from './views/User/Appearance';
@@ -18,32 +18,37 @@ import UsersAction from './views/Admin/UsersAction';
 import AnalyticsAdmin from './views/Admin/AnalyticsAdmin';
 import Banned from './views/Admin/Banned';
 import axios from 'axios';
+import AOS from 'aos';
+import 'aos/dist/aos.css'; // You can also use <link> for styles
+// ..
+AOS.init();
 
-function App() {
+const App = () => {
 
   const [loggedIn, setLoggedIn] = useState(false);
   const [username, setUsername] = useState('');
   
   const usernameUrl = window.location.href.slice(22)
-
-  useEffect(()=>{
-    if(localStorage.getItem('token'))
-    {
-      setLoggedIn(true);
-    }
-  }, [])
   
   const res = async ()=>{
     let formData = new FormData();
     formData.append('username', usernameUrl);
     
     let response = await axios.post('http://localhost/ishare/backend/user/getUser', formData)
-      let dataUsername = response.data.username
-      setUsername(dataUsername)
+    let data = response.data
+    setUsername(data.username)
+  }
+
+  const statusUser = ()=>{
+    if(localStorage.getItem('token'))
+    {
+      setLoggedIn(true);
+    }
   }
 
   useEffect(()=>{
     res();
+    statusUser();
   }, [])
   
   return (
@@ -81,7 +86,7 @@ function App() {
             </Route>
 
             <Route path={'/'+username}>
-              <View />
+              <View3 />
             </Route>
 
             <Route path='/links'>
@@ -121,7 +126,6 @@ function App() {
             <Route path='/ban'>
               <Banned />
             </Route>
-
           {/* </UserContext.Provider> */}
 
           <Route path='*'>

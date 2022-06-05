@@ -8,6 +8,7 @@ import edit from '../../imgs/edit.png'
 import deletee from '../../imgs/deletee.png'
 import Mobile from '../../components/Mobile'
 import ShowModalEdit from '../../components/ShowModalEdit'
+import Footer from '../../components/Footer'
 import Img from '../../components/Img'
 import axios from 'axios'
 
@@ -170,6 +171,10 @@ function Links() {
       </div>
 
         <ShowModalEdit showModalEdit={showModalEdit} close={()=>{setShowModalEdit(false)}} idLink={myIdLink} title={mytitle} linkUrl={myUrl} />
+
+        <div className='mt-36'>
+          <Footer />
+        </div>
     </div>
   )
 }

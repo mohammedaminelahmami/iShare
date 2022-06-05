@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import Nav from '../components/Nav'
 import Footer from '../components/Footer'
 import ins from '../imgs/ins.webp'
-import { UserContext } from './UserContext'
+// import { UserContext } from './UserContext'
 
 function Home() {
 
@@ -31,7 +31,9 @@ function Home() {
 
         {/* Section 1 */}
         <div className='flex flex-wrap justify-evenly mt-36'>
+        {/* <div data-aos="zoom-in-right"> */}
           <img src={ins} className='ins' />
+        {/* </div> */}
 
           <div className='flex flex-col justify-around'>
             <div className='flex flex-col items-center self-center'>
@@ -56,7 +58,9 @@ function Home() {
 
         {/* Section 2 */}
         <div className='flex flex-wrap justify-evenly flex-row-reverse mt-56 mx-2 md_lg:mt-10'>
+        {/* <div data-aos="zoom-in-left"> */}
           <img src={ins} className='ins insRes md_lg:mt-10'/>
+        {/* </div> */}
 
           <div className='flex flex-col justify-around'>
             <div className='flex flex-col items-center self-center'>

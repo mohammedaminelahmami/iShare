@@ -202,7 +202,4 @@
             $data = $this->userModel->selectTotalProfit();
             echo json_encode($data);
         }
-
-
-
     }
