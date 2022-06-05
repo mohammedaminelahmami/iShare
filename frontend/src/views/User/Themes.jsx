@@ -41,8 +41,7 @@ function Themes() {
             <center><p className='mt-12 text-firstColor text-3xl font-bold md:text-xl'>Free Link In Bio Templates To Help You Share Content Online</p></center>
 
             {/* Themes */}
-            <div className='flex flex-wrap m-20 gap-10'>
-
+            <div className='flex flex-wrap m-20 gap-10 sm:ml-24'>
                 {userPro ?
                   <button className='myTansition rounded-xl sm:mr-8'>
                     <img src={use1} />
@@ -72,7 +71,6 @@ function Themes() {
                 </button>
             </div>
         </div>
-
         <Footer />
     </div>
   )

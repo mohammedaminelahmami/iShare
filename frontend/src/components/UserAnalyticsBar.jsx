@@ -6,7 +6,7 @@ import axios from 'axios'
 import { Link } from 'react-router-dom'
 import ReactGa from 'react-ga';
 
-function UserAnalyticsBar() {
+const UserAnalyticsBar = ()=>{
 
   const [userPro, setUserPro] = useState(false);
 
@@ -37,10 +37,10 @@ function UserAnalyticsBar() {
 
   return (
     <div className='parentUserAnalyticsBar'>
-        <div className='flex text-white bg-secondColor w-full p-5 gap-10'>
+        <div className='flex text-white bg-secondColor w-full p-5 gap-10 sm:gap-5'>
             <div className='ml-12 text-md font-sm d_none'>Lifetime Analytics</div>
 
-            <div className='flex gap-2 view_click'>
+            <div className='flex gap-2 view_click gap'>
                 <div className='self-center'><img src={green} className='' /></div>
                 <div className='text-md font-sm' >views : </div>
                 {userPro ?
