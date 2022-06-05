@@ -282,3 +282,11 @@ body{
         width: 100%;
     }
 }
+
+@media(max-width: 390px)
+{
+    .responLogo{
+        margin-bottom: 2rem;
+        width: 2rem;
+    }
+}
