@@ -18,37 +18,37 @@ function NavAdmin() {
 
     return (
         <div className='flex font-["poppins"]'>
-            <div className='bg-secondColor w-72 fixed' style={{height:"45rem"}}>
-                <div className='flex flex-col mt-4 gap-2' style={{marginLeft:"5.5rem"}}>
+            <div className='bg-secondColor w-72 h-full fixed nav_respon'>
+                <div className='flex flex-col mt-4 gap-2 img_admin_respon' style={{marginLeft:"5.5rem"}}>
                     <img src={admin} width='100' />
                     <div className='ml-3 text-white font-bold'>@Admin</div>
                 </div>
                 {/* Side */}
                 <nav className='mt-16'>
-                    <div className='flex flex-col gap-4 text-white ml-16'>
-                        <Link to='/dashboard' className={pageUrl == 'dashboard' ? 'flex gap-4 p-4 bg-ffirstColor rounded-md hoverTransition' : 'flex gap-4 p-4 hover:bg-ffirstColor hover:rounded-md hoverTransition'}>
+                    <div className='flex flex-col gap-4 text-white ml-16 respon_elem'>
+                        <Link to='/dashboard' className={pageUrl == 'dashboard' ? 'flex gap-4 p-4 bg-ffirstColor rounded-md hoverTransition bgcolor_respon' : 'flex gap-4 p-4 hover:bg-ffirstColor hover:rounded-md hoverTransition'}>
                             <div><img src={overview} width='22' /></div>
-                            <div className='font-semibold'>Overview</div>
+                            <div className='font-semibold none_respon'>Overview</div>
                         </Link>
 
-                        <Link to='/users' className={pageUrl == 'users' ? 'flex gap-4 p-4 bg-ffirstColor rounded-md hoverTransition' : 'flex gap-4 p-4 hover:bg-ffirstColor hover:rounded-md hoverTransition'}>
+                        <Link to='/users' className={pageUrl == 'users' ? 'flex gap-4 p-4 bg-ffirstColor rounded-md hoverTransition bgcolor_respon' : 'flex gap-4 p-4 hover:bg-ffirstColor hover:rounded-md hoverTransition'}>
                             <div><img src={users} width='22' /></div>
-                            <div className='font-semibold'>Users</div>
+                            <div className='font-semibold none_respon'>Users</div>
                         </Link>
 
-                        <Link to='/analytics' className={pageUrl == 'analytics' ? 'flex gap-4 p-4 bg-ffirstColor rounded-md hoverTransition' : 'flex gap-4 p-4 hover:bg-ffirstColor hover:rounded-md hoverTransition'}>
+                        <Link to='/analytics' className={pageUrl == 'analytics' ? 'flex gap-4 p-4 bg-ffirstColor rounded-md hoverTransition bgcolor_respon' : 'flex gap-4 p-4 hover:bg-ffirstColor hover:rounded-md hoverTransition'}>
                             <div><img src={analytics} width='22' /></div>
-                            <div className='font-semibold'>Analytics</div>
+                            <div className='font-semibold none_respon'>Analytics</div>
                         </Link>
 
-                        <Link to='/ban' className={pageUrl == 'ban' ? 'flex gap-4 p-4 bg-ffirstColor rounded-md hoverTransition' : 'flex gap-4 p-4 hover:bg-ffirstColor hover:rounded-md hoverTransition'}>
+                        <Link to='/ban' className={pageUrl == 'ban' ? 'flex gap-4 p-4 bg-ffirstColor rounded-md hoverTransition bgcolor_respon' : 'flex gap-4 p-4 hover:bg-ffirstColor hover:rounded-md hoverTransition'}>
                             <div><img src={ban} width='22' /></div>
-                            <div className='font-semibold'>Banned</div>
+                            <div className='font-semibold none_respon'>Banned</div>
                         </Link>
 
-                        <button onClick={logout} type='submit' className='flex gap-4 p-4 mt-36 hover:bg-ffirstColor hover:rounded-md hoverTransition'>
+                        <button onClick={logout} type='submit' className='flex gap-4 p-4 mt-36 hover:bg-ffirstColor hover:rounded-md hoverTransition bgcolor_respon'>
                             <div><img src={loggout} width='22' /></div>
-                            <div className='font-semibold'>Logout</div>
+                            <div className='font-semibold none_respon'>Logout</div>
                         </button>
                     </div>
                 </nav>
