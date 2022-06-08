@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import admin from '../imgs/admin.png'
 import overview from '../imgs/overview.png'
-import analytics from '../imgs/analytics.png'
 import ban from '../imgs/ban.png'
 import loggout from '../imgs/logout.png'
 import { Link } from 'react-router-dom'
@@ -36,17 +35,17 @@ function NavAdmin() {
                             <div className='font-semibold none_respon'>Users</div>
                         </Link>
 
-                        <Link to='/analytics' className={pageUrl == 'analytics' ? 'flex gap-4 p-4 bg-ffirstColor rounded-md hoverTransition bgcolor_respon' : 'flex gap-4 p-4 hover:bg-ffirstColor hover:rounded-md hoverTransition'}>
+                        {/* <Link to='/analytics' className={pageUrl == 'analytics' ? 'flex gap-4 p-4 bg-ffirstColor rounded-md hoverTransition bgcolor_respon' : 'flex gap-4 p-4 hover:bg-ffirstColor hover:rounded-md hoverTransition'}>
                             <div><img src={analytics} width='22' /></div>
                             <div className='font-semibold none_respon'>Analytics</div>
-                        </Link>
+                        </Link> */}
 
                         <Link to='/ban' className={pageUrl == 'ban' ? 'flex gap-4 p-4 bg-ffirstColor rounded-md hoverTransition bgcolor_respon' : 'flex gap-4 p-4 hover:bg-ffirstColor hover:rounded-md hoverTransition'}>
                             <div><img src={ban} width='22' /></div>
                             <div className='font-semibold none_respon'>Banned</div>
                         </Link>
 
-                        <button onClick={logout} type='submit' className='flex gap-4 p-4 mt-36 hover:bg-ffirstColor hover:rounded-md hoverTransition bgcolor_respon'>
+                        <button onClick={logout} type='submit' className='flex gap-4 p-4 mt-36 sm:mt-0 hover:bg-ffirstColor hover:rounded-md hoverTransition bgcolor_respon'>
                             <div><img src={loggout} width='22' /></div>
                             <div className='font-semibold none_respon'>Logout</div>
                         </button>

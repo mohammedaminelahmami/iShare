@@ -22,9 +22,9 @@ function UsersAction() {
   return (
     <div className='font-["poppins"]'>
         <NavAdmin />
-        <h1 className='ml-52 mt-10 p-4 text-secondColor text-3xl font-bold'>USERS</h1>
+        <center><h1 className='ml-64 p-4 mt-10 text-secondColor text-3xl font-bold mll sm:mt-14'>USERS</h1></center>
 
-        <div className="relative overflow-x-auto shadow-md sm:rounded-lg" style={{top:"6.5rem", left:"24.5rem", width:"65rem"}}>
+        <div className="shadow-md mt-24 sm:rounded-lg responTable" style={{width:"65%", marginLeft:"26%"}}>
           <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
             <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
               <tr>

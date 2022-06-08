@@ -216,6 +216,13 @@ body{
     }
 } */
 
+@media(max-width: 1285px)
+{
+    .responTable{
+        margin-left: 30% !important;
+    }
+}
+
 @media(max-width: 1200px)
 {
     .line{
@@ -235,6 +242,13 @@ body{
     }
 }
 
+@media(max-width: 1031px)
+{
+    .responTable{
+        margin-left: 31% !important;
+    }
+}
+
 @media(max-width: 900px)
 {
     .svgHome{
@@ -246,6 +260,10 @@ body{
     }
     .p_2{
         display: none;
+    }
+    .responTable{
+        overflow-x: scroll;
+        margin-left: 34% !important;
     }
 
     /* .insRes{
@@ -297,10 +315,11 @@ body{
         display: none;
     }
     .respon_elem{
-        position: absolute;
+        display: none;
+        /* position: absolute;
         display: flex;
         flex-direction: row;
-        top: 0;
+        top: 0; */
     }
     .bgcolor_respon{
         width: 3%;
@@ -315,6 +334,16 @@ body{
     }
     .line{
         width: 30rem;
+    }
+    .mll{
+        display: none !important;
+    }
+    .responTable{
+        margin-left: 22% !important;
+        margin-top: 10px;
+    }
+    .none_respon{
+        display: none;
     }
 }
 
@@ -341,9 +370,6 @@ body{
     .ins{
         width: 100%;
     }
-    .none_respon{
-        display: none;
-    }
     .respon_elem{
         gap: 2.4rem;
     }
@@ -353,9 +379,21 @@ body{
     .line{
         width: 20rem;
     }
+    .responTable{
+        width: 75% !important;
+        margin-left: 20% !important;
+    }
 }
 
-@media(max-width: 390px)
+@media(max-width: 488px)
+{
+    .responTable{
+        width: 100% !important;
+        margin-left: 20% !important;
+    }
+}
+
+@media(max-width: 388px)
 {
     .responLogo{
         margin-bottom: 2rem;
@@ -366,5 +404,9 @@ body{
     }
     .hoverTransition{
         width: 3rem;
+    }
+    .responTable{
+        width: 130% !important;
+        margin-left: 30% !important;
     }
 }

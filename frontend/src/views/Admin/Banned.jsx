@@ -21,7 +21,7 @@ function UsersAction() {
   return (
     <div className='font-["poppins"]'>
         <NavAdmin />
-        <h1 className='ml-52 mt-10 p-4 text-secondColor text-3xl font-bold'>BANNED USERS</h1>
+        <center><h1 className='ml-64 p-4 mt-10 text-secondColor text-3xl font-bold mll sm:mt-14'>BANNED USERS</h1></center>
 
         <div className="relative overflow-x-auto shadow-md sm:rounded-lg" style={{top:"6.5rem", left:"24.5rem", width:"65rem"}}>
           <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
