@@ -138,8 +138,8 @@ function View() {
     <div className='parentView myBgTheme3' style={click_100 ? {height:"100%"} : {height:"100vh"}}>
       <div className='flex flex-col items-center w-full'>
 
-        <div className='absolute left-40 top-10 sm:left-10 sm:top-10'><img src={music4} width="20" /></div>
-        <div className='absolute right-20 top-10 sm:right-10 sm:top-10'><img src={music5} width="20" /></div>
+        {/* <div className='absolute left-40 top-10 sm:left-10 sm:top-10'><img src={music4} width="20" /></div>
+        <div className='absolute right-20 top-10 sm:right-10 sm:top-10'><img src={music5} width="20" /></div> */}
         {/* <div className='absolute right-30 top-60 sm:right-10 sm:top-96'><img src={music6} width="40" /></div> */}
         {/* <div className='absolute left-30 top-60 sm:left-10 sm:top-96'><img src={music6} width="40" /></div> */}
 
