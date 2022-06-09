@@ -163,4 +163,12 @@
                             ");
             return $this->db->execute();
         }
+
+        public function updateView($username)
+        {
+            $this->db->query("UPDATE user SET view = view + 1
+                              WHERE username = '$username'
+                            ");
+            return $this->db->execute();
+        }
     }

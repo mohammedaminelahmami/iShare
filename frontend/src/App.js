@@ -15,7 +15,6 @@ import Profile from './views/User/Profile';
 import Error404 from './components/Error404'
 import Overview from './views/Admin/Overview';
 import UsersAction from './views/Admin/UsersAction';
-import AnalyticsAdmin from './views/Admin/AnalyticsAdmin';
 import Banned from './views/Admin/Banned';
 import axios from 'axios';
 import AOS from 'aos';
@@ -28,8 +27,8 @@ const App = () => {
   const [loggedIn, setLoggedIn] = useState(false);
   const [username, setUsername] = useState('');
   
-  const usernameUrl = window.location.href.slice(22)
-  
+  const usernameUrl = window.location.pathname.split('/')[1];
+
   const res = async ()=>{
     let formData = new FormData();
     formData.append('username', usernameUrl);
@@ -117,10 +116,6 @@ const App = () => {
 
             <Route path='/users'>
               <UsersAction />
-            </Route>
-
-            <Route path='/analytics'>
-              <AnalyticsAdmin />
             </Route>
 
             <Route path='/ban'>

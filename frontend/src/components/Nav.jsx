@@ -7,8 +7,7 @@ import Logo from './Logo'
 import profile from '../imgs/profile.png'
 import MenuDropDown from './MenuDropDown'
 
-
-function Nav() {
+const Nav = ()=> {
     const [isActive, setIsActive] = useState(false);
     const [menu_el, setMenu_el] = useState(false);
     const [loggedIn, setLoggedIn] = useState(false);
@@ -34,13 +33,13 @@ function Nav() {
         {
           setLoggedIn(true);
         }
-      }, [])
+    }, [])
 
-      const logout = ()=>{
+    const logout = ()=>{
         localStorage.removeItem('token');
         localStorage.removeItem('username');
         window.location.replace('http://localhost:3000/');
-      }
+    }
 
   return (
     <div className="parentNav font-['poppins']">

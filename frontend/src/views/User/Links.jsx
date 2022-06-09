@@ -19,6 +19,7 @@ function Links() {
   const [myIdLink, setMyIdLink] = useState('')
   const [mytitle, setMyTitle] = useState('')
   const [myUrl, setMyUrl] = useState('')
+  const [users, setUsers] = useState([])
 
   const [clickedNone, setClickedNone] = useState(true)
   const [clickedYoutube, setClickedYoutube] = useState(false)
@@ -95,7 +96,7 @@ function Links() {
       console.log(error);
     })
   }
-  
+
   return (
     <div className='bg-gray-100 font-["poppins"] backg'>
       <Nav />
@@ -170,11 +171,11 @@ function Links() {
           <Mobile HandleClick={HandleClick} />
       </div>
 
-        <ShowModalEdit showModalEdit={showModalEdit} close={()=>{setShowModalEdit(false)}} idLink={myIdLink} title={mytitle} linkUrl={myUrl} />
+      <ShowModalEdit showModalEdit={showModalEdit} close={()=>{setShowModalEdit(false)}} idLink={myIdLink} title={mytitle} linkUrl={myUrl} />
 
-        <div className='mt-36'>
-          <Footer />
-        </div>
+      <div className='mt-36'>
+        <Footer />
+      </div>
     </div>
   )
 }

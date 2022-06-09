@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import github from '../../imgs/github.png'
 import facebook from '../../imgs/facebook1.png'
 import twitter from '../../imgs/twitter1.png'
@@ -23,10 +23,11 @@ function View() {
   const [img, setImg] = useState('')
   const [reload, setReload] = useState(false)
   const [click_100, setClick_100] = useState(false)
+  const [users, setUsers] = useState([])
 
   const [username, setUsername] = useState('');
 
-  const usernameUrl = window.location.href.slice(22)
+  const usernameUrl = window.location.pathname.split('/')[1]
 
   const username_res = async ()=>{
     let formDataUser = new FormData();
@@ -77,7 +78,6 @@ function View() {
       // https://developers.google.com/youtube/player_parameters
       autoplay: 1,
     },
-    
   };
 
   // size may also be a plain string using the presets 'large' or 'compact'
@@ -101,12 +101,45 @@ function View() {
     getImg();
   }, [reload])
   
+  const resAddView = async ()=>{
+    let formDataView = new FormData();
+    formDataView.append('username', usernameUrl);
+    await axios.post('http://localhost/ishare/backend/user/viewPage', formDataView)
+  }
+
+  const getUsers = async ()=>{
+    let response = await axios.get('http://localhost/ishare/backend/user/getUsers')
+    // console.log(response.data);
+    setUsers(response.data)
+  }
+
+  useEffect(()=>{
+    getUsers();
+  }, [])
+
+  for(let i = 0; i < users.length; i++)
+  {
+    if(users[i].username === usernameUrl)
+    {
+      if(localStorage.getItem('usernameView') == usernameUrl)
+      {
+        // console.log('deja hsabto');
+      }
+      else{
+        localStorage.setItem('usernameView', usernameUrl);
+        resAddView();
+        // console.log('function view++');
+        break;
+      }
+    }
+  }
+
   return (
     <div className='parentView myBgTheme3' style={click_100 ? {height:"100%"} : {height:"100vh"}}>
       <div className='flex flex-col items-center w-full'>
 
-        <div className='absolute left-40 top-10 sm:left-10 sm:top-10'><img src={music4} width="20" /></div>
-        <div className='absolute right-20 top-10 sm:right-10 sm:top-10'><img src={music5} width="20" /></div>
+        {/* <div className='absolute left-40 top-10 sm:left-10 sm:top-10'><img src={music4} width="20" /></div>
+        <div className='absolute right-20 top-10 sm:right-10 sm:top-10'><img src={music5} width="20" /></div> */}
         {/* <div className='absolute right-30 top-60 sm:right-10 sm:top-96'><img src={music6} width="40" /></div> */}
         {/* <div className='absolute left-30 top-60 sm:left-10 sm:top-96'><img src={music6} width="40" /></div> */}
 

@@ -209,6 +209,46 @@ body{
     background-image: linear-gradient(to bottom right, white, #a5abff);
 }
 
+/* @media(max-width: 2561px)
+{
+    .parentFooter{
+        margin-top: 31rem;
+    }
+} */
+
+@media(max-width: 1285px)
+{
+    .responTable{
+        margin-left: 30% !important;
+    }
+}
+
+@media(max-width: 1200px)
+{
+    .line{
+        width: 55%;
+    }
+    .admin_respon{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1.3rem;
+    }
+    .admin_charts{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 3rem;
+    }
+}
+
+@media(max-width: 1031px)
+{
+    .responTable{
+        margin-left: 31% !important;
+    }
+}
+
 @media(max-width: 900px)
 {
     .svgHome{
@@ -220,6 +260,10 @@ body{
     }
     .p_2{
         display: none;
+    }
+    .responTable{
+        overflow-x: scroll;
+        margin-left: 34% !important;
     }
 
     /* .insRes{
@@ -246,7 +290,7 @@ body{
 
     .show{
 		width: 100%;
-        height: 36%;
+        height: 41%;
         z-index: 99999999;
         display: block;
         background-color: var(--firstColor);
@@ -255,6 +299,54 @@ body{
         position: absolute;
         transform: scale(1.04);
         transition:all 0.3s ease;
+    }
+    .line{
+        width: 80%;
+    }
+}
+
+@media(max-width: 700px)
+{
+    .nav_respon{
+        width: 100%;
+        height: 3.5rem !important;
+    }
+    .img_admin_respon{
+        display: none;
+    }
+    .respon_elem{
+        display: none;
+        /* position: absolute;
+        display: flex;
+        flex-direction: row;
+        top: 0; */
+    }
+    .bgcolor_respon{
+        width: 3%;
+        height: 3%;
+        background-color: transparent;
+    }
+    .responMa{
+        margin-right: 17.5rem;
+    }
+    .marginTop0{
+        margin-top: 0 !important;
+    }
+    .line{
+        width: 30rem;
+    }
+    .mll{
+        margin-left: 0 !important;
+    }
+    .responTable{
+        margin-left: 22% !important;
+        margin-top: 10px;
+    }
+    .none_respon{
+        display: none;
+    }
+    .mllDashboard{
+        display: none !important;
     }
 }
 
@@ -280,5 +372,50 @@ body{
     }
     .ins{
         width: 100%;
+    }
+    .respon_elem{
+        gap: 2.4rem;
+    }
+    .hoverTransition{
+        width: 5rem;
+    }
+    .line{
+        width: 20rem;
+    }
+    .mll{
+        margin-left: 30% !important;
+    }
+    .responTable{
+        width: 75% !important;
+        margin-left: 20% !important;
+    }
+}
+
+@media(max-width: 488px)
+{
+    .responTable{
+        width: 100% !important;
+        margin-left: 20% !important;
+    }
+}
+
+@media(max-width: 388px)
+{
+    .responLogo{
+        margin-bottom: 2rem;
+        width: 2rem;
+    }
+    .respon_elem{
+        gap: 1rem;
+    }
+    .hoverTransition{
+        width: 3rem;
+    }
+    .mll{
+        margin-left: 70% !important;
+    }
+    .responTable{
+        width: 130% !important;
+        margin-left: 30% !important;
     }
 }

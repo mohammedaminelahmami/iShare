@@ -6,9 +6,10 @@ import axios from 'axios'
 import { Link } from 'react-router-dom'
 import ReactGa from 'react-ga';
 
-function UserAnalyticsBar() {
+const UserAnalyticsBar = ()=>{
 
   const [userPro, setUserPro] = useState(false);
+  const [userViews, setUserViews] = useState(0);
 
   const getUser = async ()=>{
     let formData = new FormData();
@@ -16,6 +17,9 @@ function UserAnalyticsBar() {
 
     let response = await axios.post('http://localhost/ishare/backend/user/getUser', formData)
     // console.log(response.data.plan);
+    let dataView = response.data.view
+    setUserViews(dataView)
+    
     let data = response.data.plan
 
     if(data === 1)
@@ -37,14 +41,14 @@ function UserAnalyticsBar() {
 
   return (
     <div className='parentUserAnalyticsBar'>
-        <div className='flex text-white bg-secondColor w-full p-5 gap-10'>
+        <div className='flex text-white bg-secondColor w-full p-5 gap-10 sm:gap-5'>
             <div className='ml-12 text-md font-sm d_none'>Lifetime Analytics</div>
 
-            <div className='flex gap-2 view_click'>
+            <div className='flex gap-2 view_click gap'>
                 <div className='self-center'><img src={green} className='' /></div>
                 <div className='text-md font-sm' >views : </div>
                 {userPro ?
-                  <div>32</div>
+                  <div>{userViews}</div>
                   :
                   <Link to='/pricing'><img src={lock} width='25' /></Link>
                 }

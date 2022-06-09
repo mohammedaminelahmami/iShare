@@ -37,20 +37,20 @@ function Home() {
 
           <div className='flex flex-col justify-around'>
             <div className='flex flex-col items-center self-center'>
-              <div className='w-96 text-white font-normal p_1'>
-                <div className='text-white font-extrabold text-3xl'>Easy to use</div>
-                <div className='mt-5 text-sm'>
+              <div className='w-96 text-white font-normal p_1 sm:w-full'>
+                <p className='text-white font-extrabold text-3xl'>Easy to use</p>
+                <p className='mt-5 text-sm sm:w-60'>
                   Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum optio excepturi nemo sit eligendi quia dicta! Voluptas vitae veniam cum facilis fugiat.
-                </div>
+                </p>
               </div>
             </div>
 
             <div className='flex flex-col items-center self-center'>
               <div className='w-96 text-white font-normal p_2'>
-                <div className='text-white font-extrabold text-3xl'>Easy to use</div>
-                <div className='mt-5 text-sm'>
+                <p className='text-white font-extrabold text-3xl'>Easy to use</p>
+                <p className='mt-5 text-sm'>
                   Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum optio excepturi nemo sit eligendi quia dicta! Voluptas vitae veniam cum facilis fugiat.
-                </div>
+                </p>
               </div>
             </div>
           </div>
@@ -64,9 +64,9 @@ function Home() {
 
           <div className='flex flex-col justify-around'>
             <div className='flex flex-col items-center self-center'>
-              <div className='w-96 font-normal self-center md:w-80 md_lg:mt-10 ml_eas'>
+              <div className='w-96 font-normal md:mt-5 sm:w-full'>
                 <div className='text-firstColor font-extrabold text-3xl'>Easy to use</div>
-                <div className='mt-5 text-sm text-menuColor'>
+                <div className='mt-5 text-sm text-menuColor sm:w-60'>
                   Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum optio excepturi nemo sit eligendi quia dicta! Voluptas vitae veniam cum facilis fugiat.
                   <Link to='/register'><button type='submit' className='btnGetStartedForFree text-white bg-firstColor px-10 py-4 mt-8 rounded-sm'>GET STARTED FOR FREE !</button></Link>
                 </div>
