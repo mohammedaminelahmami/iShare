@@ -336,7 +336,7 @@ body{
         width: 30rem;
     }
     .mll{
-        display: none !important;
+        margin-left: 0 !important;
     }
     .responTable{
         margin-left: 22% !important;
@@ -344,6 +344,9 @@ body{
     }
     .none_respon{
         display: none;
+    }
+    .mllDashboard{
+        display: none !important;
     }
 }
 
@@ -379,6 +382,9 @@ body{
     .line{
         width: 20rem;
     }
+    .mll{
+        margin-left: 30% !important;
+    }
     .responTable{
         width: 75% !important;
         margin-left: 20% !important;
@@ -404,6 +410,9 @@ body{
     }
     .hoverTransition{
         width: 3rem;
+    }
+    .mll{
+        margin-left: 70% !important;
     }
     .responTable{
         width: 130% !important;

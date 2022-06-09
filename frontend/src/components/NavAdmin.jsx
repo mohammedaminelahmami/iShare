@@ -13,7 +13,7 @@ function NavAdmin() {
     const logout = ()=>{
         window.location.replace('http://localhost:3000/loginadmin')
         localStorage.removeItem('tokenAdmin')
-      }
+    }
 
     return (
         <div className='flex font-["poppins"]'>
@@ -51,6 +51,24 @@ function NavAdmin() {
                         </button>
                     </div>
                 </nav>
+            </div>
+            {/* Nav-Mobile */}
+            <div className='hidden md700:flex md700:justify-around md700:mx-auto md700:mt-3 md700:w-96 md700:z-10 fixed'>
+                <Link to='/dashboard'>
+                    <div><img src={overview} width='22' /></div>
+                </Link>
+
+                <Link to='/users'>
+                    <div><img src={users} width='22' /></div>
+                </Link>
+
+                <Link to='/ban'>
+                    <div><img src={ban} width='22' /></div>
+                </Link>
+
+                <button onClick={logout} type='submit'>
+                    <div><img src={loggout} width='22' /></div>
+                </button>
             </div>
         </div>
     )

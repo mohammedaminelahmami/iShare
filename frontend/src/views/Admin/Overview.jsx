@@ -77,7 +77,7 @@ const Overview = ()=> {
   return (
     <div className='font-["poppins"]'>
         <NavAdmin />
-        <center><h1 className='ml-64 p-4 mt-10 text-secondColor text-3xl font-bold mll'>ADMIN DASHBOARD</h1></center>
+        <center><h1 className='ml-64 p-4 mt-10 text-secondColor text-3xl font-bold mll mllDashboard'>ADMIN DASHBOARD</h1></center>
         <div className='ml-20 responMa sm:mx-auto md700:mt-24'>
           <div className='flex justify-center ml-40 admin_respon marginTop0' style={{marginTop:"6.5rem"}}>
             <CardAnalytic img='users' title='Total Users' data={users} />

@@ -9,6 +9,7 @@ import ReactGa from 'react-ga';
 const UserAnalyticsBar = ()=>{
 
   const [userPro, setUserPro] = useState(false);
+  const [userViews, setUserViews] = useState(0);
 
   const getUser = async ()=>{
     let formData = new FormData();
@@ -16,6 +17,9 @@ const UserAnalyticsBar = ()=>{
 
     let response = await axios.post('http://localhost/ishare/backend/user/getUser', formData)
     // console.log(response.data.plan);
+    let dataView = response.data.view
+    setUserViews(dataView)
+    
     let data = response.data.plan
 
     if(data === 1)
@@ -44,7 +48,7 @@ const UserAnalyticsBar = ()=>{
                 <div className='self-center'><img src={green} className='' /></div>
                 <div className='text-md font-sm' >views : </div>
                 {userPro ?
-                  <div>32</div>
+                  <div>{userViews}</div>
                   :
                   <Link to='/pricing'><img src={lock} width='25' /></Link>
                 }

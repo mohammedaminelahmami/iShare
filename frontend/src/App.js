@@ -27,8 +27,8 @@ const App = () => {
   const [loggedIn, setLoggedIn] = useState(false);
   const [username, setUsername] = useState('');
   
-  const usernameUrl = window.location.href.slice(22)
-  
+  const usernameUrl = window.location.pathname.split('/')[1];
+
   const res = async ()=>{
     let formData = new FormData();
     formData.append('username', usernameUrl);

@@ -28,7 +28,7 @@ function ShowModalEdit(props) {
     <div>
     {/* Modal */}
       {props.showModalEdit ? (
-          <div className="p-20 flex justify-center items-center overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none  bg-colorOpacity bg-blackfocus:outline-none">
+          <div className="p-20 flex justify-center items-center overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none bg-colorOpacity bg-blackfocus:outline-none">
             <div className="relative w-auto my-6 mx-auto max-w-3xl">
               <div className="animate-scale p-10 border-0 rounded-md shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none modal">
                 <div className="flex items-start justify-between p-6 border-b border-solid border-gray-300 rounded-t ">

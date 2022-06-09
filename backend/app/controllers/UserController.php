@@ -202,4 +202,10 @@
             $data = $this->userModel->selectTotalProfit();
             echo json_encode($data);
         }
+
+        public function viewPage()
+        {
+            $username = $_POST['username'];
+            return $this->userModel->updateView($username);
+        }
     }
