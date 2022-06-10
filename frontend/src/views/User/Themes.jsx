@@ -9,10 +9,11 @@ import use2 from '../../imgs/use2.png'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 
-function Themes() {
+function Themes(props) {
 
   const [userPro, setUserPro] = useState(false);
-  const [title, setTitle] = useState('theme1');
+  const [idTheme, setIdTheme] = useState(1);
+  const [themeDB, setThemeDB] = useState([]);
 
   const getUser = async ()=>{
     let formData = new FormData();
@@ -36,22 +37,51 @@ function Themes() {
   //   // console.log(response.data)
   // }
 
-  const getThemeByTitle = async ()=>{
-    let formDataTheme = new FormData();
-    formDataTheme.append('title', title);
+  // const getThemeByTitle = async ()=>{
+  //   let formDataTheme = new FormData();
+  //   formDataTheme.append('title', title);
 
-    let response = await axios.post('http://localhost/ishare/backend/theme/getThemeByTitle', formDataTheme)
-    console.log(response.data)
-  }
+  //   let response = await axios.post('http://localhost/ishare/backend/theme/getThemeByTitle', formDataTheme)
+  //   console.log(response.data)
+  // }
 
-  useEffect(()=>{
-    getThemeByTitle();
-  }, [title])
+  // useEffect(()=>{
+  //   getThemeByTitle();
+  // }, [title])
 
   useEffect(()=>{
     getUser();
     // getThemes();
   }, [])
+
+  const changeTheme = async ()=>{
+    let formDataTheme = new FormData();
+    formDataTheme.append('idTheme', idTheme);
+    formDataTheme.append('username', localStorage.getItem('username'));
+
+    await axios.post('http://localhost/ishare/backend/theme/changeTheme', formDataTheme)
+  }
+
+  const themeHandler = (e)=>{
+    if(e === 1)
+    {
+      setIdTheme(1)
+    }
+    else if(e === 2)
+    {
+      setIdTheme(2)
+    }
+    else if(e === 3)
+    {
+      setIdTheme(3)
+    }
+    props.getTheme(idTheme)
+  }
+
+  
+    useEffect(()=>{
+      changeTheme();
+    }, [idTheme])
 
   return (
     <div className='parentThemes'>
@@ -62,7 +92,7 @@ function Themes() {
 
             <div className='flex flex-wrap m-20 gap-10 sm:ml-24'>
               {userPro ?
-                <button onClick={()=>{setTitle('theme3')}} className='myTansition rounded-xl sm:mr-8'>
+                <button onClick={()=>{themeHandler(3)}} type='submit' className='myTansition rounded-xl sm:mr-8'>
                   <img src={use1} />
                 </button>
                 :
@@ -74,7 +104,7 @@ function Themes() {
               }
 
               {userPro ?
-                <button onClick={()=>{setTitle('theme2')}} className='myTansition rounded-xl sm:mr-8'>
+                <button onClick={()=>{themeHandler(2)}} type='submit' className='myTansition rounded-xl sm:mr-8'>
                   <img src={use2} />
                 </button>
                 :
@@ -85,7 +115,7 @@ function Themes() {
                 </Link>
               }
 
-              <button onClick={()=>{setTitle('theme1')}} className='myTansition rounded-xl sm:mr-8'>
+              <button onClick={()=>{themeHandler(1)}} type='submit' className='myTansition rounded-xl sm:mr-8'>
                 <img src={img1} />
               </button>
             </div>

@@ -8,6 +8,8 @@ import Contact from './views/User/Contact';
 import Pricing from './views/User/Pricing';
 import Themes from './views/User/Themes';
 import View3 from './views/User/View3';
+import View2 from './views/User/View2';
+import View from './views/User/View';
 import Links from './views/User/Links';
 import LoginAdmin from './views/Admin/LoginAdmin';
 import Appearance from './views/User/Appearance';
@@ -26,6 +28,8 @@ const App = () => {
 
   const [loggedIn, setLoggedIn] = useState(false);
   const [username, setUsername] = useState('');
+  const [theme, setTheme] = useState(1);
+  const [themeDB, setThemeDB] = useState('');
   
   const usernameUrl = window.location.pathname.split('/')[1];
 
@@ -44,6 +48,20 @@ const App = () => {
       setLoggedIn(true);
     }
   }
+
+  const getThemeById = async ()=>
+  {
+    let formDataGetTheme = new FormData();
+    formDataGetTheme.append('username', localStorage.getItem('username'));
+    
+    let response = await axios.post('http://localhost/ishare/backend/theme/getThemeById', formDataGetTheme)
+    // console.log("response : "+response.data.idTheme)
+    setThemeDB(response.data.idTheme)
+  }
+
+  useEffect(()=>{
+    getThemeById();
+  }, [theme])
 
   useEffect(()=>{
     res();
@@ -73,7 +91,7 @@ const App = () => {
             </Route>
 
             <Route path='/Themes'>
-              <Themes />
+              <Themes getTheme={(e)=>{setTheme(e)}} />
             </Route>
 
             <Route path='/Pricing'>
@@ -85,7 +103,7 @@ const App = () => {
             </Route>
 
             <Route path={'/'+username}>
-              <View3 />
+              {themeDB===1 ? <View3 /> : (themeDB===2 ? <View2 /> : <View />)}
             </Route>
 
             <Route path='/links'>
