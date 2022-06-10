@@ -52,7 +52,7 @@ const App = () => {
   const getThemeById = async ()=>
   {
     let formDataGetTheme = new FormData();
-    formDataGetTheme.append('username', localStorage.getItem('username'));
+    formDataGetTheme.append('username', usernameUrl);
     
     let response = await axios.post('http://localhost/ishare/backend/theme/getThemeById', formDataGetTheme)
     // console.log("response : "+response.data.idTheme)

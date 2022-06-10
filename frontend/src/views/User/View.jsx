@@ -5,6 +5,7 @@ import twitter from '../../imgs/twitter1.png'
 import linkdin from '../../imgs/linkdin.png'
 import spt from '../../imgs/spt.png'
 import ytt from '../../imgs/ytt.png'
+import verified from '../../imgs/verified.png'
 import logoiShare3 from '../../imgs/logoiShare3.png'
 import axios from 'axios'
 import YouTube from 'react-youtube';
@@ -22,6 +23,7 @@ function View() {
   const [img, setImg] = useState('')
   const [reload, setReload] = useState(false)
   const [click_100, setClick_100] = useState(false)
+  const [users, setUsers] = useState([])
 
   const [username, setUsername] = useState('');
 
@@ -99,14 +101,51 @@ function View() {
   useEffect(()=>{
     getImg();
   }, [reload])
+
+  const resAddView = async ()=>{
+    let formDataView = new FormData();
+    formDataView.append('username', usernameUrl);
+    await axios.post('http://localhost/ishare/backend/user/viewPage', formDataView)
+  }
+
+  const getUsers = async ()=>{
+    let response = await axios.get('http://localhost/ishare/backend/user/getUsers')
+    // console.log(response.data);
+    setUsers(response.data)
+  }
+
+  useEffect(()=>{
+    getUsers();
+  }, [])
+
+  for(let i = 0; i < users.length; i++)
+  {
+    if(users[i].username === usernameUrl)
+    {
+      if(localStorage.getItem('usernameView') == usernameUrl)
+      {
+        // console.log('deja hsabto');
+      }
+      else{
+        localStorage.setItem('usernameView', usernameUrl);
+        resAddView();
+        // console.log('function view++');
+        break;
+      }
+    }
+  }
   
   return (
     <div className='parentView bg-blue-50' style={click_100 ? {height:"100%"} : {height:"100vh"}}>
       <div className='flex flex-col items-center w-full'>
         {/* Avatar */}
         <HandleImg img={img&& img} />
+        
         {/* @username */}
-        <center className='underline font-bold md:text-xs text-black'>@{username}</center>
+        <div className='flex gap-1'>
+          <center className='underline font-bold md:text-xs text-black'>@{username}</center>
+          <div className='self-center'><img src={verified} width='14' /></div>
+        </div>
         {/* Description */}
         <p className='m-8 text-black text-xl font-semibold md:text-md sm:text-xs md:m-3'>{desc}</p>
 

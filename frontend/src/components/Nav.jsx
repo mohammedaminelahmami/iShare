@@ -56,7 +56,7 @@ const Nav = ()=> {
                             <>
                                 <li><Link to='/' className={menu_el ? "block text-menuColor md:text-white md:text-normal text-center mt-4" : "md:hidden text-menuColor hover:text-firstColor"}>Home</Link></li>
                                 <li><Link to='/Pricing' className={menu_el ? "block text-menuColor md:text-white md:text-normal text-center mt-4" : "md:hidden text-menuColor hover:text-firstColor"}>Pricing</Link></li>
-                                <li><Link to='/' className={menu_el ? "block text-menuColor md:text-white md:text-normal text-center mt-4" : "md:hidden text-menuColor hover:text-firstColor"}>Community</Link></li>
+                                {/* <li><Link to='/' className={menu_el ? "block text-menuColor md:text-white md:text-normal text-center mt-4" : "md:hidden text-menuColor hover:text-firstColor"}>Community</Link></li> */}
                                 <li><Link to='/Contact' className={menu_el ? "block text-menuColor md:text-white md:text-normal text-center mt-4" : "md:hidden text-menuColor hover:text-firstColor"}>Contact</Link></li>
                             </>
                         }
@@ -64,17 +64,13 @@ const Nav = ()=> {
                         {loggedIn&&
                             <>
                                 <li><Link to='/Links' className={menu_el ? "block text-menuColor md:text-white md:text-normal text-center mt-4" : "md:hidden text-menuColor hover:text-firstColor"}>Links</Link></li>
-                                {/* <li><Link to='/Appearance' className={menu_el ? "block text-menuColor md:text-white md:text-normal text-center mt-4" : "md:hidden text-menuColor hover:text-firstColor"}>Appearance</Link></li> */}
                                 <li><Link to='/Themes' className={menu_el ? "block text-menuColor md:text-white md:text-normal text-center mt-4" : "md:hidden text-menuColor hover:text-firstColor"}>Themes</Link></li>
-                                <li><Link to={'/' + localStorage.getItem('username') + 'Analytics'} className={menu_el ? "block text-menuColor md:text-white md:text-normal text-center mt-4" : "md:hidden text-menuColor hover:text-firstColor"}> Analytics </Link></li>
+                                <li><Link to='/Contact' className={menu_el ? "block text-menuColor md:text-white md:text-normal text-center mt-4" : "md:hidden text-menuColor hover:text-firstColor"}>Contact</Link></li>
                             </>
                         }
 
                         {!loggedIn&&
                             <li><Link to='/login' className={menu_el ? "block text-menuColor md:text-white md:text-normal text-center mt-4 py-2 px-4 w-32 mx-auto rounded-full bg-secondColor" : "hidden text-menuColor"}> Login </Link></li>
-                        }
-                        {loggedIn&&
-                            <li><Link to='' className={menu_el ? "block text-menuColor md:text-white md:text-normal text-center mt-4" : "hidden text-menuColor"}> Links </Link></li>
                         }
                         {loggedIn&&
                             <li><button onClick={logout} className={menu_el ? "block text-menuColor md:text-white md:text-normal text-center my-4 py-2 px-4 w-32 mx-auto rounded-full bg-secondColor" : "hidden text-menuColor"}> Logout </button></li>
