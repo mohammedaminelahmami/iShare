@@ -7,6 +7,7 @@ import spt from '../../imgs/spt.png'
 import ytt2 from '../../imgs/ytt2.png'
 import music1 from '../../imgs/music1.png'
 import music2 from '../../imgs/music2.png'
+import verified from '../../imgs/verified.png'
 import axios from 'axios'
 import YouTube from 'react-youtube';
 import HandleImg from '../../components/HandleImg'
@@ -23,6 +24,7 @@ function View() {
   const [img, setImg] = useState('')
   const [reload, setReload] = useState(false)
   const [click_100, setClick_100] = useState(false)
+  const [users, setUsers] = useState([])
 
   const [username, setUsername] = useState('');
 
@@ -100,18 +102,54 @@ function View() {
   useEffect(()=>{
     getImg();
   }, [reload])
+
+  const resAddView = async ()=>{
+    let formDataView = new FormData();
+    formDataView.append('username', usernameUrl);
+    await axios.post('http://localhost/ishare/backend/user/viewPage', formDataView)
+  }
+
+  const getUsers = async ()=>{
+    let response = await axios.get('http://localhost/ishare/backend/user/getUsers')
+    // console.log(response.data);
+    setUsers(response.data)
+  }
+
+  useEffect(()=>{
+    getUsers();
+  }, [])
+
+  for(let i = 0; i < users.length; i++)
+  {
+    if(users[i].username === usernameUrl)
+    {
+      if(localStorage.getItem('usernameView') == usernameUrl)
+      {
+        // console.log('deja hsabto');
+      }
+      else{
+        localStorage.setItem('usernameView', usernameUrl);
+        resAddView();
+        // console.log('function view++');
+        break;
+      }
+    }
+  }
   
   return (
-    <div className='parentView bg-green-100' style={click_100 ? {height:"100%"} : {height:"100vh"}}>
+    <div className='parentView bgThemeGreen' style={click_100 ? {height:"100%"} : {height:"100vh"}}>
       <div className='flex flex-col items-center w-full'>
 
-        <div className='absolute left-40 top-10 sm:left-10 sm:top-10'><img src={music1} width="40" /></div>
-        <div className='absolute right-20 top-10 sm:right-10 sm:top-10'><img src={music2} width="40" /></div>
+        <div className='absolute left-40 top-10 sm:left-10 sm:top-10 sm:w-7'><img src={music1} width="40" /></div>
+        <div className='absolute right-20 top-10 sm:right-10 sm:top-10 sm:w-7'><img src={music2} width="40" /></div>
 
         {/* Avatar */}
         <HandleImg img={img&& img} />
-        {/* @username */}
-        <center className='underline font-bold md:text-xs text-black'>@{username}</center>
+          {/* @username */}
+        <div className='flex gap-1'>
+          <center className='underline font-bold md:text-xs text-black'>@{username}</center>
+          <div className='self-center'><img src={verified} width='14' /></div>
+        </div>
         {/* Description */}
         <p className='m-8 text-black text-xl font-semibold md:text-md sm:text-xs md:m-3'>{desc}</p>
 

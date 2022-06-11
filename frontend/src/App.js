@@ -8,6 +8,8 @@ import Contact from './views/User/Contact';
 import Pricing from './views/User/Pricing';
 import Themes from './views/User/Themes';
 import View3 from './views/User/View3';
+import View2 from './views/User/View2';
+import View from './views/User/View';
 import Links from './views/User/Links';
 import LoginAdmin from './views/Admin/LoginAdmin';
 import Appearance from './views/User/Appearance';
@@ -19,14 +21,16 @@ import Banned from './views/Admin/Banned';
 import axios from 'axios';
 import AOS from 'aos';
 import 'aos/dist/aos.css'; // You can also use <link> for styles
-// ..
+import Terms from './views/User/Terms';
 AOS.init();
 
 const App = () => {
 
   const [loggedIn, setLoggedIn] = useState(false);
   const [username, setUsername] = useState('');
-  
+  const [theme, setTheme] = useState(1);
+  const [themeDB, setThemeDB] = useState('');
+
   const usernameUrl = window.location.pathname.split('/')[1];
 
   const res = async ()=>{
@@ -45,6 +49,20 @@ const App = () => {
     }
   }
 
+  const getThemeById = async ()=>
+  {
+    let formDataGetTheme = new FormData();
+    formDataGetTheme.append('username', usernameUrl);
+    
+    let response = await axios.post('http://localhost/ishare/backend/theme/getThemeById', formDataGetTheme)
+    // console.log("response : "+response.data.idTheme)
+    setThemeDB(response.data.idTheme)
+  }
+
+  useEffect(()=>{
+    getThemeById();
+  }, [theme])
+
   useEffect(()=>{
     res();
     statusUser();
@@ -54,74 +72,75 @@ const App = () => {
     <Router>
       <div className='parentApp'>
         <Switch>
-          {/* <UserContext.Provider value='Test UseContext'> */}
-            <Route exact path='/'>
+          <Route exact path='/'>
+            <Home />
+          </Route>
+
+          <Route path='/login'>
+            {!loggedIn ?
+              <LoginUser />
+              :
               <Home />
-            </Route>
+            }
+          </Route>
 
-            <Route path='/login'>
-              {!loggedIn&&
-                <LoginUser />
-              }
-              {loggedIn&&
-                <Home />
-              }
-            </Route>
+          <Route path='/register'>
+            <GetStarted />
+          </Route>
 
-            <Route path='/register'>
-              <GetStarted />
-            </Route>
+          <Route path='/Themes'>
+            <Themes getTheme={(e)=>{setTheme(e)}} />
+          </Route>
 
-            <Route path='/Themes'>
-              <Themes />
-            </Route>
+          <Route path='/Pricing'>
+            <Pricing />
+          </Route>
 
-            <Route path='/Pricing'>
-              <Pricing />
-            </Route>
+          <Route path='/Contact'>
+            <Contact />
+          </Route>
 
-            <Route path='/Contact'>
-              <Contact />
-            </Route>
+          <Route path={'/'+username}>
+            {themeDB===1 ? <View3 /> : (themeDB===2 ? <View2 /> : <View />)}
+          </Route>
 
-            <Route path={'/'+username}>
-              <View3 />
-            </Route>
+          <Route path='/links'>
+            {!loggedIn&&
+              <Home />
+            }
 
-            <Route path='/links'>
-              {!loggedIn&&
-                <Home />
-              }
+            {loggedIn&&
+              <Links />
+            }
+          </Route>
 
-              {loggedIn&&
-                <Links />
-              }
-            </Route>
+          <Route exact path='/profile'>
+            <Profile />
+          </Route>
 
-            <Route path='/profile'>
-              <Profile />
-            </Route>
+          <Route path='/Appearance'>
+            <Appearance />
+          </Route>
 
-            <Route path='/Appearance'>
-              <Appearance />
-            </Route>
+          <Route path='/loginadmin'>
+            <LoginAdmin />
+          </Route>
 
-            <Route path='/loginadmin'>
-              <LoginAdmin />
-            </Route>
+          <Route path='/dashboard'>
+            <Overview />
+          </Route>
 
-            <Route path='/dashboard'>
-              <Overview />
-            </Route>
+          <Route path='/users'>
+            <UsersAction />
+          </Route>
 
-            <Route path='/users'>
-              <UsersAction />
-            </Route>
+          <Route path='/ban'>
+            <Banned />
+          </Route>
 
-            <Route path='/ban'>
-              <Banned />
-            </Route>
-          {/* </UserContext.Provider> */}
+          <Route path='/terms'>
+            <Terms />
+          </Route>
 
           <Route path='*'>
             <Error404 />

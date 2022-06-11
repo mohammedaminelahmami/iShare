@@ -15,24 +15,24 @@ const footer = () => {
                 </ul>
 
                 <ul>
-                    <li><Link to='/' className='hover:text-thirdColor hover:underline'>Contac</Link>t</li>
+                    <li><Link to='/' className='hover:text-thirdColor hover:underline'>Contact</Link></li>
                     <li><Link to='/' className='hover:text-thirdColor hover:underline'>Pokos</Link></li>
                     <li><Link to='/' className='hover:text-thirdColor hover:underline'>iShare</Link></li>
                     <li><Link to='/' className='hover:text-thirdColor hover:underline'>Gareth</Link></li>
                 </ul>
 
                 <ul>
-                    <li><Link to='/' className='hover:text-thirdColor hover:underline'>Gareth</Link></li>
-                    <li><Link to='/' className='hover:text-thirdColor hover:underline'>Contact</Link>t</li>
+                    <li><Link to='/terms' className='hover:text-thirdColor hover:underline'>Terms</Link></li>
+                    <li><Link to='/' className='hover:text-thirdColor hover:underline'>Contact</Link></li>
                     <li><Link to='/' className='hover:text-thirdColor hover:underline'>Pokos</Link></li>
                     <li><Link to='/' className='hover:text-thirdColor hover:underline'>iShare</Link></li>
                 </ul>
 
                 <ul>
                     <li><Link to='/' className='hover:text-thirdColor hover:underline'>Pokos</Link></li>
-                    <li><Link to='/' className='hover:text-thirdColor hover:underline'>Contact</Link>t</li>
-                    <li><Link to='/' className='hover:text-thirdColor hover:underline'>iShare</Link></li>
-                    <li><Link to='/' className='hover:text-thirdColor hover:underline'>Gareth</Link></li>
+                    <li><Link to='/' className='hover:text-thirdColor hover:underline'>Contact</Link></li>
+                    <li><Link to='/terms' className='hover:text-thirdColor hover:underline'>Terms</Link></li>
+                    <li><Link to='/terms' className='hover:text-thirdColor hover:underline'>Condition</Link></li>
                 </ul>
             </div>
         

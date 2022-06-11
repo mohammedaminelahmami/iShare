@@ -5,8 +5,9 @@ import twitter from '../../imgs/twitter1.png'
 import linkdin from '../../imgs/linkdin.png'
 import spt from '../../imgs/spt.png'
 import ytt from '../../imgs/ytt.png'
-import music4 from '../../imgs/music4.png'
-import music5 from '../../imgs/music5.png'
+import verified from '../../imgs/verified.png'
+// import music4 from '../../imgs/music4.png'
+// import music5 from '../../imgs/music5.png'
 import axios from 'axios'
 import YouTube from 'react-youtube';
 import HandleImg from '../../components/HandleImg'
@@ -146,7 +147,10 @@ function View() {
         {/* Avatar */}
         <HandleImg img={img&& img} />
         {/* @username */}
-        <center className='underline font-bold md:text-xs text-black'>@{username}</center>
+        <div className='flex gap-1'>
+          <center className='underline font-bold md:text-xs text-black'>@{username}</center>
+          <div className='self-center'><img src={verified} width='14' /></div>
+        </div>
         {/* Description */}
         <p className='m-8 text-black text-xl font-semibold md:text-md sm:text-xs md:m-3'>{desc}</p>
 
