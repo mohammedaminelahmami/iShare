@@ -23,14 +23,13 @@ const Pinformation = () => {
       }, [])
 
     const HandleSubmitEdit = async (e)=>{
-        e.preventDefault()
+        e.preventDefault();
         let formData = new FormData()
         formData.append('editUsername', editUsername.current.value)
         formData.append('editEmail', editEmail.current.value)
         formData.append('username_old', localStorage.getItem('username'))
 
         let response = await axios.post('http://localhost/ishare/backend/user/editUser', formData)
-        console.log(response.data);
         if(response.data === 'Edit Sucssefully')
         {
             localStorage.setItem('username', editUsername.current.value)

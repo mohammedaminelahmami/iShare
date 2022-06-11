@@ -214,7 +214,7 @@
             $editEmail = htmlspecialchars($_POST['editEmail']);
             $username_old = $_POST['username_old'];
 
-            $checkEmailExist = $this->userModel->checkEmailExist($editEmail, $editUsername);
+            $checkEmailExist = $this->userModel->checkEmailExist($editEmail, $username_old);
 
             // RegExfunc
             if(empty($editUsername) || !preg_match("/^[a-zA-Z0-9]*$/", $editUsername))
@@ -227,6 +227,26 @@
             else{
                 echo json_encode('Edit Sucssefully');
                 return $this->userModel->updateUserInfo($editUsername, $editEmail, $username_old);
+            }
+        }
+
+        public function changePwd()
+        {
+            $username = $_POST['username'];
+            $currentPassword = $_POST['currentPassword'];
+            $newPassword = $_POST['newPassword'];
+
+            $row = $this->userModel->checkUser($username);
+            $hashedPassword = $row["password"];
+
+            if(password_verify($currentPassword, $hashedPassword))
+            {
+                echo json_encode("password changed");
+
+                $newPasswordH = password_hash($newPassword, PASSWORD_DEFAULT);
+                return $this->userModel->updatePwd($newPasswordH, $username);
+            }else{
+                echo json_encode("current password incorrect");
             }
         }
     }

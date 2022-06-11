@@ -173,11 +173,11 @@
         }
 
         // check email exist
-        public function checkEmailExist($editEmail, $editUsername)
+        public function checkEmailExist($editEmail, $username_old)
         {
             $this->db->query("SELECT * FROM user
                               WHERE email = '$editEmail'
-                              AND username != '$editUsername'
+                              AND username != '$username_old'
                             ");
             $this->db->execute();
             return $this->db->rowCount();
@@ -187,6 +187,14 @@
         {
             $this->db->query("UPDATE user SET username = '$editUsername', email = '$editEmail'
                               WHERE username = '$username_old'
+                            ");
+            return $this->db->execute();
+        }
+
+        public function updatePwd($newPasswordH, $username)
+        {
+            $this->db->query("UPDATE user SET password = '$newPasswordH'
+                              WHERE username = '$username'
                             ");
             return $this->db->execute();
         }
