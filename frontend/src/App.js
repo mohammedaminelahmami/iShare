@@ -21,6 +21,7 @@ import Banned from './views/Admin/Banned';
 import axios from 'axios';
 import AOS from 'aos';
 import 'aos/dist/aos.css'; // You can also use <link> for styles
+// import ChangePwd from './components/ChangePwd';
 // ..
 AOS.init();
 
@@ -42,6 +43,7 @@ const App = () => {
     setUsername(data.username)
   }
 
+  
   const statusUser = ()=>{
     if(localStorage.getItem('token'))
     {
@@ -78,10 +80,9 @@ const App = () => {
             </Route>
 
             <Route path='/login'>
-              {!loggedIn&&
+              {!loggedIn ?
                 <LoginUser />
-              }
-              {loggedIn&&
+                :
                 <Home />
               }
             </Route>
@@ -116,9 +117,19 @@ const App = () => {
               }
             </Route>
 
-            <Route path='/profile'>
+            <Route exact path='/profile'>
               <Profile />
             </Route>
+
+            {/* <Route path='/profile/:username'>
+              <Profile />
+              <Pinformation />
+            </Route>
+
+            <Route path='/profile/pwd'>
+              <Profile />
+              <ChangePwd />
+            </Route> */}
 
             <Route path='/Appearance'>
               <Appearance />

@@ -171,4 +171,23 @@
                             ");
             return $this->db->execute();
         }
+
+        // check email exist
+        public function checkEmailExist($editEmail, $editUsername)
+        {
+            $this->db->query("SELECT * FROM user
+                              WHERE email = '$editEmail'
+                              AND username != '$editUsername'
+                            ");
+            $this->db->execute();
+            return $this->db->rowCount();
+        }
+
+        public function updateUserInfo($editUsername, $editEmail, $username_old)
+        {
+            $this->db->query("UPDATE user SET username = '$editUsername', email = '$editEmail'
+                              WHERE username = '$username_old'
+                            ");
+            return $this->db->execute();
+        }
     }

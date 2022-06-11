@@ -1,5 +1,4 @@
 <?php
-
     class UserController extends Controller {
 
         public function __construct()
@@ -207,5 +206,27 @@
         {
             $username = $_POST['username'];
             return $this->userModel->updateView($username);
+        }
+
+        public function editUser()
+        {
+            $editUsername = htmlspecialchars($_POST['editUsername']);
+            $editEmail = htmlspecialchars($_POST['editEmail']);
+            $username_old = $_POST['username_old'];
+
+            $checkEmailExist = $this->userModel->checkEmailExist($editEmail, $editUsername);
+
+            // RegExfunc
+            if(empty($editUsername) || !preg_match("/^[a-zA-Z0-9]*$/", $editUsername))
+            {
+                echo json_encode("please enter correct 'Username' ");
+            }elseif(empty($editEmail) || !preg_match("/^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/", $editEmail) || $checkEmailExist > 0)
+            {
+                echo json_encode("please enter correct 'Email' ");
+            }
+            else{
+                echo json_encode('Edit Sucssefully');
+                return $this->userModel->updateUserInfo($editUsername, $editEmail, $username_old);
+            }
         }
     }
