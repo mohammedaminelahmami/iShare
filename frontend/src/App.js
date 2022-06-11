@@ -21,10 +21,11 @@ import Banned from './views/Admin/Banned';
 import axios from 'axios';
 import AOS from 'aos';
 import 'aos/dist/aos.css'; // You can also use <link> for styles
+import Terms from './views/User/Terms';
 AOS.init();
 
 const App = () => {
-  
+
   const [loggedIn, setLoggedIn] = useState(false);
   const [username, setUsername] = useState('');
   const [theme, setTheme] = useState(1);
@@ -135,6 +136,10 @@ const App = () => {
 
           <Route path='/ban'>
             <Banned />
+          </Route>
+
+          <Route path='/terms'>
+            <Terms />
           </Route>
 
           <Route path='*'>
