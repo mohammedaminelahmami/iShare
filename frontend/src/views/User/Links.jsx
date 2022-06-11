@@ -19,13 +19,11 @@ function Links() {
   const [myIdLink, setMyIdLink] = useState('')
   const [mytitle, setMyTitle] = useState('')
   const [myUrl, setMyUrl] = useState('')
-  const [users, setUsers] = useState([])
 
   const [clickedNone, setClickedNone] = useState(true)
   const [clickedYoutube, setClickedYoutube] = useState(false)
   const [clickedSpotify, setClickedSpotify] = useState(false)
 
-  //
   const title = useRef('');
   const linkUrl = useRef('');
   const description = useRef('');

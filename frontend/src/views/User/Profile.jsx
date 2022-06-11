@@ -4,7 +4,7 @@ import Nav from '../../components/Nav'
 import Pinformation from '../../components/Pinformation'
 import ChangePwd from '../../components/ChangePwd'
 import { useLocation } from 'react-router-dom'
-import axios from "axios"
+import Img from '../../components/Img'
 
 const Profile = ()=>{
   const [currentPage, setCurrentPage] = useState(window.location.href.split("=")[1])
@@ -33,7 +33,13 @@ const Profile = ()=>{
             {currentPage == 'pwd' ?
               <ChangePwd />
               :
-              <Pinformation />
+              (currentPage == 'info' ?
+                <Pinformation />
+                :
+                <div className='mt-12 ml-72'>
+                  <Img />
+                </div>
+              )
             }
         </div>
 

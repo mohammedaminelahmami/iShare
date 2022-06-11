@@ -21,17 +21,15 @@ import Banned from './views/Admin/Banned';
 import axios from 'axios';
 import AOS from 'aos';
 import 'aos/dist/aos.css'; // You can also use <link> for styles
-// import ChangePwd from './components/ChangePwd';
-// ..
 AOS.init();
 
 const App = () => {
-
+  
   const [loggedIn, setLoggedIn] = useState(false);
   const [username, setUsername] = useState('');
   const [theme, setTheme] = useState(1);
   const [themeDB, setThemeDB] = useState('');
-  
+
   const usernameUrl = window.location.pathname.split('/')[1];
 
   const res = async ()=>{
@@ -43,7 +41,6 @@ const App = () => {
     setUsername(data.username)
   }
 
-  
   const statusUser = ()=>{
     if(localStorage.getItem('token'))
     {
@@ -74,83 +71,71 @@ const App = () => {
     <Router>
       <div className='parentApp'>
         <Switch>
-          {/* <UserContext.Provider value='Test UseContext'> */}
-            <Route exact path='/'>
+          <Route exact path='/'>
+            <Home />
+          </Route>
+
+          <Route path='/login'>
+            {!loggedIn ?
+              <LoginUser />
+              :
               <Home />
-            </Route>
+            }
+          </Route>
 
-            <Route path='/login'>
-              {!loggedIn ?
-                <LoginUser />
-                :
-                <Home />
-              }
-            </Route>
+          <Route path='/register'>
+            <GetStarted />
+          </Route>
 
-            <Route path='/register'>
-              <GetStarted />
-            </Route>
+          <Route path='/Themes'>
+            <Themes getTheme={(e)=>{setTheme(e)}} />
+          </Route>
 
-            <Route path='/Themes'>
-              <Themes getTheme={(e)=>{setTheme(e)}} />
-            </Route>
+          <Route path='/Pricing'>
+            <Pricing />
+          </Route>
 
-            <Route path='/Pricing'>
-              <Pricing />
-            </Route>
+          <Route path='/Contact'>
+            <Contact />
+          </Route>
 
-            <Route path='/Contact'>
-              <Contact />
-            </Route>
+          <Route path={'/'+username}>
+            {themeDB===1 ? <View3 /> : (themeDB===2 ? <View2 /> : <View />)}
+          </Route>
 
-            <Route path={'/'+username}>
-              {themeDB===1 ? <View3 /> : (themeDB===2 ? <View2 /> : <View />)}
-            </Route>
+          <Route path='/links'>
+            {!loggedIn&&
+              <Home />
+            }
 
-            <Route path='/links'>
-              {!loggedIn&&
-                <Home />
-              }
+            {loggedIn&&
+              <Links />
+            }
+          </Route>
 
-              {loggedIn&&
-                <Links />
-              }
-            </Route>
+          <Route exact path='/profile'>
+            <Profile />
+          </Route>
 
-            <Route exact path='/profile'>
-              <Profile />
-            </Route>
+          <Route path='/Appearance'>
+            <Appearance />
+          </Route>
 
-            {/* <Route path='/profile/:username'>
-              <Profile />
-              <Pinformation />
-            </Route>
+          <Route path='/loginadmin'>
+            <LoginAdmin />
+          </Route>
 
-            <Route path='/profile/pwd'>
-              <Profile />
-              <ChangePwd />
-            </Route> */}
+          <Route path='/dashboard'>
+            <Overview />
+          </Route>
 
-            <Route path='/Appearance'>
-              <Appearance />
-            </Route>
+          <Route path='/users'>
+            <UsersAction />
+          </Route>
 
-            <Route path='/loginadmin'>
-              <LoginAdmin />
-            </Route>
-
-            <Route path='/dashboard'>
-              <Overview />
-            </Route>
-
-            <Route path='/users'>
-              <UsersAction />
-            </Route>
-
-            <Route path='/ban'>
-              <Banned />
-            </Route>
-          {/* </UserContext.Provider> */}
+          <Route path='/ban'>
+            <Banned />
+          </Route>
 
           <Route path='*'>
             <Error404 />
