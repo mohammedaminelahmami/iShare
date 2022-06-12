@@ -12,7 +12,7 @@ import Footer from '../../components/Footer'
 import Img from '../../components/Img'
 import axios from 'axios'
 
-function Links() {
+const Links = ()=>{
 
   const [showModalEdit, setShowModalEdit] = useState(false)
   const [links, setLinks] = useState([])
@@ -28,12 +28,8 @@ function Links() {
   const linkUrl = useRef('');
   const description = useRef('');
 
-  const test = ()=>{
-    alert('Clicked !!!!')
-  }
-
   const HandleClick = ()=>{
-    window.open('http://localhost:3000/'+localStorage.getItem('username'), '_blank')
+    window.open('/'+localStorage.getItem('username'))
   }
 
   const HandleClickLink = ()=>{

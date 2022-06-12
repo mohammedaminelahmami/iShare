@@ -249,4 +249,9 @@
                 echo json_encode("current password incorrect");
             }
         }
+
+        public function checkUserBan()
+        {
+            
+        }
     }

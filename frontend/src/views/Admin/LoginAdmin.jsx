@@ -3,7 +3,7 @@ import axios from 'axios'
 import logoiShare4 from '../../imgs/logoiShare4.png'
 import Overview from './Overview';
 
-function LoginAdmin() {
+const LoginAdmin = ()=>{
 
   const [loggedIn, setLoggedIn] = useState(false);
 
@@ -29,11 +29,6 @@ function LoginAdmin() {
     .catch(function(error){
       console.log(error);
     })
-  }
-
-  const logout = ()=>{
-    window.location.replace('http://localhost:3000/loginadmin')
-    localStorage.removeItem('tokenAdmin')
   }
 
   return (
