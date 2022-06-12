@@ -1,5 +1,4 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import banned from '../imgs/banned.png'
 import Footer from './Footer'
 

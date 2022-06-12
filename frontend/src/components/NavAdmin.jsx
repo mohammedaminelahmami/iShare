@@ -5,6 +5,7 @@ import ban from '../imgs/ban.png'
 import loggout from '../imgs/logout.png'
 import { Link } from 'react-router-dom'
 import users from '../imgs/users.png'
+import msg from '../imgs/msg.png'
 
 function NavAdmin() {
 
@@ -35,14 +36,14 @@ function NavAdmin() {
                             <div className='font-semibold none_respon'>Users</div>
                         </Link>
 
-                        {/* <Link to='/analytics' className={pageUrl == 'analytics' ? 'flex gap-4 p-4 bg-ffirstColor rounded-md hoverTransition bgcolor_respon' : 'flex gap-4 p-4 hover:bg-ffirstColor hover:rounded-md hoverTransition'}>
-                            <div><img src={analytics} width='22' /></div>
-                            <div className='font-semibold none_respon'>Analytics</div>
-                        </Link> */}
-
                         <Link to='/ban' className={pageUrl == 'ban' ? 'flex gap-4 p-4 bg-ffirstColor rounded-md hoverTransition bgcolor_respon' : 'flex gap-4 p-4 hover:bg-ffirstColor hover:rounded-md hoverTransition'}>
                             <div><img src={ban} width='22' /></div>
                             <div className='font-semibold none_respon'>Banned</div>
+                        </Link>
+
+                        <Link to='/AdminContact' className={pageUrl == 'AdminContact' ? 'flex gap-4 p-4 bg-ffirstColor rounded-md hoverTransition bgcolor_respon' : 'flex gap-4 p-4 hover:bg-ffirstColor hover:rounded-md hoverTransition'}>
+                            <div><img src={msg} width='22' /></div>
+                            <div className='font-semibold none_respon'>Messages</div>
                         </Link>
 
                         <button onClick={logout} type='submit' className='flex gap-4 p-4 mt-36 sm:mt-0 hover:bg-ffirstColor hover:rounded-md hoverTransition bgcolor_respon'>

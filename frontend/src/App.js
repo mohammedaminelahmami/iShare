@@ -22,6 +22,7 @@ import axios from 'axios';
 import AOS from 'aos';
 import 'aos/dist/aos.css'; // You can also use <link> for styles
 import Terms from './views/User/Terms';
+import Msg from './views/Admin/Msg';
 AOS.init();
 
 const App = () => {
@@ -132,6 +133,10 @@ const App = () => {
 
           <Route path='/users'>
             <UsersAction />
+          </Route>
+
+          <Route path='/AdminContact'>
+            <Msg />
           </Route>
 
           <Route path='/ban'>

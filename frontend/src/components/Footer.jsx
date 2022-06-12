@@ -8,29 +8,29 @@ const footer = () => {
         <footer className='bg-footerBgColor mt-20'>
             <div className='flex justify-evenly p-24 font-medium text-favColor sm:flex-col sm:items-center sm:mt-0 md:gap-8'>
                 <ul>
-                    <li><Link to='/' className='hover:text-thirdColor hover:underline'>iShare</Link></li>
-                    <li><Link to='/' className='hover:text-thirdColor hover:underline'>Contact</Link></li>
-                    <li><Link to='/' className='hover:text-thirdColor hover:underline'>Pokos</Link></li>
-                    <li><Link to='/' className='hover:text-thirdColor hover:underline'>Gareth</Link></li>
+                    <li><Link to='/pricing' className='hover:text-thirdColor hover:underline'>iShare</Link></li>
+                    <li><Link to='/contact' className='hover:text-thirdColor hover:underline'>Contact</Link></li>
+                    <li><Link to='/terms' className='hover:text-thirdColor hover:underline'>Pokos</Link></li>
+                    <li><Link to='/terms' className='hover:text-thirdColor hover:underline'>Gareth</Link></li>
                 </ul>
 
                 <ul>
-                    <li><Link to='/' className='hover:text-thirdColor hover:underline'>Contact</Link></li>
-                    <li><Link to='/' className='hover:text-thirdColor hover:underline'>Pokos</Link></li>
-                    <li><Link to='/' className='hover:text-thirdColor hover:underline'>iShare</Link></li>
-                    <li><Link to='/' className='hover:text-thirdColor hover:underline'>Gareth</Link></li>
+                    <li><Link to='/contact' className='hover:text-thirdColor hover:underline'>Contact</Link></li>
+                    <li><Link to='/terms' className='hover:text-thirdColor hover:underline'>Pokos</Link></li>
+                    <li><Link to='/pricing' className='hover:text-thirdColor hover:underline'>iShare</Link></li>
+                    <li><Link to='/terms' className='hover:text-thirdColor hover:underline'>Gareth</Link></li>
                 </ul>
 
                 <ul>
                     <li><Link to='/terms' className='hover:text-thirdColor hover:underline'>Terms</Link></li>
-                    <li><Link to='/' className='hover:text-thirdColor hover:underline'>Contact</Link></li>
-                    <li><Link to='/' className='hover:text-thirdColor hover:underline'>Pokos</Link></li>
-                    <li><Link to='/' className='hover:text-thirdColor hover:underline'>iShare</Link></li>
+                    <li><Link to='/contact' className='hover:text-thirdColor hover:underline'>Contact</Link></li>
+                    <li><Link to='/terms' className='hover:text-thirdColor hover:underline'>Pokos</Link></li>
+                    <li><Link to='/pricing' className='hover:text-thirdColor hover:underline'>iShare</Link></li>
                 </ul>
 
                 <ul>
-                    <li><Link to='/' className='hover:text-thirdColor hover:underline'>Pokos</Link></li>
-                    <li><Link to='/' className='hover:text-thirdColor hover:underline'>Contact</Link></li>
+                    <li><Link to='/terms' className='hover:text-thirdColor hover:underline'>Pokos</Link></li>
+                    <li><Link to='/contact' className='hover:text-thirdColor hover:underline'>Contact</Link></li>
                     <li><Link to='/terms' className='hover:text-thirdColor hover:underline'>Terms</Link></li>
                     <li><Link to='/terms' className='hover:text-thirdColor hover:underline'>Condition</Link></li>
                 </ul>
