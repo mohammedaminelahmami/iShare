@@ -22,7 +22,7 @@ const AccountBannedModal = () => {
                         <p className="flex justify-center text-xl">Your account has been banned</p>
                     </div>
                     <div className="flex justify-center gap-5 mt-2 text-sm text-gray-500 ml-10">
-                        <p>Your account has been disabled<br></br> for violating our <button onClick={HandleClickTerms} type='submit'><span className='text-secondColor font-medium'>terms</span></button>. Learn how you <br></br> may be able to restore your account. <br></br> Think your account was banned or suspended by mistake?<br></br> Let us know so we can help. <button onClick={HandleClickContact} type='submit'><span className='text-secondColor font-medium'>contact</span></button></p>
+                      <p>Your account has been disabled<br></br> for violating our <button onClick={HandleClickTerms} type='submit'><span className='text-secondColor font-medium'>terms</span></button>. Learn how you <br></br> may be able to restore your account. <br></br> Think your account was banned or suspended by mistake?<br></br> Let us know so we can help. <button onClick={HandleClickContact} type='submit'><span className='text-secondColor font-medium'>contact</span></button></p>
                     </div>
                 </div>
               </div>
