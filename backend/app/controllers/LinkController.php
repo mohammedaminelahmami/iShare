@@ -27,6 +27,8 @@
 
         public function addLink()
         {
+            
+
             $title = $_POST['title'];
             $linkUrl = $_POST['linkUrl'];
             $username = $_POST['username'];

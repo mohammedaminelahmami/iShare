@@ -16,7 +16,6 @@ function ShowModalEdit(props) {
 
         axios.post('http://localhost/ishare/backend/link/updateLink', formDataEdit)
         .then(function(response){
-            // console.log(response);
             window.location.reload()
         })
         .catch(function(error){

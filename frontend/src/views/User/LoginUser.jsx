@@ -1,48 +1,65 @@
-import React, { useRef, useState, useContext } from 'react'
-import { Link, Redirect } from 'react-router-dom'
+import React, { useRef, useState } from 'react'
+import { Link } from 'react-router-dom'
 import Logo from '../../components/Logo'
+import AccountBannedModal from '../../components/AccountBannedModal'
 import axios from 'axios';
-// import { UserContext } from '../UserContext';
 
-function LoginUser() {
+const LoginUser = ()=>{
 
     const [loggedIn, setLoggedIn] = useState(false);
+    const [banned, setBanned] = useState(false);
 
     const username = useRef('');
     const password = useRef('');
 
     const HandleSubmit = (e)=>{
         e.preventDefault();
-        
-        const formData = new FormData();
-        formData.append('username', username.current.value);
-        formData.append('password', password.current.value);
 
-        axios.post('http://localhost/ishare/backend/user/login', formData)
-        .then(function(response){
-            localStorage.setItem('token', response.data.token);
-            if(localStorage.getItem('token') === response.data.token)
+        let formDataCheckUserBan = new FormData();
+        formDataCheckUserBan.append('username', username.current.value);
+        axios.post('http://localhost/ishare/backend/user/getUser', formDataCheckUserBan)
+        .then(response=>{
+            let data = response.data
+            if(data.status == '0')
             {
-                setLoggedIn(true);
-                window.location.replace('http://localhost:3000/links')
-                localStorage.setItem('username', response.data.data.username)
+                const formData = new FormData();
+                formData.append('username', username.current.value);
+                formData.append('password', password.current.value);
+
+                axios.post('http://localhost/ishare/backend/user/login', formData)
+                .then(function(response){
+                    localStorage.setItem('token', response.data.token);
+                    if(localStorage.getItem('token') === response.data.token)
+                    {
+                        setLoggedIn(true);
+                        window.location.replace('/links')
+                        localStorage.setItem('username', response.data.data.username)
+                    }
+                })
+                .catch(function(error){
+                    console.log(error);
+                })
+            }else if(data.status == '1')
+            {
+                setBanned(true)
             }
         })
-        .catch(function(error){
+        .catch(error=>{
             console.log(error);
         })
     }
 
     return (
         <>
+            {banned&&
+                <AccountBannedModal />
+            }
             {!loggedIn&&
                 <div className="parentLoginUser font-['poppins'] h-auto">
                     <div className='mt-5' style={{marginLeft:"68px"}}>
                         <Logo />
                     </div>
 
-                    {/* <h1>{test}</h1> */}
-            
                     <form onSubmit={HandleSubmit} className='flex flex-col items-center mt-10'>
                         <p className='text-firstColor font-bold text-2xl md:text-xl'>Log in to your iShare account</p>
                         <input type="text" ref={username} className='bg-inputColor mt-14 px-5 py-3 border-2 w-1/3 placeHolderColor md:w-1/2' placeholder='Username'/>

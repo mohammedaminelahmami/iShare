@@ -1,12 +1,14 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import banned from '../imgs/banned.png'
-import Footer from './Footer'
 
 const AccountBannedModal = () => {
 
     const HandleClickTerms = ()=>{
         window.open('/terms');
+    }
+
+    const HandleClickContact = ()=>{
+      window.open('/contact');
     }
 
   return (
@@ -19,14 +21,13 @@ const AccountBannedModal = () => {
                         <div className='self-center'><img src={banned} width="25" /></div>
                         <p className="flex justify-center text-xl">Your account has been banned</p>
                     </div>
-                    <div className="flex justify-center gap-5 mt-2 text-sm text-gray-500">
-                        <p>Your accound has been disabled<br></br> for violating our <button onClick={HandleClickTerms} type='submit'><span className='text-secondColor'>terms</span></button>. Learn how you <br></br> may be able to restore your account.</p>
+                    <div className="flex justify-center gap-5 mt-2 text-sm text-gray-500 ml-10">
+                      <p>Your account has been disabled<br></br> for violating our <button onClick={HandleClickTerms} type='submit'><span className='text-secondColor font-medium'>terms</span></button>. Learn how you <br></br> may be able to restore your account. <br></br> Think your account was banned or suspended by mistake?<br></br> Let us know so we can help. <button onClick={HandleClickContact} type='submit'><span className='text-secondColor font-medium'>contact</span></button></p>
                     </div>
                 </div>
               </div>
             </div>
           </div>
-          <Footer />
     </div>
   )
 }

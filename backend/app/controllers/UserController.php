@@ -67,8 +67,6 @@
                     $hashedPassword = $row["password"];
                     if(password_verify($password_unhashed, $hashedPassword))
                     {
-                        // echo json_encode('Correct !');
-
                         $header = [
                             "alg" => "JWT",
                             "typ" => "HS256"
@@ -248,5 +246,10 @@
             }else{
                 echo json_encode("current password incorrect");
             }
+        }
+
+        public function checkUserBan()
+        {
+            
         }
     }

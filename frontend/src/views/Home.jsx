@@ -68,7 +68,7 @@ function Home() {
                 <div className='text-firstColor font-extrabold text-3xl'>Easy to use</div>
                 <div className='mt-5 text-sm text-menuColor sm:w-60'>
                   Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum optio excepturi nemo sit eligendi quia dicta! Voluptas vitae veniam cum facilis fugiat.
-                  <Link to='/register'><button type='submit' className='btnGetStartedForFree text-white bg-firstColor px-10 py-4 mt-8 rounded-sm'>GET STARTED FOR FREE !</button></Link>
+                  <Link to={loggedIn ? '/links' : '/register'}><button type='submit' className='btnGetStartedForFree text-white bg-firstColor px-10 py-4 mt-8 rounded-sm'>{loggedIn ? 'GET STARTED' : 'GET STARTED FOR FREE !'}</button></Link>
                 </div>
               </div>
             </div>
