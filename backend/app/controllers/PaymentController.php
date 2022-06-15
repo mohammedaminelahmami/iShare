@@ -22,8 +22,10 @@
             // 1month --> sec == 2630000
             if(strTotime($dateNow) - strtotime($dateI) >= 2630000)
             {
+                echo json_encode("0");
                 return $this->paymentModel->paymentEx($username);
             }else{
+                echo json_encode("1");
                 return;
             }
         }

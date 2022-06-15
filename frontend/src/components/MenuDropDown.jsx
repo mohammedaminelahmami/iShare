@@ -8,6 +8,7 @@ export default function Example() {
   const logout = ()=>{
     localStorage.removeItem('token');
     localStorage.removeItem('username');
+    localStorage.removeItem('plan');
     window.location.replace('/');
   }
   
