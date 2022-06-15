@@ -73,7 +73,7 @@ const Msg = () => {
                       <button onClick={()=>{setShowModal(true); setEmail(msg.email); setTo_name(msg.name)}} className="font-medium text-green-600 hover:underline">Respond</button>
                     </td>
                     {showModal&&
-                      <div className="p-20 flex justify-center items-center overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none bg-colorOpacity bg-blackfocus:outline-none">
+                      <div className="p-20 flex justify-center items-center overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none bg-blackfocus:outline-none" style={{backgroundColor:"#0000006a"}}>
                         <div className="relative w-auto my-6 mx-auto max-w-3xl">
                           <div className="animate-scale p-10 border-0 rounded-md shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none modal">
                             <div className="flex items-start justify-between gap-5">

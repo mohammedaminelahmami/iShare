@@ -7,7 +7,7 @@ import UserAnalyticsBar from '../../components/UserAnalyticsBar'
 function Appearance() {
 
   const HandleClick = ()=>{
-    window.open('http://localhost:3000/'+localStorage.getItem('username'), '_blank')
+    window.open('/'+localStorage.getItem('username'), '_blank')
   }
 
   return (

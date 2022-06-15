@@ -12,7 +12,7 @@ function NavAdmin() {
     const pageUrl = window.location.href.slice(22)
 
     const logout = ()=>{
-        window.location.replace('http://localhost:3000/loginadmin')
+        window.location.replace('/loginadmin')
         localStorage.removeItem('tokenAdmin')
     }
 
