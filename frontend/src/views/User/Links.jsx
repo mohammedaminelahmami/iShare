@@ -19,7 +19,11 @@ const Links = (props)=>{
   const [myIdLink, setMyIdLink] = useState('')
   const [mytitle, setMyTitle] = useState('')
   const [myUrl, setMyUrl] = useState('')
+
   const [requestNewLink, setRequestNewLink] = useState(false)
+  const [newDescription, setNewDescription] = useState(false)
+  const [newDelete, setNewDelete] = useState(false)
+
   //
   const [clickedNone, setClickedNone] = useState(true)
   const [clickedYoutube, setClickedYoutube] = useState(false)
@@ -56,10 +60,8 @@ const Links = (props)=>{
 
     axios.post('http://localhost/ishare/backend/link/addLink', formData)
     .then(function(response){
-      // console.log(response);
       setRequestNewLink(!requestNewLink)
       props.newLinkMobile(!requestNewLink);
-      // window.location.reload()
     })
     .catch(function(error){
       console.log(error);
@@ -72,23 +74,22 @@ const Links = (props)=>{
 
     axios.post('http://localhost/ishare/backend/link/getLinks', myFormData)
     .then(function(response){
-      // console.log(response)
       setLinks(response.data)
     })
     .catch(function(error){
       console.log(error);
     })
-  }, [requestNewLink])
+  }, [requestNewLink, newDelete])
 
-  const HandleClickDesc = ()=>{
+  const HandleClickDesc = (e)=>{
+    e.preventDefault();
     let formDataDesc = new FormData();
     formDataDesc.append('description', description.current.value)
     formDataDesc.append('username', localStorage.getItem('username'))
 
     axios.post('http://localhost/ishare/backend/user/addDescription', formDataDesc)
     .then(function(response){
-      window.location.reload()
-      // console.log(response)
+      props.newDescription(!newDescription);
     })
     .catch(function(error){
       console.log(error);
@@ -124,19 +125,12 @@ const Links = (props)=>{
                       </button>
 
                       <button type='button'
-                        onClick={(e)=>{
+                        onClick={async (e)=>{
                           e.preventDefault();
                           let formDataDelete = new FormData();
                           formDataDelete.append('idLink', link.idLink)
-
-                          axios.post('http://localhost/ishare/backend/link/deleteLink', formDataDelete)
-                          .then(function(response){
-                          window.location.reload()
-                            // console.log(response);
-                          })
-                          .catch(function(error){
-                            console.log(error);
-                          })
+                          await axios.post('http://localhost/ishare/backend/link/deleteLink', formDataDelete)
+                          setNewDelete(!newDelete)
                         }}><img src={deletee} width='25' className='block' />
                       </button>
                     </div>
@@ -166,7 +160,11 @@ const Links = (props)=>{
             <button type='button' onClick={HandleClickLink} className='mt-2 py-1 px-4 text-sm font-semibold text-firstColor border-2 border-firstColor rounded-md'>Add</button>
           </div>
         </div>
-          <Mobile HandleClick={HandleClick} />
+        {/* <div className='w-1/5'>
+          <div className='fixed'> */}
+            <Mobile HandleClick={HandleClick} />
+          {/* </div>
+        </div> */}
       </div>
 
       <ShowModalEdit showModalEdit={showModalEdit} close={()=>{setShowModalEdit(false)}} idLink={myIdLink} title={mytitle} linkUrl={myUrl} />

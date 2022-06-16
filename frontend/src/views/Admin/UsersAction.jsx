@@ -11,7 +11,7 @@ function UsersAction() {
 
   const resGetUsers = async () => {
     let response = await axios.get('http://localhost/ishare/backend/user/getUsers')
-    console.log(response.data);
+    // console.log(response.data);
     setUsers(response.data)
   }
 
@@ -63,7 +63,7 @@ function UsersAction() {
                       </td>
                       <td className="px-6 py-4 text-right">
                         <button onClick={()=>{
-                          setAreYouSure(true);
+                          setAreYouSure(!AreYouSure);
                           setUsername(user.username);
                         }} className="font-medium text-red-600 hover:underline">Ban</button>
                       </td>

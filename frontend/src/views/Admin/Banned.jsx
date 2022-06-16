@@ -62,7 +62,7 @@ function UsersAction() {
                       </td>
                       <td className="px-6 py-4 text-right">
                         <button onClick={()=>{
-                            setTestReload(true)
+                            setTestReload(!testReload)
                             let formData = new FormData();
                             formData.append('username', ban.username);
                             axios.post('http://localhost/ishare/backend/user/unban', formData)

@@ -6,8 +6,6 @@ import linkdin from '../../imgs/linkdin.png'
 import spt from '../../imgs/spt.png'
 import ytt from '../../imgs/ytt.png'
 import verified from '../../imgs/verified.png'
-// import music4 from '../../imgs/music4.png'
-// import music5 from '../../imgs/music5.png'
 import axios from 'axios'
 import YouTube from 'react-youtube';
 import HandleImg from '../../components/HandleImg'
@@ -26,7 +24,8 @@ function View(props) {
   const [click_100, setClick_100] = useState(false)
   const [users, setUsers] = useState([])
   const [linkReload, setLinkReload] = useState(props.newLinkMobile)
-
+  const [descReload, setDescReload] = useState(props.newDescription)
+  
   const [username, setUsername] = useState('');
 
   const usernameUrl = window.location.pathname.split('/')[1]
@@ -51,7 +50,6 @@ function View(props) {
 
     axios.post('http://localhost/ishare/backend/link/getLinks', myFormData)
     .then(function(response){
-      // console.log(response)
       setLinks(response.data)
       setLinkReload(!linkReload)
     })
@@ -68,11 +66,12 @@ function View(props) {
     .then(function(response){
       // console.log(response.data.description);
       setDesc(response.data.description)
+      setDescReload(!descReload)
     })
     .catch(function(error){
       console.log(error);
     })
-  }, [reload])
+  }, [reload, descReload])
   
   const optsWeb = {
     width: '100%',

@@ -6,14 +6,13 @@ import linkdin from '../../imgs/linkdin.png'
 import spt from '../../imgs/spt.png'
 import ytt from '../../imgs/ytt.png'
 import verified from '../../imgs/verified.png'
-import logoiShare3 from '../../imgs/logoiShare3.png'
 import axios from 'axios'
 import YouTube from 'react-youtube';
 import HandleImg from '../../components/HandleImg'
 import SpotifyPlayer from 'react-spotify-player';
 var getYouTubeID = require('get-youtube-id');
 
-function View() {
+function View(props) {
 
   const [links, setLinks] = useState([])
   const [YTlink, setYTlink] = useState([])
@@ -24,6 +23,8 @@ function View() {
   const [reload, setReload] = useState(false)
   const [click_100, setClick_100] = useState(false)
   const [users, setUsers] = useState([])
+  const [linkReload, setLinkReload] = useState(props.newLinkMobile)
+  const [descReload, setDescReload] = useState(props.newDescription)
 
   const [username, setUsername] = useState('');
 
@@ -51,11 +52,12 @@ function View() {
     .then(function(response){
       // console.log(response)
       setLinks(response.data)
+      setLinkReload(!linkReload)
     })
     .catch(function(error){
       console.log(error);
     })
-  }, [reload])
+  }, [reload, linkReload])
 
   useEffect(()=>{
     let formData = new FormData();
@@ -65,11 +67,12 @@ function View() {
     .then(function(response){
       // console.log(response.data.description);
       setDesc(response.data.description)
+      setDescReload(!descReload)
     })
     .catch(function(error){
       console.log(error);
     })
-  }, [reload])
+  }, [reload, descReload])
   
   const optsWeb = {
     width: '100%',
