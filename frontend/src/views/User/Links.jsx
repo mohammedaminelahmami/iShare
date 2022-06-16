@@ -12,14 +12,15 @@ import Footer from '../../components/Footer'
 import Img from '../../components/Img'
 import axios from 'axios'
 
-const Links = ()=>{
+const Links = (props)=>{
 
   const [showModalEdit, setShowModalEdit] = useState(false)
   const [links, setLinks] = useState([])
   const [myIdLink, setMyIdLink] = useState('')
   const [mytitle, setMyTitle] = useState('')
   const [myUrl, setMyUrl] = useState('')
-
+  const [requestNewLink, setRequestNewLink] = useState(false)
+  //
   const [clickedNone, setClickedNone] = useState(true)
   const [clickedYoutube, setClickedYoutube] = useState(false)
   const [clickedSpotify, setClickedSpotify] = useState(false)
@@ -32,7 +33,8 @@ const Links = ()=>{
     window.open('/'+localStorage.getItem('username'))
   }
 
-  const HandleClickLink = ()=>{
+  const HandleClickLink = (e)=>{
+    e.preventDefault();
     let formData = new FormData();
 
     let typeLink = ''
@@ -54,8 +56,10 @@ const Links = ()=>{
 
     axios.post('http://localhost/ishare/backend/link/addLink', formData)
     .then(function(response){
-      console.log(response);
-      window.location.reload()
+      // console.log(response);
+      setRequestNewLink(!requestNewLink)
+      props.newLinkMobile(!requestNewLink);
+      // window.location.reload()
     })
     .catch(function(error){
       console.log(error);
@@ -74,7 +78,7 @@ const Links = ()=>{
     .catch(function(error){
       console.log(error);
     })
-  }, [])
+  }, [requestNewLink])
 
   const HandleClickDesc = ()=>{
     let formDataDesc = new FormData();

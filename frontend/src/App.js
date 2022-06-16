@@ -31,6 +31,7 @@ const App = () => {
   const [username, setUsername] = useState('');
   const [theme, setTheme] = useState(1);
   const [themeDB, setThemeDB] = useState('');
+  const [requestNewLink, setRequestNewLink] = useState(false);
 
   const usernameUrl = window.location.pathname.split('/')[1];
 
@@ -102,7 +103,7 @@ const App = () => {
           </Route>
 
           <Route path={'/'+username}>
-            {themeDB===1 ? <View3 /> : (themeDB===2 ? <View2 /> : <View />)}
+            {themeDB===1 ? <View3 newLinkMobile={requestNewLink} /> : (themeDB===2 ? <View2 newLinkMobile={requestNewLink} /> : <View newLinkMobile={requestNewLink} />)}
           </Route>
 
           <Route path='/links'>
@@ -111,7 +112,7 @@ const App = () => {
             }
 
             {loggedIn&&
-              <Links />
+              <Links newLinkMobile={(e)=>{setRequestNewLink(e)}} />
             }
           </Route>
 

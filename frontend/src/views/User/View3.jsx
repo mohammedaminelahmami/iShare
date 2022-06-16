@@ -14,7 +14,7 @@ import HandleImg from '../../components/HandleImg'
 import SpotifyPlayer from 'react-spotify-player';
 var getYouTubeID = require('get-youtube-id');
 
-function View() {
+function View(props) {
 
   const [links, setLinks] = useState([])
   const [YTlink, setYTlink] = useState([])
@@ -25,6 +25,7 @@ function View() {
   const [reload, setReload] = useState(false)
   const [click_100, setClick_100] = useState(false)
   const [users, setUsers] = useState([])
+  const [linkReload, setLinkReload] = useState(props.newLinkMobile)
 
   const [username, setUsername] = useState('');
 
@@ -33,7 +34,7 @@ function View() {
   const username_res = async ()=>{
     let formDataUser = new FormData();
     formDataUser.append('username', usernameUrl);
-    
+  
     let response = await axios.post('http://localhost/ishare/backend/user/getUser', formDataUser)
     const dataUsername = response.data.username
     setUsername(dataUsername)
@@ -52,11 +53,12 @@ function View() {
     .then(function(response){
       // console.log(response)
       setLinks(response.data)
+      setLinkReload(!linkReload)
     })
     .catch(function(error){
       console.log(error);
     })
-  }, [reload])
+  }, [reload, linkReload])
 
   useEffect(()=>{
     let formData = new FormData();
