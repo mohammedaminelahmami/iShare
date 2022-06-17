@@ -1,19 +1,18 @@
 import React, {useState, useEffect} from 'react'
-import github from '../../imgs/github.png'
 import facebook from '../../imgs/facebook1.png'
 import twitter from '../../imgs/twitter1.png'
-import linkdin from '../../imgs/linkdin.png'
+import instagram from '../../imgs/ig.png'
 import spt from '../../imgs/spt.png'
 import ytt from '../../imgs/ytt.png'
 import verified from '../../imgs/verified.png'
-import logoiShare3 from '../../imgs/logoiShare3.png'
 import axios from 'axios'
 import YouTube from 'react-youtube';
 import HandleImg from '../../components/HandleImg'
 import SpotifyPlayer from 'react-spotify-player';
+import Div from '../../components/Div'
 var getYouTubeID = require('get-youtube-id');
 
-function View() {
+function View(props) {
 
   const [links, setLinks] = useState([])
   const [YTlink, setYTlink] = useState([])
@@ -24,6 +23,8 @@ function View() {
   const [reload, setReload] = useState(false)
   const [click_100, setClick_100] = useState(false)
   const [users, setUsers] = useState([])
+  const [linkReload, setLinkReload] = useState(props.newLinkMobile)
+  const [descReload, setDescReload] = useState(props.newDescription)
 
   const [username, setUsername] = useState('');
 
@@ -51,11 +52,12 @@ function View() {
     .then(function(response){
       // console.log(response)
       setLinks(response.data)
+      setLinkReload(!linkReload)
     })
     .catch(function(error){
       console.log(error);
     })
-  }, [reload])
+  }, [reload, linkReload])
 
   useEffect(()=>{
     let formData = new FormData();
@@ -65,11 +67,12 @@ function View() {
     .then(function(response){
       // console.log(response.data.description);
       setDesc(response.data.description)
+      setDescReload(!descReload)
     })
     .catch(function(error){
       console.log(error);
     })
-  }, [reload])
+  }, [reload, descReload])
   
   const optsWeb = {
     width: '100%',
@@ -122,12 +125,12 @@ function View() {
   {
     if(users[i].username === usernameUrl)
     {
-      if(localStorage.getItem('usernameView') == usernameUrl)
+      if(localStorage.getItem(usernameUrl) == usernameUrl)
       {
         // console.log('deja hsabto');
       }
       else{
-        localStorage.setItem('usernameView', usernameUrl);
+        localStorage.setItem(usernameUrl, usernameUrl);
         resAddView();
         // console.log('function view++');
         break;
@@ -152,9 +155,9 @@ function View() {
         {/* <input type="text" onChange={HandleChange} defaultValue={youtubeUrl} placeholder='URL...' hidden/> */}
 
         {links&&
-          links.map((link)=>{
+          Array.from(links).map((link, index)=>{
             return(
-              <>
+              <Div key={index}>
                 <button
                   onClick={link.type === 'Normal Link' ? ()=>{window.open('http://'+link.linkUrl, '_blank')} : 
                     (link.type === 'Youtube Link' ?
@@ -227,16 +230,15 @@ function View() {
                     />
                   </div>
                 }
-              </>
+              </Div>
             )
           })
         }
         {/* social media icons */}
         <div className='flex m-10 gap-2 md:mb-4 md:mt-8'>
-          <button className='w-7 h-full md:w-6'><img src={github} /></button>
           <button className='w-7 h-full md:w-6'><img src={facebook} /></button>
           <button className='w-7 h-full md:w-6'><img src={twitter} /></button>
-          <button className='w-7 h-full md:w-6'><img src={linkdin} /></button>
+          <button className='w-7 h-full md:w-6'><img src={instagram} /></button>
         </div>
 
         {/* Logo iShare */}

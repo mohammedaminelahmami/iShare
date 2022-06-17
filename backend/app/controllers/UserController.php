@@ -248,8 +248,33 @@
             }
         }
 
-        public function checkUserBan()
+        public function addFacebook()
         {
-            
+            $username = $_POST['username'];
+            $facebook = $_POST['facebook'];
+            return $this->userModel->updateFacebook($facebook, $username);
         }
+        
+        public function addTwitter()
+        {
+            $username = $_POST['username'];
+            $twitter = $_POST['twitter'];
+            return $this->userModel->updateTwitter($twitter, $username);
+        }
+        
+        public function addInstagram()
+        {
+            $username = $_POST['username'];
+            $instagram = $_POST['instagram'];
+            return $this->userModel->updateInstagram($instagram, $username);
+        }
+
+        public function getSocialMedia()
+        {
+            $social = $_POST['social'];
+            $username = $_POST['username'];
+            $data = $this->userModel->selectSocialMedia($social, $username);
+            echo json_encode(['media'=> $social,'data'=>$data]);
+        }
+
     }

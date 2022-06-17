@@ -11,8 +11,9 @@ import ShowModalEdit from '../../components/ShowModalEdit'
 import Footer from '../../components/Footer'
 import Img from '../../components/Img'
 import axios from 'axios'
+import AddSocialMedia from '../../components/AddSocialMedia'
 
-const Links = ()=>{
+const Links = (props)=>{
 
   const [showModalEdit, setShowModalEdit] = useState(false)
   const [links, setLinks] = useState([])
@@ -20,6 +21,11 @@ const Links = ()=>{
   const [mytitle, setMyTitle] = useState('')
   const [myUrl, setMyUrl] = useState('')
 
+  const [requestNewLink, setRequestNewLink] = useState(false)
+  const [newDescription, setNewDescription] = useState(false)
+  const [newDelete, setNewDelete] = useState(false)
+
+  //
   const [clickedNone, setClickedNone] = useState(true)
   const [clickedYoutube, setClickedYoutube] = useState(false)
   const [clickedSpotify, setClickedSpotify] = useState(false)
@@ -32,7 +38,8 @@ const Links = ()=>{
     window.open('/'+localStorage.getItem('username'))
   }
 
-  const HandleClickLink = ()=>{
+  const HandleClickLink = (e)=>{
+    e.preventDefault();
     let formData = new FormData();
 
     let typeLink = ''
@@ -54,8 +61,10 @@ const Links = ()=>{
 
     axios.post('http://localhost/ishare/backend/link/addLink', formData)
     .then(function(response){
-      console.log(response);
-      window.location.reload()
+      setRequestNewLink(!requestNewLink)
+      props.newLinkMobile(!requestNewLink);
+      title.current.value = '';
+      linkUrl.current.value = '';
     })
     .catch(function(error){
       console.log(error);
@@ -68,23 +77,23 @@ const Links = ()=>{
 
     axios.post('http://localhost/ishare/backend/link/getLinks', myFormData)
     .then(function(response){
-      // console.log(response)
       setLinks(response.data)
     })
     .catch(function(error){
       console.log(error);
     })
-  }, [])
+  }, [requestNewLink, newDelete])
 
-  const HandleClickDesc = ()=>{
+  const HandleClickDesc = (e)=>{
+    e.preventDefault();
     let formDataDesc = new FormData();
     formDataDesc.append('description', description.current.value)
     formDataDesc.append('username', localStorage.getItem('username'))
 
     axios.post('http://localhost/ishare/backend/user/addDescription', formDataDesc)
     .then(function(response){
-      window.location.reload()
-      // console.log(response)
+      props.newDescription(!newDescription);
+      description.current.value = '';
     })
     .catch(function(error){
       console.log(error);
@@ -102,7 +111,8 @@ const Links = ()=>{
 
             <Img />
 
-            {links.map((link, index)=>{
+            {links.length > 0 &&
+            links.map((link, index)=>{
               return(
                 <div key={index}>
                   <div className='flex justify-between mt-2 p-4 shadow-lg rounded-md bg-firstColor text-white'>
@@ -120,19 +130,12 @@ const Links = ()=>{
                       </button>
 
                       <button type='button'
-                        onClick={(e)=>{
+                        onClick={async (e)=>{
                           e.preventDefault();
                           let formDataDelete = new FormData();
                           formDataDelete.append('idLink', link.idLink)
-
-                          axios.post('http://localhost/ishare/backend/link/deleteLink', formDataDelete)
-                          .then(function(response){
-                          window.location.reload()
-                            // console.log(response);
-                          })
-                          .catch(function(error){
-                            console.log(error);
-                          })
+                          await axios.post('http://localhost/ishare/backend/link/deleteLink', formDataDelete)
+                          setNewDelete(!newDelete)
                         }}><img src={deletee} width='25' className='block' />
                       </button>
                     </div>
@@ -161,8 +164,20 @@ const Links = ()=>{
 
             <button type='button' onClick={HandleClickLink} className='mt-2 py-1 px-4 text-sm font-semibold text-firstColor border-2 border-firstColor rounded-md'>Add</button>
           </div>
+          <AddSocialMedia socialM="Add Facebook" media='facebook' />
+          <AddSocialMedia socialM="Add Twitter" media='twitter' />
+          <AddSocialMedia socialM="Add instagram" media='instagram' />
         </div>
-          <Mobile HandleClick={HandleClick} />
+        {/* Share */}
+        <div className='display_none mt-2 text-white absolute right-48 top-20 share'>
+          <button onClick={HandleClick} className='text-md underline' target='_blank'>iShare.com/{localStorage.getItem('username')}</button>
+          <button className='ml-6 border-4 px-2 py-1 rounded-md'>Share</button>
+        </div>
+        <div className='w-1/5'>
+          <div className='fixed'>
+            <Mobile />
+          </div>
+        </div>
       </div>
 
       <ShowModalEdit showModalEdit={showModalEdit} close={()=>{setShowModalEdit(false)}} idLink={myIdLink} title={mytitle} linkUrl={myUrl} />
