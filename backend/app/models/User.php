@@ -198,4 +198,36 @@
                             ");
             return $this->db->execute();
         }
+
+        public function updateFacebook($facebook, $username)
+        {
+            $this->db->query("UPDATE user SET fb = '$facebook'
+                              WHERE username = '$username'
+                            ");
+            return $this->db->execute();
+        }
+
+        public function updateTwitter($twitter, $username)
+        {
+            $this->db->query("UPDATE user SET tw = '$twitter'
+                              WHERE username = '$username'
+                            ");
+            return $this->db->execute();
+        }
+
+        public function updateInstagram($instagram, $username)
+        {
+            $this->db->query("UPDATE user SET it = '$instagram'
+                              WHERE username = '$username'
+                            ");
+            return $this->db->execute();
+        }
+
+        public function selectSocialMedia($social, $username)
+        {
+            $this->db->query("SELECT $social FROM user
+                              WHERE username = '$username'
+                            ");
+            return $this->db->single();
+        }
     }

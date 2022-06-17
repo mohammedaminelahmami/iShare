@@ -1,8 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import github from '../../imgs/github.png'
-import facebook from '../../imgs/facebook1.png'
-import twitter from '../../imgs/twitter1.png'
-import linkdin from '../../imgs/linkdin.png'
 import spt from '../../imgs/spt.png'
 import ytt from '../../imgs/ytt.png'
 import verified from '../../imgs/verified.png'
@@ -10,6 +6,7 @@ import axios from 'axios'
 import YouTube from 'react-youtube';
 import HandleImg from '../../components/HandleImg'
 import SpotifyPlayer from 'react-spotify-player';
+import SocialMediaIcons from '../../components/SocialMediaIcons'
 var getYouTubeID = require('get-youtube-id');
 
 function View(props) {
@@ -123,12 +120,12 @@ function View(props) {
   {
     if(users[i].username === usernameUrl)
     {
-      if(localStorage.getItem('usernameView') == usernameUrl)
+      if(localStorage.getItem(usernameUrl) == usernameUrl)
       {
         // console.log('deja hsabto');
       }
       else{
-        localStorage.setItem('usernameView', usernameUrl);
+        localStorage.setItem(usernameUrl, usernameUrl);
         resAddView();
         // console.log('function view++');
         break;
@@ -231,13 +228,7 @@ function View(props) {
             )
           })
         }
-        {/* social media icons */}
-        <div className='flex m-10 gap-2 md:mb-4 md:mt-8'>
-          <button className='w-7 h-full md:w-6'><img src={github} /></button>
-          <button className='w-7 h-full md:w-6'><img src={facebook} /></button>
-          <button className='w-7 h-full md:w-6'><img src={twitter} /></button>
-          <button className='w-7 h-full md:w-6'><img src={linkdin} /></button>
-        </div>
+      <SocialMediaIcons username={username} />
       </div>
     </div>
   )

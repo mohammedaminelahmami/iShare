@@ -11,6 +11,7 @@ import ShowModalEdit from '../../components/ShowModalEdit'
 import Footer from '../../components/Footer'
 import Img from '../../components/Img'
 import axios from 'axios'
+import AddSocialMedia from '../../components/AddSocialMedia'
 
 const Links = (props)=>{
 
@@ -62,6 +63,8 @@ const Links = (props)=>{
     .then(function(response){
       setRequestNewLink(!requestNewLink)
       props.newLinkMobile(!requestNewLink);
+      title.current.value = '';
+      linkUrl.current.value = '';
     })
     .catch(function(error){
       console.log(error);
@@ -90,6 +93,7 @@ const Links = (props)=>{
     axios.post('http://localhost/ishare/backend/user/addDescription', formDataDesc)
     .then(function(response){
       props.newDescription(!newDescription);
+      description.current.value = '';
     })
     .catch(function(error){
       console.log(error);
@@ -107,7 +111,8 @@ const Links = (props)=>{
 
             <Img />
 
-            {links.map((link, index)=>{
+            {links.length > 0 &&
+            links.map((link, index)=>{
               return(
                 <div key={index}>
                   <div className='flex justify-between mt-2 p-4 shadow-lg rounded-md bg-firstColor text-white'>
@@ -159,12 +164,20 @@ const Links = (props)=>{
 
             <button type='button' onClick={HandleClickLink} className='mt-2 py-1 px-4 text-sm font-semibold text-firstColor border-2 border-firstColor rounded-md'>Add</button>
           </div>
+          <AddSocialMedia socialM="Add Facebook" media='facebook' />
+          <AddSocialMedia socialM="Add Twitter" media='twitter' />
+          <AddSocialMedia socialM="Add instagram" media='instagram' />
         </div>
-        {/* <div className='w-1/5'>
-          <div className='fixed'> */}
-            <Mobile HandleClick={HandleClick} />
-          {/* </div>
-        </div> */}
+        {/* Share */}
+        <div className='display_none mt-2 text-white absolute right-48 top-20 share'>
+          <button onClick={HandleClick} className='text-md underline' target='_blank'>iShare.com/{localStorage.getItem('username')}</button>
+          <button className='ml-6 border-4 px-2 py-1 rounded-md'>Share</button>
+        </div>
+        <div className='w-1/5'>
+          <div className='fixed'>
+            <Mobile />
+          </div>
+        </div>
       </div>
 
       <ShowModalEdit showModalEdit={showModalEdit} close={()=>{setShowModalEdit(false)}} idLink={myIdLink} title={mytitle} linkUrl={myUrl} />

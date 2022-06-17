@@ -1,8 +1,7 @@
 import React, {useState, useEffect} from 'react'
-import github from '../../imgs/github.png'
 import facebook from '../../imgs/facebook1.png'
 import twitter from '../../imgs/twitter1.png'
-import linkdin from '../../imgs/linkdin.png'
+import instagram from '../../imgs/ig.png'
 import spt from '../../imgs/spt.png'
 import ytt2 from '../../imgs/ytt2.png'
 import music1 from '../../imgs/music1.png'
@@ -241,10 +240,9 @@ function View(props) {
         }
         {/* social media icons */}
         <div className='flex m-10 gap-2 md:mb-4 md:mt-8'>
-          <button className='w-7 h-full md:w-6'><img src={github} /></button>
           <button className='w-7 h-full md:w-6'><img src={facebook} /></button>
           <button className='w-7 h-full md:w-6'><img src={twitter} /></button>
-          <button className='w-7 h-full md:w-6'><img src={linkdin} /></button>
+          <button className='w-7 h-full md:w-6'><img src={instagram} /></button>
         </div>
       </div>
     </div>
