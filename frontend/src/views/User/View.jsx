@@ -9,6 +9,7 @@ import axios from 'axios'
 import YouTube from 'react-youtube';
 import HandleImg from '../../components/HandleImg'
 import SpotifyPlayer from 'react-spotify-player';
+import Div from '../../components/Div'
 var getYouTubeID = require('get-youtube-id');
 
 function View(props) {
@@ -124,12 +125,12 @@ function View(props) {
   {
     if(users[i].username === usernameUrl)
     {
-      if(localStorage.getItem('usernameView') == usernameUrl)
+      if(localStorage.getItem(usernameUrl) == usernameUrl)
       {
         // console.log('deja hsabto');
       }
       else{
-        localStorage.setItem('usernameView', usernameUrl);
+        localStorage.setItem(usernameUrl, usernameUrl);
         resAddView();
         // console.log('function view++');
         break;
@@ -154,9 +155,9 @@ function View(props) {
         {/* <input type="text" onChange={HandleChange} defaultValue={youtubeUrl} placeholder='URL...' hidden/> */}
 
         {links&&
-          links.map((link)=>{
+          Array.from(links).map((link, index)=>{
             return(
-              <>
+              <Div key={index}>
                 <button
                   onClick={link.type === 'Normal Link' ? ()=>{window.open('http://'+link.linkUrl, '_blank')} : 
                     (link.type === 'Youtube Link' ?
@@ -229,7 +230,7 @@ function View(props) {
                     />
                   </div>
                 }
-              </>
+              </Div>
             )
           })
         }

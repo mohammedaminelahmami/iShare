@@ -12,7 +12,7 @@ import axios from 'axios'
 function Themes(props) {
 
   const [userPro, setUserPro] = useState(false);
-  const [idTheme, setIdTheme] = useState(1);
+  const [idTheme, setIdTheme] = useState('');
   const [themeDB, setThemeDB] = useState([]);
 
   const getUser = async ()=>{
@@ -31,27 +31,8 @@ function Themes(props) {
     }
   }
 
-  // const getThemes = async ()=>{
-  //   let response = await axios.get('http://localhost/ishare/backend/theme/getAllThemes')
-  //   setThemes(response.data)
-  //   // console.log(response.data)
-  // }
-
-  // const getThemeByTitle = async ()=>{
-  //   let formDataTheme = new FormData();
-  //   formDataTheme.append('title', title);
-
-  //   let response = await axios.post('http://localhost/ishare/backend/theme/getThemeByTitle', formDataTheme)
-  //   console.log(response.data)
-  // }
-
-  // useEffect(()=>{
-  //   getThemeByTitle();
-  // }, [title])
-
   useEffect(()=>{
     getUser();
-    // getThemes();
   }, [])
 
   const changeTheme = async ()=>{
@@ -77,7 +58,6 @@ function Themes(props) {
     }
     props.getTheme(idTheme)
   }
-
   
     useEffect(()=>{
       changeTheme();

@@ -11,6 +11,7 @@ import axios from 'axios'
 import YouTube from 'react-youtube';
 import HandleImg from '../../components/HandleImg'
 import SpotifyPlayer from 'react-spotify-player';
+import Div from '../../components/Div'
 var getYouTubeID = require('get-youtube-id');
 
 function View(props) {
@@ -126,12 +127,12 @@ function View(props) {
   {
     if(users[i].username === usernameUrl)
     {
-      if(localStorage.getItem('usernameView') == usernameUrl)
+      if(localStorage.getItem(usernameUrl) == usernameUrl)
       {
         // console.log('deja hsabto');
       }
       else{
-        localStorage.setItem('usernameView', usernameUrl);
+        localStorage.setItem(usernameUrl, usernameUrl);
         resAddView();
         // console.log('function view++');
         break;
@@ -158,10 +159,10 @@ function View(props) {
 
         {/* <input type="text" onChange={HandleChange} defaultValue={youtubeUrl} placeholder='URL...' hidden/> */}
 
-        {links&&
-          links.map((link)=>{
+        {links &&
+          Array.from(links).map((link, index)=>{
             return(
-              <>
+              <Div key={index}>
                 <button
                   onClick={link.type === 'Normal Link' ? ()=>{window.open('http://'+link.linkUrl, '_blank')} : 
                     (link.type === 'Youtube Link' ?
@@ -202,7 +203,7 @@ function View(props) {
                       }
                     )
                   }
-                  className='bg-green-600 text-white text-medium font-semibold mt-7 px-5 py-3 w-1/3 md:text-xs md:w-52 md:mt-2 hoverButtonTheme2'>
+                  className='bg-theme2Color text-white text-medium font-semibold rounded-full mt-7 px-5 py-2.5 w-1/3 md:text-xs md:w-52 md:mt-2 hoverButtonTheme2'>
                     {link.type === 'Spotify Link' ?
                       <div className='flex'>
                         <div className=''><img src={spt} width="20" className='inline' /></div>
@@ -220,12 +221,12 @@ function View(props) {
                     }
                 </button>
                 {YTlink.idLink == link.idLink&&
-                  <div className='w-1/3 sm:w-width_77 mt-1 border-8 border-green-600 rounded-md'>
+                  <div className='w-1/3 sm:w-width_77 mt-1 border-8 border-theme2Color rounded-md'>
                     <YouTube videoId={urlYoutube} opts={optsWeb} />
                   </div>
                 }
                 {spotifyLink.idLink == link.idLink&&
-                  <div className='w-1/3 sm:w-width_77 mt-1 border-8 border-green-600 rounded-md'>
+                  <div className='w-1/3 sm:w-width_77 mt-1 border-8 border-theme2Color rounded-md'>
                     <SpotifyPlayer
                       uri={spotifyLink.linkUrl}
                       size={size}
@@ -234,7 +235,7 @@ function View(props) {
                     />
                   </div>
                 }
-              </>
+              </Div>
             )
           })
         }

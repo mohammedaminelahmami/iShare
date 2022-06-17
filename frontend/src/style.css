@@ -106,8 +106,7 @@ body{
 }
 
 .hoverButtonTheme2:hover{
-    background-color: rgb(30, 62, 30);
-    outline: white solid 1px;
+    background-color: rgb(55, 122, 55);
     transform: scale(1.04);
 }
 
@@ -206,12 +205,12 @@ body{
 
 /* Background Theme 3 */
 .myBgTheme3{
-    background-image: linear-gradient(to bottom right, white, #a5abff);
+    background-color: #bfe9fd;
 }
 
 /* Background Theme 2 */
 .bgThemeGreen{
-    background-image: linear-gradient(to bottom right, white, #3be15c);
+    background-color: #98ffa3;
 }
 
 /* @media(max-width: 2561px)

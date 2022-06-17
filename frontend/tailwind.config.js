@@ -26,6 +26,8 @@ module.exports = {
         favColor : "#261D8E",
         theme1Color : "#872D2D",
         theme1ColorHover : "#EC5656",
+        theme2Color : '#00c58a',
+        theme2Colorbtn : '#98ffa3',
         colorOpacity : "#00000066",
         ffirstColor : '#2736D4',
         stripeColor : '#0a2540',

@@ -13,7 +13,31 @@ const SocialMediaIcons = (props) => {
         let response = await axios.post(`http://localhost/ishare/backend/user/getSocialMedia`, formData)
         if(response.data.media === 'fb')
         {
-            console.log();
+          let string = response.data.data.fb;
+          if(string.includes('https://'))
+          {
+            window.open(response.data.data.fb, '_blank');
+          }else{
+            window.open('https://'+response.data.data.fb, '_blank');
+          }
+        }else if(response.data.media === 'tw')
+        {
+          let string = response.data.data.tw;
+          if(string.includes('https://'))
+          {
+            window.open(response.data.data.tw, '_blank');
+          }else{
+            window.open('https://'+response.data.data.tw, '_blank');
+          }
+        }else if(response.data.media === 'it')
+        {
+          let string = response.data.data.it;
+          if(string.includes('https://'))
+          {
+            window.open(response.data.data.it, '_blank');
+          }else{
+            window.open('https://'+response.data.data.it, '_blank');
+          }
         }
     }
 

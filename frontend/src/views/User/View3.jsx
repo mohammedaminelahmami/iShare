@@ -7,6 +7,7 @@ import YouTube from 'react-youtube';
 import HandleImg from '../../components/HandleImg'
 import SpotifyPlayer from 'react-spotify-player';
 import SocialMediaIcons from '../../components/SocialMediaIcons'
+import Div from '../../components/Div'
 var getYouTubeID = require('get-youtube-id');
 
 function View(props) {
@@ -149,9 +150,9 @@ function View(props) {
         {/* <input type="text" onChange={HandleChange} defaultValue={youtubeUrl} placeholder='URL...' hidden/> */}
 
         {links&&
-          links.map((link)=>{
+        Array.from(links).map((link, index)=>{
             return(
-              <>
+              <Div key={index}>
                 <button
                   onClick={link.type === 'Normal Link' ? ()=>{window.open('http://'+link.linkUrl, '_blank')} : 
                     (link.type === 'Youtube Link' ?
@@ -192,7 +193,7 @@ function View(props) {
                       }
                     )
                   }
-                  className='bg-firstColor text-white text-medium font-semibold rounded-md mt-6 px-5 py-3 w-1/3 md:text-xs md:w-52 md:mt-2 hoverButtonTheme3'>
+                  className='bg-firstColor text-white text-medium font-semibold rounded-sm mt-6 px-5 py-2.5 w-1/3 md:text-xs md:w-52 md:mt-2 hoverButtonTheme3'>
                     {link.type === 'Spotify Link' ?
                       <div className='flex'>
                         <div className=''><img src={spt} width="20" className='inline' /></div>
@@ -224,7 +225,7 @@ function View(props) {
                     />
                   </div>
                 }
-              </>
+              </Div>
             )
           })
         }
