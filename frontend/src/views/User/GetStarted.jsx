@@ -6,12 +6,22 @@ import Logo from '../../components/Logo'
 
 function GetStarted() {
 
+  const [fieldsRequired, setFieldsRequired] = useState(false);
+
   const username = useRef('')
   const email = useRef('')
   const password = useRef('')
 
   const formData = new FormData()
   const HandleSubmit = ()=>{
+
+    if(username.current.value === '' || email.current.value === '' || password.current.value === '')
+    {
+      setFieldsRequired(true)
+    }
+    else{
+      setFieldsRequired(false)
+    }
 
     formData.append('username', username.current.value)
     formData.append('email', email.current.value)
@@ -37,6 +47,8 @@ function GetStarted() {
             <input type="text" ref={username} className='bg-inputColor mt-14 px-5 py-3 border-2 w-1/3 placeHolderColor md:w-1/2' placeholder='Username' required/>
             <input type="email" ref={email} className='bg-inputColor mt-6 px-5 py-3 border-2 w-1/3 placeHolderColor md:w-1/2' placeholder='Email' required/>
             <input type="password" ref={password} className='bg-inputColor mt-6 px-5 py-3 border-2 w-1/3 placeHolderColor md:w-1/2' placeholder='Password' required/>
+
+            <div className='mt-1 text-red-600 font-medium'>{fieldsRequired ? 'Please fill all the fields correctly !' : ''}</div>
 
             <button type='submit' className='bg-firstColor mt-7 px-5 py-3 w-1/3 z-10 md:w-1/2 text-white font-bold'>Register</button>
 

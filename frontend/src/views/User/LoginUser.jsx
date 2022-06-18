@@ -3,28 +3,27 @@ import { Link } from 'react-router-dom'
 import Logo from '../../components/Logo'
 import AccountBannedModal from '../../components/AccountBannedModal'
 import axios from 'axios';
-// import { Formik, Form, ErrorMessage } from 'formik'
-// import * as Yup from 'yup'
 
 const LoginUser = ()=>{
-    
-    // const validate = Yup.object({
-    //     username_name: Yup.string()
-    //     .max(15, 'Username must be 15 characters or less')
-    //     .required('Username is required'),
-
-    //     password_name: Yup.string()
-    //     .required('Password is required')
-    // })
 
     const [loggedIn, setLoggedIn] = useState(false);
     const [banned, setBanned] = useState(false);
 
+    const [fieldsRequired, setFieldsRequired] = useState(false);
+
     const username = useRef('');
     const password = useRef('');
 
+
     const HandleSubmit = (e)=>{
         e.preventDefault();
+
+        if(username.current.value === '' || password.current.value === '')
+        {
+            setFieldsRequired(true)
+        }else{
+            setFieldsRequired(false)
+        }
 
         let formDataCheckUserBan = new FormData();
         formDataCheckUserBan.append('username', username.current.value);
@@ -78,6 +77,8 @@ const LoginUser = ()=>{
 
                             <input type="text" ref={username} name='username_name' className='bg-inputColor mt-14 px-5 py-3 border-2 w-1/3 placeHolderColor md:w-1/2' placeholder='Username'/>
                             <input type="password" ref={password} name='password_name' className='bg-inputColor mt-6 px-5 py-3 border-2 w-1/3 placeHolderColor md:w-1/2' placeholder='Password'/>
+
+                            <div className='mt-1 text-red-600 font-medium'>{fieldsRequired ? 'Please fill all the fields correctly !' : ''}</div>
 
                             <button type='submit' className='bg-firstColor text-white font-bold mt-7 px-5 py-3 w-1/3 md:w-1/2'>Login</button>
 
