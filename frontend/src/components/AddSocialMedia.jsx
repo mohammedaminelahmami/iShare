@@ -29,15 +29,17 @@ const AddSocialMedia = (props) => {
       if(check_fb === undefined)
       {
         check_fb = '';
-      }else if(check_tw === undefined)
+      }
+      if(check_tw === undefined)
       {
         check_tw = '';
-      }else if(check_it === undefined)
+      }
+      if(check_it === undefined)
       {
         check_it = '';
       }
 
-      if(validURL(check_fb || check_tw || check_it) && check_fb.includes('facebook.com') || check_fb.includes('fb.com') || check_it.includes('instagram.com') || check_tw.includes('twitter.com'))
+      if(validURL(check_fb || check_tw || check_it) && check_fb.includes('facebook.com') || check_fb.includes('fb.com') || check_tw.includes('twitter.com') || check_it.includes('instagram.com'))
       {
         let formData = new FormData();
         formData.append(props.media === 'facebook' ? 'facebook' : (props.media === 'twitter' ? 'twitter' : 'instagram'), props.media === 'facebook' ? check_fb : (props.media === 'twitter' ? check_tw : check_it))
