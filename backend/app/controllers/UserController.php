@@ -60,7 +60,7 @@
             {
                 echo json_encode("please enter correct 'username' ");
             }else{
-                $row = $this->userModel->checkUser($username);
+                $row = $this->userModel->selectUser($username);
                 if($row)
                 {
                     // Hashed Password from Database
@@ -123,7 +123,20 @@
             $description = $_POST['description'];
             $username = $_POST['username'];
 
-            return $this->userModel->insertDescription($description, $username);
+            if(empty($description))
+            {
+                echo json_encode([
+                    "message" => "required",
+                ]);
+            }else{
+                return $this->userModel->insertDescription($description, $username);
+            }
+        }
+
+        public function deleteDescription()
+        {
+            $username = $_POST['username'];
+            return $this->userModel->deleteDescription($username);
         }
 
         public function getDescription()
