@@ -124,7 +124,7 @@ function PlanPricing() {
                 </ul>
                 
                 {loggedIn ?
-                    (localStorage.getItem('plan') == 1 ?
+                    (localStorage.getItem('plan'+localStorage.getItem('username')) == 1 ?
                         <button type="button" disabled className="text-white bg-gray-400 focus:ring-4 focus:outline-none focus:ring-blue-200 dark:focus:ring-blue-900 font-medium rounded text-sm px-5 py-2.5 inline-flex justify-center w-full text-center">Pro</button>
                         :
                         <button type="button" onClick={HandleClickModal} className="text-white bg-firstColor hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-200 dark:focus:ring-blue-900 font-medium rounded text-sm px-5 py-2.5 inline-flex justify-center w-full text-center">Get PRO</button>

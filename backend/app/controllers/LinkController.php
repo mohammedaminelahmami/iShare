@@ -61,7 +61,15 @@
             $title = $_POST['title'];
             $idLink = $_POST['idLink'];
 
-            return $this->linkModel->updateLink($linkUrl, $title, $idLink);
+            if(empty($title) || empty($linkUrl))
+            {
+                echo json_encode([
+                    "message" => "required",
+                ]);
+            }else
+            {
+                return $this->linkModel->updateLink($linkUrl, $title, $idLink);
+            }
         }
 
         public function getYoutubeLinks()

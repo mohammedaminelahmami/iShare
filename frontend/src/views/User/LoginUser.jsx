@@ -56,6 +56,11 @@ const LoginUser = ()=>{
             {
                 setBanned(true)
             }
+
+            if(data.plan === 1)
+            {
+                localStorage.setItem('plan'+data.username, 1);
+            }
         })
         .catch(error=>{
             console.log(error);

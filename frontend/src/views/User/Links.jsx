@@ -57,7 +57,7 @@ const Links = (props)=>{
       typeLink = 'Spotify Link'
     }
 
-    // validation
+    // validation empty fields
     if(title.current.value === '' || linkUrl.current.value === '')
     {
       setLinkRequired(true)

@@ -47,7 +47,7 @@ const payment_Ex = async ()=>{
     let response = await axios.post('http://localhost/ishare/backend/payment/payment_Ex', formDataPayment_Ex);
     if(response.data === '0')
     {
-        localStorage.removeItem('plan');
+        localStorage.removeItem('plan'+localStorage.getItem('username'));
     }
 }
 
@@ -82,7 +82,6 @@ function PaymentForm() {
                     // changer plan 0 --> 1 user --> pro
                     updatePlanApi();
                     insertPayment();
-                    localStorage.setItem('plan', 1);
                 }
             } catch (error) {
                 console.log("ERROR" . error);

@@ -4,12 +4,23 @@ import axios from 'axios'
 function ShowModalEdit(props) {
 
   const [updateState, setUpdateState] = useState(false)
+  const [linkRequired, setLinkRequired] = useState(false)
 
   const linkUrl_update = useRef('')
   const title_update = useRef('')
 
   const HandleSubmitEdit = (e)=>{
     e.preventDefault();
+
+    // validation empty fields
+    if(title_update.current.value === '' || linkUrl_update.current.value === '')
+    {
+      setLinkRequired(true)
+      props.showModalEdit();
+    }else{
+      setLinkRequired(false)
+    }
+
     let formDataEdit = new FormData();
 
     formDataEdit.append('title', title_update.current.value)
@@ -52,7 +63,10 @@ function ShowModalEdit(props) {
                     <textarea name="body" id="body" cols="15" rows="1" defaultValue={props.title} ref={title_update}  className="mt-2 mb-2 bg-gray-100 border-2 w-full p-2 rounded-md" placeholder="Title"></textarea>
                     <textarea name="body" id="body" cols="15" rows="3" defaultValue={props.linkUrl} ref={linkUrl_update} className="bg-gray-100 border-2 w-full p-2 rounded-md" placeholder="Url"></textarea>
 
-                    <button type='submit' className='mt-2 py-1 px-4 text-sm font-semibold text-firstColor border-2 border-firstColor rounded-md'>Edit</button>
+                    <div className='flex gap-3'>
+                      <button type='submit' className='mt-2 py-1 px-4 text-sm font-semibold text-firstColor border-2 border-firstColor rounded-md'>Edit</button>
+                      <div className='mt-2.5 text-red-600 font-medium'>{linkRequired ? 'Fields are required !' : ''}</div>
+                    </div>
                   </form>
                 </div>
               </div>
