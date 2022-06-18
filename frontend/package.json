@@ -30,6 +30,7 @@
     "react-scripts": "5.0.1",
     "react-spotify-player": "^1.0.4",
     "react-youtube": "^9.0.1",
+    "sweetalert2": "^11.4.17",
     "web-vitals": "^2.1.4",
     "yup": "^0.32.11"
   },

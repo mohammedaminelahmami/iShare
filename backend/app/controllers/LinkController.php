@@ -20,26 +20,27 @@
             return $this->linkModel->selectDescription($username);
         }
 
-        public function updateDescription()
-        {
-            //
-        }
-
         public function addLink()
         {
-            
-
             $title = $_POST['title'];
             $linkUrl = $_POST['linkUrl'];
             $username = $_POST['username'];
             $type = $_POST['type'];
 
-            if($this->linkModel->insertLink($title, $linkUrl, $username, $type))
+            if(empty($title) || empty($linkUrl))
             {
-                echo json_encode('TRUE');
+                echo json_encode([
+                    "message" => "required",
+                ]);
             }else{
-                echo json_encode('FALSE');
+                if($this->linkModel->insertLink($title, $linkUrl, $username, $type))
+                {
+                    echo json_encode('TRUE');
+                }else{
+                    echo json_encode('FALSE');
+                }
             }
+
         }
 
         public function getLinks()

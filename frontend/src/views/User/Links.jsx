@@ -40,6 +40,7 @@ const Links = (props)=>{
     window.open('/'+localStorage.getItem('username'))
   }
 
+  const [linkRequired, setLinkRequired] = useState(false)
   const HandleClickLink = (e)=>{
     e.preventDefault();
     let formData = new FormData();
@@ -54,6 +55,14 @@ const Links = (props)=>{
     }else if(clickedSpotify)
     {
       typeLink = 'Spotify Link'
+    }
+
+    // validation
+    if(title.current.value === '' || linkUrl.current.value === '')
+    {
+      setLinkRequired(true)
+    }else{
+      setLinkRequired(false)
     }
 
     formData.append('title', title.current.value)
@@ -168,7 +177,7 @@ const Links = (props)=>{
               <div className='flex gap-3'>
                 <button type='button' onClick={HandleClickDesc} className='mt-2 py-1 px-4 text-sm font-semibold text-firstColor bg-white border-2 border-firstColor rounded-md'>Submit</button>
                 <button type='button' onClick={HandleDeleteDesc} className='mt-1'><img src={deleteDesc} width="25" /></button>
-                <div className='mt-2 text-red-600 font-medium'>{descRequired ? 'Required!' : ''}</div>
+                <div className='mt-2.5 text-red-600 font-medium'>{descRequired ? 'Required !' : ''}</div>
               </div>
             </div>
           </div>
@@ -184,7 +193,10 @@ const Links = (props)=>{
             <textarea name="body" id="body" cols="15" rows="1" ref={title} className="mt-2 mb-2 bg-gray-100 border-2 w-full p-2 rounded-md" placeholder="Title"></textarea>
             <textarea name="body" id="body" cols="15" rows="3" ref={linkUrl} className="bg-gray-100 border-2 w-full p-2 rounded-md" placeholder="Url"></textarea>
 
-            <button type='button' onClick={HandleClickLink} className='mt-2 py-1 px-4 text-sm font-semibold text-firstColor border-2 border-firstColor rounded-md'>Add</button>
+            <div className='flex gap-3'>
+              <button type='button' onClick={HandleClickLink} className='mt-2 py-1 px-4 text-sm font-semibold text-firstColor border-2 border-firstColor rounded-md'>Add</button>
+              <div className='mt-2.5 text-red-600 font-medium'>{linkRequired ? 'Fields are required !' : ''}</div>
+            </div>
           </div>
           <AddSocialMedia socialM="Add Facebook" media='facebook' />
           <AddSocialMedia socialM="Add Twitter" media='twitter' />
