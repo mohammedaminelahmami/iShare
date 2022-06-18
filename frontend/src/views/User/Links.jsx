@@ -12,6 +12,7 @@ import Footer from '../../components/Footer'
 import Img from '../../components/Img'
 import axios from 'axios'
 import AddSocialMedia from '../../components/AddSocialMedia'
+import deleteDesc from '../../imgs/deleteDesc.png'
 
 const Links = (props)=>{
 
@@ -24,6 +25,7 @@ const Links = (props)=>{
   const [requestNewLink, setRequestNewLink] = useState(false)
   const [newDescription, setNewDescription] = useState(false)
   const [newDelete, setNewDelete] = useState(false)
+  const [updateState, setUpdateState] = useState(false)
 
   //
   const [clickedNone, setClickedNone] = useState(true)
@@ -82,10 +84,19 @@ const Links = (props)=>{
     .catch(function(error){
       console.log(error);
     })
-  }, [requestNewLink, newDelete])
+  }, [requestNewLink, newDelete, updateState])
 
+  const [descRequired, setDescRequired] = useState(false)
   const HandleClickDesc = (e)=>{
     e.preventDefault();
+
+    if(description.current.value === '')
+    {
+      setDescRequired(true);
+    }else{
+      setDescRequired(false);
+    }
+
     let formDataDesc = new FormData();
     formDataDesc.append('description', description.current.value)
     formDataDesc.append('username', localStorage.getItem('username'))
@@ -100,6 +111,12 @@ const Links = (props)=>{
     })
   }
 
+  const HandleDeleteDesc = async ()=>{
+    let formDataDesc = new FormData();
+    formDataDesc.append('username', localStorage.getItem('username'))
+    await axios.post('http://localhost/ishare/backend/user/deleteDescription', formDataDesc)
+  }
+
   return (
     <div className='bg-gray-100 font-["poppins"] backg'>
       <Nav />
@@ -111,8 +128,8 @@ const Links = (props)=>{
 
             <Img />
 
-            {links.length > 0 &&
-            links.map((link, index)=>{
+            {links &&
+            Array.from(links).map((link, index)=>{
               return(
                 <div key={index}>
                   <div className='flex justify-between mt-2 p-4 shadow-lg rounded-md bg-firstColor text-white'>
@@ -136,6 +153,7 @@ const Links = (props)=>{
                           formDataDelete.append('idLink', link.idLink)
                           await axios.post('http://localhost/ishare/backend/link/deleteLink', formDataDelete)
                           setNewDelete(!newDelete)
+                          setUpdateState(!updateState)
                         }}><img src={deletee} width='25' className='block' />
                       </button>
                     </div>
@@ -147,7 +165,11 @@ const Links = (props)=>{
             {/* Description */}
             <div className='p-4 w-full bg-white shadow-lg rounded-md'>
               <textarea ref={description} name="body" id="body" cols="15" rows="2" className="bg-gray-100 border-2 w-full p-2 rounded-md" placeholder="Description"></textarea>
-              <button type='button' onClick={HandleClickDesc} className='mt-2 py-1 px-4 text-sm font-semibold text-firstColor bg-white border-2 border-firstColor rounded-md'>Submit</button>
+              <div className='flex gap-3'>
+                <button type='button' onClick={HandleClickDesc} className='mt-2 py-1 px-4 text-sm font-semibold text-firstColor bg-white border-2 border-firstColor rounded-md'>Submit</button>
+                <button type='button' onClick={HandleDeleteDesc} className='mt-1'><img src={deleteDesc} width="25" /></button>
+                <div className='mt-2 text-red-600 font-medium'>{descRequired ? 'Required!' : ''}</div>
+              </div>
             </div>
           </div>
 
@@ -173,14 +195,14 @@ const Links = (props)=>{
           <button onClick={HandleClick} className='text-md underline' target='_blank'>iShare.com/{localStorage.getItem('username')}</button>
           <button className='ml-6 border-4 px-2 py-1 rounded-md'>Share</button>
         </div>
-        <div className='w-1/5'>
+        <div className='w-1/5 display_none'>
           <div className='fixed'>
             <Mobile />
           </div>
         </div>
       </div>
 
-      <ShowModalEdit showModalEdit={showModalEdit} close={()=>{setShowModalEdit(false)}} idLink={myIdLink} title={mytitle} linkUrl={myUrl} />
+      <ShowModalEdit showModalEdit={showModalEdit} close={()=>{setShowModalEdit(false)}} idLink={myIdLink} title={mytitle} linkUrl={myUrl} updateState={(e)=>{setUpdateState(e)}} />
 
       <div className='mt-36'>
         <Footer />

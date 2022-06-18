@@ -29,16 +29,6 @@
             }
         }
 
-        // Check if the user exists { Login }
-        public function checkUser($username)
-        {
-            $this->db->query("SELECT * FROM ishare . user
-                              WHERE username = '$username'
-                            ");
-            $row = $this->db->single();
-            return $row;
-        }
-
         // check Email { Unique }
         public function checkEmail($email)
         {
@@ -72,6 +62,15 @@
         {
             $this->db->query("UPDATE user
                               SET description = '$description'
+                              WHERE username = '$username'
+                            ");
+            return $this->db->execute();
+        }
+
+        public function deleteDescription($username)
+        {
+            $this->db->query("UPDATE user
+                              SET description = ''
                               WHERE username = '$username'
                             ");
             return $this->db->execute();

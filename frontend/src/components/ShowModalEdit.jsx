@@ -3,26 +3,30 @@ import axios from 'axios'
 
 function ShowModalEdit(props) {
 
-    const linkUrl_update = useRef('')
-    const title_update = useRef('')
+  const [updateState, setUpdateState] = useState(false)
 
-    const HandleSubmitEdit = (e)=>{
-        e.preventDefault();
-        let formDataEdit = new FormData();
+  const linkUrl_update = useRef('')
+  const title_update = useRef('')
 
-        formDataEdit.append('title', title_update.current.value)
-        formDataEdit.append('linkUrl', linkUrl_update.current.value)
-        formDataEdit.append('idLink', props.idLink)
+  const HandleSubmitEdit = (e)=>{
+    e.preventDefault();
+    let formDataEdit = new FormData();
 
-        axios.post('http://localhost/ishare/backend/link/updateLink', formDataEdit)
-        .then(function(response){
-            window.location.reload()
-        })
-        .catch(function(error){
-            console.log(error);
-        })
-        props.close();
-    }
+    formDataEdit.append('title', title_update.current.value)
+    formDataEdit.append('linkUrl', linkUrl_update.current.value)
+    formDataEdit.append('idLink', props.idLink)
+
+    axios.post('http://localhost/ishare/backend/link/updateLink', formDataEdit)
+    .then(function(response){
+      // window.location.reload()
+      setUpdateState(!updateState)
+    })
+    .catch(function(error){
+        console.log(error);
+    })
+    props.updateState(!updateState);
+    props.close();
+  }
   return (
     <div>
     {/* Modal */}

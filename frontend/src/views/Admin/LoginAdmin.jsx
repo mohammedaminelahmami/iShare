@@ -19,8 +19,10 @@ const LoginAdmin = ()=>{
 
     axios.post('http://localhost/ishare/backend/admin/login', formData)
     .then(function(response){
-      console.log(response.data.token);
-      localStorage.setItem('tokenAdmin', response.data.token)
+      if(response.data.message === 'Success !')
+      {
+        localStorage.setItem('tokenAdmin', response.data.token)
+      }
       if(localStorage.getItem('tokenAdmin') === response.data.token)
       {
         setLoggedIn(true);

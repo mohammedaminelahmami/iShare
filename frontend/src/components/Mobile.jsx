@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Mobile(props) {
+function Mobile() {
   return (
     <div className='display_none'>
       {/* Show Mobile */}
