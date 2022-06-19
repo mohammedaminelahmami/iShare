@@ -2,7 +2,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import HandleImg from "./HandleImg";
 
-function Img() {
+function Img(props) {
 
   const [img, setImg] = useState('')
   const [upload, setUpload] = useState(false)
@@ -17,7 +17,7 @@ function Img() {
         "Content-Type": "multipart/form-data",
       },
     })
-    setUpload(true)
+    setUpload(!upload)
   }
 
   const resImg = async ()=>{

@@ -8,7 +8,7 @@ const HandleImg = (props)=>{
     useEffect(()=>{
         if(props.img)
         {
-            setImg(require(`../uploads/${props.img}`))
+            setImg(require(`../uploads/${props.img}`));
         }
     }, [props.img])
 

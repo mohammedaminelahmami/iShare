@@ -138,36 +138,36 @@ const Links = (props)=>{
             <Img />
 
             {links &&
-            Array.from(links).map((link, index)=>{
-              return(
-                <div key={index}>
-                  <div className='flex justify-between mt-2 p-4 shadow-lg rounded-md bg-firstColor text-white'>
-                    <p className='ml-2'>{link.title}</p>
-                    <div className='flex gap-4 mr-2'>
-                      <button type='button'
-                        onClick={()=>{
-                          setShowModalEdit(true)
-                          setMyIdLink(link.idLink)
-                          setMyTitle(link.title)
-                          setMyUrl(link.linkUrl)
-                        }}
-                      >
-                        <img src={edit} width='25' className='block' />
-                      </button>
+              Array.from(links).map((link, index)=>{
+                return(
+                  <div key={index}>
+                    <div className='flex justify-between mt-2 p-4 shadow-lg rounded-md bg-firstColor text-white'>
+                      <p className='ml-2'>{link.title}</p>
+                      <div className='flex gap-4 mr-2'>
+                        <button type='button'
+                          onClick={()=>{
+                            setShowModalEdit(true)
+                            setMyIdLink(link.idLink)
+                            setMyTitle(link.title)
+                            setMyUrl(link.linkUrl)
+                          }}
+                        >
+                          <img src={edit} width='25' className='block' />
+                        </button>
 
-                      <button type='button'
-                        onClick={async (e)=>{
-                          e.preventDefault();
-                          let formDataDelete = new FormData();
-                          formDataDelete.append('idLink', link.idLink)
-                          await axios.post('http://localhost/ishare/backend/link/deleteLink', formDataDelete)
-                          setNewDelete(!newDelete)
-                          setUpdateState(!updateState)
-                        }}><img src={deletee} width='25' className='block' />
-                      </button>
+                        <button type='button'
+                          onClick={async (e)=>{
+                            e.preventDefault();
+                            let formDataDelete = new FormData();
+                            formDataDelete.append('idLink', link.idLink)
+                            await axios.post('http://localhost/ishare/backend/link/deleteLink', formDataDelete)
+                            setNewDelete(!newDelete)
+                            setUpdateState(!updateState)
+                          }}><img src={deletee} width='25' className='block' />
+                        </button>
+                      </div>
                     </div>
                   </div>
-                </div>
                 )
               })
             }

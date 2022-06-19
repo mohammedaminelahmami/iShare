@@ -23,6 +23,7 @@ function View(props) {
   const [users, setUsers] = useState([])
   const [linkReload, setLinkReload] = useState(props.newLinkMobile)
   const [descReload, setDescReload] = useState(props.newDescription)
+  const [reloadImg, setReloadImg] = useState(false)
   
   const [username, setUsername] = useState('');
 
@@ -95,11 +96,12 @@ function View(props) {
     let getImg = await axios.post('http://localhost/ishare/backend/user/getImg', formDataImg)
     setImg(getImg.data.imgProfile)
     // console.log(getImg.data.imgProfile);
+    setReloadImg(!reloadImg)
   }
   
   useEffect(()=>{
     getImg();
-  }, [reload])
+  }, [reload, reloadImg])
   
   const resAddView = async ()=>{
     let formDataView = new FormData();
