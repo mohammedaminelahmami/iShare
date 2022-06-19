@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import admin from '../imgs/admin.png'
 import overview from '../imgs/overview.png'
 import ban from '../imgs/ban.png'

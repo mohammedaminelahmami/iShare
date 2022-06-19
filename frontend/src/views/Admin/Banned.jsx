@@ -10,7 +10,6 @@ function UsersAction() {
   useEffect(()=>{
     axios.get('http://localhost/ishare/backend/user/getBanns')
     .then(response=>{
-      // console.log(response.data);
       setBans(response.data)
     })
     .catch(error=>{

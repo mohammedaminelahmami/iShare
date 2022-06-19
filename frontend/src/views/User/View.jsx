@@ -26,6 +26,7 @@ function View(props) {
   const [linkReload, setLinkReload] = useState(props.newLinkMobile)
   const [descReload, setDescReload] = useState(props.newDescription)
   const [reloadImg, setReloadImg] = useState(false)
+  const [stateClick, setStateClick] = useState(false)
 
   const [username, setUsername] = useState('');
 
@@ -122,6 +123,16 @@ function View(props) {
   useEffect(()=>{
     getUsers();
   }, [])
+
+  const clicks = async ()=>{
+    let formData = new FormData();
+    formData.append('username', username)
+    let response = await axios.post('http://localhost/ishare/backend/user/clicks', formData)
+  }
+
+  useEffect(()=>{
+    clicks();
+  }, [stateClick])
 
   for(let i = 0; i < users.length; i++)
   {

@@ -219,6 +219,17 @@
             return $this->userModel->updateView($username);
         }
 
+        public function clicks()
+        {
+            $username = $_POST['username'];
+            if($this->userModel->updateClick($username))
+            {
+                echo json_encode('clicked');
+            }else{
+                echo json_encode('ERROR');
+            }
+        }
+
         public function editUser()
         {
             $editUsername = htmlspecialchars($_POST['editUsername']);

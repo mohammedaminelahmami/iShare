@@ -24,6 +24,7 @@ function View(props) {
   const [linkReload, setLinkReload] = useState(props.newLinkMobile)
   const [descReload, setDescReload] = useState(props.newDescription)
   const [reloadImg, setReloadImg] = useState(false)
+  const [stateClick, setStateClick] = useState(false)
   
   const [username, setUsername] = useState('');
 
@@ -119,6 +120,16 @@ function View(props) {
     getUsers();
   }, [])
 
+  const clicks = async ()=>{
+    let formData = new FormData();
+    formData.append('username', username)
+    let response = await axios.post('http://localhost/ishare/backend/user/clicks', formData)
+  }
+
+  useEffect(()=>{
+    clicks();
+  }, [stateClick])
+
   for(let i = 0; i < users.length; i++)
   {
     if(users[i].username === usernameUrl)
@@ -139,6 +150,7 @@ function View(props) {
   return (
     <div className='parentView myBgTheme3' style={click_100 ? {height:"100%"} : {height:"100vh"}}>
       <div className='flex flex-col items-center w-full'>
+
         {/* Avatar */}
         <HandleImg img={img&& img} />
         {/* @username */}
@@ -156,11 +168,12 @@ function View(props) {
             return(
               <Div key={index}>
                 <button
-                  onClick={link.type === 'Normal Link' ? ()=>{window.open('http://'+link.linkUrl, '_blank')} : 
+                  onClick={link.type === 'Normal Link' ? ()=>{window.open('http://'+link.linkUrl, '_blank'); setStateClick(!stateClick)} : 
                     (link.type === 'Youtube Link' ?
                       ()=>
                       {
-                        setClick_100(true)
+                        setStateClick(!stateClick)
+                        setClick_100(true) // click_100 = true -> height 100%
                         let formDataYTLinks = new FormData();
 
                         formDataYTLinks.append('idLink', link.idLink)
@@ -178,8 +191,9 @@ function View(props) {
                           console.log(error);
                         })
                       }
-                      :
+                        :
                       ()=>{
+                        setStateClick(!stateClick)
                         setClick_100(true)
                         let formDataSpotify = new FormData();
                         formDataSpotify.append('idLink', link.idLink)

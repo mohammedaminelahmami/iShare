@@ -28,6 +28,7 @@ function View(props) {
   const [linkReload, setLinkReload] = useState(props.newLinkMobile)
   const [descReload, setDescReload] = useState(props.newDescription)
   const [reloadImg, setReloadImg] = useState(false)
+  const [stateClick, setStateClick] = useState(false)
 
   const [username, setUsername] = useState('');
 
@@ -125,6 +126,16 @@ function View(props) {
     getUsers();
   }, [])
 
+  const clicks = async ()=>{
+    let formData = new FormData();
+    formData.append('username', username)
+    let response = await axios.post('http://localhost/ishare/backend/user/clicks', formData)
+  }
+
+  useEffect(()=>{
+    clicks();
+  }, [stateClick])
+
   for(let i = 0; i < users.length; i++)
   {
     if(users[i].username === usernameUrl)
@@ -166,10 +177,11 @@ function View(props) {
             return(
               <Div key={index}>
                 <button
-                  onClick={link.type === 'Normal Link' ? ()=>{window.open('http://'+link.linkUrl, '_blank')} : 
+                  onClick={link.type === 'Normal Link' ? ()=>{window.open('http://'+link.linkUrl, '_blank'); setStateClick(!stateClick)} : 
                     (link.type === 'Youtube Link' ?
                       ()=>
                       {
+                        setStateClick(!stateClick)
                         setClick_100(true)
                         let formDataYTLinks = new FormData();
 
@@ -190,6 +202,7 @@ function View(props) {
                       }
                       :
                       ()=>{
+                        setStateClick(!stateClick)
                         setClick_100(true)
                         let formDataSpotify = new FormData();
                         formDataSpotify.append('idLink', link.idLink)

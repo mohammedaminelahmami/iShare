@@ -1,8 +1,7 @@
-import React, { useRef } from 'react'
+import React from 'react'
 import Mobile from '../../components/Mobile'
 import Nav from '../../components/Nav'
 import UserAnalyticsBar from '../../components/UserAnalyticsBar'
-// import img1 from '../../imgs/img1.jpg'
 
 function Appearance() {
 

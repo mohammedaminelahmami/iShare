@@ -171,6 +171,14 @@
             return $this->db->execute();
         }
 
+        public function updateClick($username)
+        {
+            $this->db->query("UPDATE user SET click = click + 1
+                              WHERE username = '$username'
+                            ");
+            return $this->db->execute();
+        }
+
         // check email exist
         public function checkEmailExist($editEmail, $username_old)
         {

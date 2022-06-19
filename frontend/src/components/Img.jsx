@@ -2,7 +2,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import HandleImg from "./HandleImg";
 
-function Img(props) {
+function Img() {
 
   const [img, setImg] = useState('')
   const [upload, setUpload] = useState(false)
