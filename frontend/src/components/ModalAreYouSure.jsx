@@ -3,17 +3,11 @@ import axios from "axios"
 
 function ModalAreYouSure(props) {
 
-  const HandleClickBan = ()=>{
+  const HandleClickBan = async ()=>{
     const formDataBan = new FormData();
     formDataBan.append('username', props.username)
 
-    axios.post('http://localhost/ishare/backend/user/banUser', formDataBan)
-    .then(response=>{
-      // console.log(response.data);
-    })
-    .catch(error=>{
-      console.log(error);
-    })
+    await axios.post('http://localhost/ishare/backend/user/banUser', formDataBan)
     props.close();
   }
 

@@ -27,6 +27,8 @@ function View(props) {
   const [users, setUsers] = useState([])
   const [linkReload, setLinkReload] = useState(props.newLinkMobile)
   const [descReload, setDescReload] = useState(props.newDescription)
+  const [reloadImg, setReloadImg] = useState(false)
+  const [stateClick, setStateClick] = useState(false)
 
   const [username, setUsername] = useState('');
 
@@ -101,11 +103,12 @@ function View(props) {
     let getImg = await axios.post('http://localhost/ishare/backend/user/getImg', formDataImg)
     setImg(getImg.data.imgProfile)
     // console.log(getImg.data.imgProfile);
+    setReloadImg(!reloadImg)
   }
   
   useEffect(()=>{
     getImg();
-  }, [reload])
+  }, [reload, reloadImg])
 
   const resAddView = async ()=>{
     let formDataView = new FormData();
@@ -123,6 +126,16 @@ function View(props) {
     getUsers();
   }, [])
 
+  const clicks = async ()=>{
+    let formData = new FormData();
+    formData.append('username', username)
+    let response = await axios.post('http://localhost/ishare/backend/user/clicks', formData)
+  }
+
+  useEffect(()=>{
+    clicks();
+  }, [stateClick])
+
   for(let i = 0; i < users.length; i++)
   {
     if(users[i].username === usernameUrl)
@@ -139,7 +152,7 @@ function View(props) {
       }
     }
   }
-  
+
   return (
     <div className='parentView bgThemeGreen' style={click_100 ? {height:"100%"} : {height:"100vh"}}>
       <div className='flex flex-col items-center w-full'>
@@ -164,10 +177,11 @@ function View(props) {
             return(
               <Div key={index}>
                 <button
-                  onClick={link.type === 'Normal Link' ? ()=>{window.open('http://'+link.linkUrl, '_blank')} : 
+                  onClick={link.type === 'Normal Link' ? ()=>{window.open('http://'+link.linkUrl, '_blank'); setStateClick(!stateClick)} : 
                     (link.type === 'Youtube Link' ?
                       ()=>
                       {
+                        setStateClick(!stateClick)
                         setClick_100(true)
                         let formDataYTLinks = new FormData();
 
@@ -188,6 +202,7 @@ function View(props) {
                       }
                       :
                       ()=>{
+                        setStateClick(!stateClick)
                         setClick_100(true)
                         let formDataSpotify = new FormData();
                         formDataSpotify.append('idLink', link.idLink)

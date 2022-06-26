@@ -17,7 +17,7 @@ function Img() {
         "Content-Type": "multipart/form-data",
       },
     })
-    setUpload(true)
+    setUpload(!upload)
   }
 
   const resImg = async ()=>{

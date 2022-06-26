@@ -20,6 +20,9 @@ function Contact() {
 
     await axios.post('http://localhost/ishare/backend/contact/contact', formData)
     setMsgSubmit(true)
+    Name.current.value = '';
+    Email.current.value = '';
+    Message.current.value = '';
   }
 
   return (

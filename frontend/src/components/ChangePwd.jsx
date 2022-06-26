@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from 'react'
+import React, { useRef } from 'react'
 import axios from 'axios'
 
 const ChangePwd = () => {
@@ -13,8 +13,7 @@ const ChangePwd = () => {
         formData.append('currentPassword', currentPassword.current.value)
         formData.append('newPassword', newPassword.current.value)
 
-        let response = await axios.post('http://localhost/ishare/backend/user/changePwd', formData)
-        console.log(response.data)
+        await axios.post('http://localhost/ishare/backend/user/changePwd', formData)
     }
 
   return (

@@ -70,7 +70,7 @@ const App = () => {
     res();
     statusUser();
   }, [])
-  
+  const [reloadImg, setReloadImg] = useState(false);
   return (
     <Router>
       <div className='parentApp'>
@@ -113,7 +113,7 @@ const App = () => {
             }
 
             {loggedIn&&
-              <Links newLinkMobile={(e)=>{setRequestNewLink(e)}} newDescription={(e)=>{setNewDescription(e)}} />
+              <Links newLinkMobile={(e)=>{setRequestNewLink(e)}} newDescription={(e)=>{setNewDescription(e)}} reloadImg={(e)=>{setReloadImg(e)}} />
             }
           </Route>
 

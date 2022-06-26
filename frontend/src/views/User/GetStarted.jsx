@@ -39,7 +39,7 @@ function GetStarted() {
   return (
     <div className="parentLoginUser font-['poppins'] h-auto">
         <div className='mt-5' style={{marginLeft:"68px"}}>
-            <Logo />
+          <Logo />
         </div>
 
         <form onSubmit={HandleSubmit} className='flex flex-col items-center mt-10'>
